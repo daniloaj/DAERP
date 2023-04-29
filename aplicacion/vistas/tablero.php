@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Tooplate">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-    <title>Asociación Consorcio de Bibliotecas Universitarias de El Salvador</title>
+    <title>DAERP</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

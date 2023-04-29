@@ -6,12 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="Tooplate">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-    <title>Asociación Consorcio de Bibliotecas Universitarias de El Salvador</title>
+    <title>DAERP</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Archivos adicionales CSS -->
-    <link rel="stylesheet" href="publico/css/superTablero.css">
+    <link rel="stylesheet" href="publico/css/super.css">
 
   </head>
 
@@ -143,67 +143,19 @@
         <div class="slides">
           <div class="slide" id="1">
             <div id="slider-wrapper">
-              <div id="image-slider">
-                <ul>
-                  <li class="active-img">
-                    <div class="slide-caption">
-                      <h6 style="color: yellow;">CBUES</h6>
-                      <h2>Oficina Técnica<br>Inventario</h2>
-                      <a href="manualinventario"> <button style="width: 200px;" type="button" class="btn btn-warning"> Ver manual</button></a>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div class="slide-caption">
-                      <h6 style="color: yellow;">CBUES</h6>
-                      <h2>Oficina Técnica<br>Compras</h2>
-                      <a href="manualcompras"> <button style="width: 200px;" type="button" class="btn btn-warning"> Ver manual</button></a>
-                    </div>
-                  </li>
-                    
-                  <li>
-                    <div class="slide-caption">
-                      <h6 style="color: yellow;">CBUES</h6>
-                      <h2>Oficina Técnica<br>Proveedores</h2>
-                      <a href="manualproveedores"> <button style="width: 200px;" type="button" class="btn btn-warning"> Ver manual</button></a>
-                    </div>
-                  </li> 
-                    
-                  <li>
-                    <div class="slide-caption">
-                      <h6 style="color: yellow;">CBUES</h6>
-                      <h2>Oficina Técnica<br>Usuarios</h2>
-                      <a href="manualusuarios"> <button style="width: 200px;" type="button" class="btn btn-warning"> Ver manual</button></a>
-                    </div>
-                  </li> 
-
-                  <li>
-                    <div class="slide-caption">
-                      <h6 style="color: yellow;">CBUES</h6>
-                      <h2>Oficina Técnica<br>Agenda</h2>
-                      <a href="manualagenda"> <button style="width: 200px;" type="button" class="btn btn-warning"> Ver manual</button></a>
-                    </div>
-                  </li> 
-
-                  <li>
-                    <div class="slide-caption">
-                      <h6 style="color: yellow;">CBUES</h6>
-                      <h2>Oficina Técnica<br>Reportes</h2>
-                      <a href="manualreportes"> <button style="width: 200px;" type="button" class="btn btn-warning"> Ver manual</button></a>
-                    </div>
-                  </li> 
-                </ul>
-              </div>
                 
 <!--Imagenes del pie de la pagina de inicio-->
               <div id="thumbnail">
                 <ul>
-                  <li style="color: white;" class="active">Manual de <br> "Inventario"<img src="https://www.consultek.com.mx/wp-content/uploads/2016/07/Administracion-y-Manejo-Basico-de-Almacen-y-Materiales.png" alt="" /></li>
-                  <li style="color: white;">Manual de <br> "Compras"<img src="https://www.altonivel.com.mx/wp-content/uploads/2020/01/compras-en-linea-1.jpg" alt="" /></li>
-                  <li style="color: white;">Manual de<br> "Proveedores"<img src="https://i0.wp.com/get.witei.com/wp-content/uploads/2021/10/Background-39-2.png?fit=800%2C533&ssl=1" alt="" /></li>
-                  <li style="color: white;">Manual de<br> "Usuarios"<img src="https://www2.baccredomatic.com/sites/default/files/sv-movil-tutorial_empresas_2.jpg" alt="" /></li>
-                  <li style="color: white;">Manual de<br> "Agenda"<img src="https://www.grupobillingham.com/blog/wp-content/uploads/2022/12/planner-agenda-calendario.jpg" alt="" /></li>
-                  <li style="color: white;">Manual de<br> "Reportes"<img src="https://blog.hubspot.es/hubfs/reporte%20de%20ventas.jpg" alt="" /></li>
+                  <li style="color: white;">Departamento de <br> "Contabilidad"<img src="publico/images/contabilidad.jpg" alt="" /></li>
+                  <li style="color: white;">Departamento de <br> "Recursos humanos"<img src="publico/images/rh.png" alt="" /></li>
+                  <li style="color: white;">Departamento de<br> "Marketing"<img src="publico/images/marketing.jpg" alt="" /></li>
+                  <li style="color: white;">Departamento de<br> "Comercial"<img src="publico/images/comercio.png" alt="" /></li>
+                  <li style="color: white;">Departamento de<br> "Compras"<img src="publico/images/compras.jpg" alt="" /></li>
+                  <li style="color: white;">Departamento de<br> "Logistica"<img src="publico/images/logistica.png" alt="" /></li>
+                  <li style="color: white;">Departamento de<br> "Control de gestión"<img src="publico/images/gestion.jpg" alt="" /></li>
+                  <li style="color: white;">Departamento de<br> "Dirección general"<img src="publico/images/direccion.jpg" alt="" /></li>
+                  <li style="color: white;">Comité de<br> "Dirección"<img src="publico/images/jefazos.jpg" alt="" /></li>
                 </ul>
               </div>
           </div>

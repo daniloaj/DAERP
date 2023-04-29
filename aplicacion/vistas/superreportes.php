@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Asociación Consorcio de Bibliotecas Universitarias de El Salvador</title>
+        <title>DAERP</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -29,7 +29,7 @@
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
                                 <h2 class="fw-bolder">Escoge el reporte que deseas solicitar</h2>
-                                <p class="lead fw-normal text-muted mb-5">Oficina Técnica de la Asociación Consorcio de Bibliotecas Universitarias de El Salvador</p>
+                                <p class="lead fw-normal text-muted mb-5">Oficina Técnica de la DAERP</p>
                             </div>
                         </div>
                     </div>

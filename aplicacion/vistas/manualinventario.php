@@ -6,7 +6,7 @@
         <meta name="description" content="" />
         <link rel="shortcut icon" href="publico/images/favicon.ico">
         <meta name="author" content="" />
-        <title>Asociación Consorcio de Bibliotecas Universitarias de El Salvador</title>
+        <title>DAERP</title>
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
