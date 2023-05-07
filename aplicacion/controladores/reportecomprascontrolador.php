@@ -7,9 +7,12 @@ class reportecomprascontrolador extends controlador {
     public function __construct($parametro) {
         $this->compra=new supertablero();
         parent::__construct("reportecompras",$parametro,true);
+        // el parent::__construct es lo que llamas en el js para el frameReporte en este caso es reportecompras
     }
         public function getReporte() {
+            // getReporte es lo que llamas en el js despues del parent::__construct dividido por una pleca en el frameReporte
             $registros=$this->compra->getcomprasReporte($_GET);
+            // obtiene los datos del modelo que el nombre getcomprasReporte
             $htmlheader="<img src='publico/images/LOGO TRANSPARENTE CBUES' width='150px'>";
             $htmlheader.="<h3>Reporte de compras</h3>";
             $html="<table width='100%' style='text-align: center;' border=1><thead><tr>";
@@ -24,6 +27,7 @@ class reportecomprascontrolador extends controlador {
             $html.="<th>Responsable</th>";
             $html.="<th>Proyecto</th>";
             $html.="</tr></thead><tbody>";
+            // todo esto son los datos que obtienes de la consulta que hiciste en el modelo con la funcion con el nombre de getcomprasReporte
             foreach ($registros as $key => $value) {
                 $html.="<tr>";
                 $html.="<td>".($key+1)."</td>";

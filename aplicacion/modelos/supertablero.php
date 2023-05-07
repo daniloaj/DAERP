@@ -21,6 +21,7 @@ class supertablero extends BaseDeDatos {
     //llama los datos de la tabla del historial 
     public function getAllCompras() {
         return $this->executeQuery("SELECT * FROM historial_compras group by evento");
+        // esta consulta es llamada por el js para el reporte
     }
 
     //guarda nuevos registros
@@ -50,17 +51,25 @@ class supertablero extends BaseDeDatos {
 
     //identifica los campos de la vista para utilizarlos en los filtros para los reportes
     public function getcomprasReporte($data) {
+        // aqui llamas los datos de como se llaman en la vista de los reportes
         $condicion="";
         if ($data["desde"]!="") {
+            // desde es el nombre del elemento en tu vista
             $condicion.="and fecha_compra>='{$data["desde"]}'";
+            // fecha_compra es el campo en tu bd y le diras que lo seleccionado sea mayor o igual como fecha inicial
         }
         if ($data["hasta"]!="") {
             $condicion.=" and fecha_compra<='{$data["hasta"]}'";
+            // fecha_compra es el campo en tu bd puedes utilizar la misma y le diras que lo seleccionado sea menor o igual como fecha final
+
         }
         if ($data["proyecto"]!="0") {
             $condicion.=" and evento='{$data["proyecto"]}'";
+                        // evento es el campo en tu bd y le diras que lo seleccionado sea igual que lo seleccionado en el select
+
         }
         return $this->executeQuery("SELECT * FROM historial_compras where 1=1 $condicion");
+        // con esos datos ya podes utilizar esta consulta sql que la tomará el controlador
     }
 /*Proveedores.................................................................................................................................... */
     public function getAllProveedores() {
