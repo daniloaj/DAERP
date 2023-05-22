@@ -16,6 +16,20 @@ https://www.tooplate.com/view/2113-earth
   }
 }
 
+.login {
+  animation: login-right 1s cubic-bezier(1, -0.17, 0.29, 0.99) infinite alternate both;
+}
+
+@keyframes login-right {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(2px);
+  }
+}
+
 .seq-preloader {
   background: white;
   visibility: visible;

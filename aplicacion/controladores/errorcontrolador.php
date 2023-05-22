@@ -1,5 +1,6 @@
 <?php
 //Es utilizado en caso de que de error el enlace del sistema
+// Cortesia de Delia Moterroza 
 class ErrorControlador {
     public function __construct() {
         ?>
