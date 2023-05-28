@@ -36,6 +36,7 @@ const objDatosagenda={
     function guardaragenda(event) {
         event.preventDefault();
         const formDataagenda=new FormData(formagenda);
+        const API=new Api();
         API.post(formDataagenda,"supertablero/saveagenda").then(
             data=> {
                 if (data.success) {
@@ -69,6 +70,7 @@ const objDatosagenda={
 
 //muestra los datos en la tabla de la vista
     function cargarDatosagenda() {
+        const API=new Api();
         API.get("supertablero/getAllagenda").then(
             data=>{
                 if (data.success) {
@@ -199,6 +201,7 @@ const objDatosagenda={
         limpiarFormagenda(1);
         panelDatosagenda.classList.add("d-none");
         panelFormagenda.classList.remove("d-none");
+        const API=new Api();
         API.get("supertablero/getOneagenda?id_agenda="+id_agenda).then(
             data=>{
                 if (data.success) {
@@ -239,6 +242,7 @@ const objDatosagenda={
         }).then(
             resultado=>{
                 if (resultado.isConfirmed) {
+                    const API=new Api();
                     API.get("supertablero/deleteagenda?id_agenda="+id_agenda).then(
                         data=>{
                             if (data.success) {

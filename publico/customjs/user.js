@@ -36,6 +36,7 @@ function eventListiners() {
 function guardarusuario(event) {
     event.preventDefault();
     const formDatausuario=new FormData(formusuario);
+    const API=new Api();
     API.post(formDatausuario,"supertablero/saveusuarios").then(
         data=> {
             if (data.success) {
@@ -68,6 +69,7 @@ function aplicarFiltrousuario(element) {
 
 
 function cargarDatosusuario() {
+    const API=new Api();
     API.get("supertablero/getAllusuarios").then(
         data=>{
             if (data.success) {
@@ -189,6 +191,7 @@ function editarusuario(id_usuario) {
     limpiarFormusuario(1);
     panelDatosusuarios.classList.add("d-none");
     panelFormusuarios.classList.remove("d-none");
+    const API=new Api();
     API.get("supertablero/getOneusuario?id_usuario="+id_usuario).then(
         data=>{
             if (data.success) {
@@ -227,6 +230,7 @@ function eliminarusuario(id_usuario) {
     }).then(
         resultado=>{
             if (resultado.isConfirmed) {
+                const API=new Api();
                 API.get("supertablero/deleteusuario?id_usuario="+id_usuario).then(
                     data=>{
                         if (data.success) {

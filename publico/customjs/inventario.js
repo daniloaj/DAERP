@@ -34,6 +34,7 @@ const objDatosinventario={
     function guardarinventario(event) {
         event.preventDefault();
         const formDatainventario=new FormData(forminventario);
+        const API=new Api();
         API.post(formDatainventario,"supertablero/saveinventario").then(
             data=> {
                 if (data.success) {
@@ -66,6 +67,7 @@ const objDatosinventario={
 
 
     function cargarDatosinventario() {
+        const API=new Api();
         API.get("supertablero/getAllinventario").then(
             data=>{
                 if (data.success) {
@@ -201,6 +203,7 @@ const objDatosinventario={
         limpiarForminventario(1);
         panelDatosinventario.classList.add("d-none");
         panelForminventario.classList.remove("d-none");
+        const API=new Api();
         API.get("supertablero/getOneinventario?id_inventario="+id_inventario).then(
             data=>{
                 if (data.success) {
@@ -240,6 +243,7 @@ const objDatosinventario={
         }).then(
             resultado=>{
                 if (resultado.isConfirmed) {
+                    const API=new Api();
                     API.get("supertablero/deleteinventario?id_inventario="+id_inventario).then(
                         data=>{
                             if (data.success) {

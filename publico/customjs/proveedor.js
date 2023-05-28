@@ -36,6 +36,7 @@ function eventListiners() {
 function guardarProveedor(event) {
     event.preventDefault();
     const formDataProveedor=new FormData(formProveedor);
+    const API=new Api();
     API.post(formDataProveedor,"supertablero/saveProveedores").then(
         data=> {
             if (data.success) {
@@ -68,6 +69,7 @@ function aplicarFiltroProveedor(element) {
 
 
 function cargarDatosProveedor() {
+    const API=new Api();
     API.get("supertablero/getAllProveedores").then(
         data=>{
             if (data.success) {
@@ -198,6 +200,7 @@ function editarproveedor(id_proveedor) {
     limpiarFormProveedor(1);
     panelDatosProveedores.classList.add("d-none");
     panelFormProveedores.classList.remove("d-none");
+    const API=new Api();
     API.get("supertablero/getOneProveedor?id_proveedor="+id_proveedor).then(
         data=>{
             if (data.success) {
@@ -238,6 +241,7 @@ function eliminarproveedor(id_proveedor) {
     }).then(
         resultado=>{
             if (resultado.isConfirmed) {
+                const API=new Api();
                 API.get("supertablero/deleteproveedor?id_proveedor="+id_proveedor).then(
                     data=>{
                         if (data.success) {
