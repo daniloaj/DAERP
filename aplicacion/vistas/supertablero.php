@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,16 +35,16 @@
   </div>
   <!--Fin del simbolo de secuencia de carga-->
 
-  <!--Logo de cbues-->
+  <!--Logo-->
   <div class="logo">
     <img style="width: 100%; margin-top: 25px;" src="publico/images/logo_nombre.png">
   </div>
-  <!--Fin de logo de cbues-->
+  <!--Fin de logo-->
 
   <!-- sidebar -->
   <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
 
-  <!--Slides de inicio para ver los manuales de compras y agenda-->
+  <!--Cuerpo-->
   <div class="slides">
     <div class="slide" id="1">
       <div id="slider-wrapper">
@@ -66,6 +65,8 @@
         </div>
       </div>
     </div>
+
+    <!-- slides que se llaman con el panel lateral -->
     <!--Inventario-->
     <div class="slide" id="2">
       <?php require_once "aplicacion/vistas/partes/supertablero_partes/inventario.php"; ?>

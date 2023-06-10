@@ -66,46 +66,43 @@
             </div>
         </div>
     </div>
-    <div id="contentForminventario" class="d-none">
+    <div id="contentForminventario" class="d-none formulario">
         <h4>
-            Agregar Inventario (Cada campo obligatorio tendrá un asterisco)
+            Agregar Inventario
         </h4>
         <hr>
         <form id="forminventario" enctype="multipart/form-data">
             <div class="row mb-3">
-                <label for="insumo" class="col-sm-2 col-form-label">Producto: *</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="insumo" name="insumo" required>
+                <label for="insumo" class="mt-2" >Producto:  </label>
+                <div  class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <input type="text" class="form-control" id="insumo" name="insumo"  >
                     <input type="hidden" name="id_inventario" id="id_inventario" value="0">
                 </div>
-            </div>
-            <div class="row mb-3">
-                <label for="precio" class="col-sm-2 col-form-label">Costo unitario: *</label>
-                <div class="col-sm-10">
-                    <input type="float" class="form-control" id="precio" name="precio" required>
+                <label for="precio" class="mt-2">Costo unitario:  </label>
+                <div  class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <input type="float" class="form-control" id="precio" name="precio"  >
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="unidades" class="col-sm-2 col-form-label">Cantidad: *</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" id="unidades" name="unidades" required>
-                </div>
             </div>
             <div class="row mb-3">
-                <label for="fecha" class="col-sm-2 col-form-label">Fecha compra: *</label>
-                <div class="col-sm-10">
-                    <input type="date" class="form-control" id="fecha" name="fecha" required>
+                <label for="unidades" class="mt-2"  >Cantidad:  </label>
+                <div  class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <input type="number" class="form-control" id="unidades" name="unidades"  >
+                </div>
+                <label for="fecha" class="mt-2" >Fecha compra:  </label>
+                <div  class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <input type="date" class="form-control" id="fecha" name="fecha"  >
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="provee" class="col-sm-2 col-form-label">Proveedor:</label>
-                <div class="col-sm-10">
+                <label for="provee" class="mt-2" >Proveedor:</label>
+                <div  class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
                     <select class="form-control" name="provee" id="provee">
-                        <option value="No especificado">Proveedores</option>
                         <?php
                         // Verificamos la conexión con el servidor y la base de datos
-                        $mysqli = new mysqli('localhost', 'root', 'asd', 'cbues_agenda_compra');
+                        $mysqli = new mysqli('localhost', 'root', 'asd', 'daerp');
                         $query = $mysqli->query("SELECT id_proveedor, empresa FROM proveedores ");
                         while ($valores = mysqli_fetch_array($query)) {
                             echo '<option value="' . $valores[id_proveedor] . '">' . $valores[empresa] . '</option>';
@@ -113,18 +110,15 @@
                         ?>
                     </select>
                 </div>
-            </div>
-
-            <div class="row mb-3">
-                <label for="n_factura" class="col-sm-2 col-form-label">N° factura: *</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="n_factura" name="n_factura" required>
+                <label for="n_factura" class="mt-2" >N° factura:  </label>
+                <div  class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <input type="text" class="form-control " style="width: 110%;" id="n_factura" name="n_factura"  >
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="comprador" class="col-sm-2 col-form-label">Responsable: *</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="comprador" name="comprador" required>
+                <label for="comprador" class="mt-2" >Responsable:  </label>
+                <div  class="col-md-9 col-sm-9 col-lg-9 col-xl-9">
+                    <input type="text" class="form-control" style="width: 105%" id="comprador" name="comprador"  >
                 </div>
             </div>
 

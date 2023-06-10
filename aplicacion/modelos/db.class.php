@@ -8,7 +8,7 @@ class BaseDeDatos {
     
     public function conectar()  {
         //introducimos los datos para que el sistema acceda a la bd
-        $this->conexion=new mysqli("localhost","root","asd","cbues_agenda_compra");
+        $this->conexion=new mysqli("localhost","root","asd","daerp");
 
         //validamos la conexión 
         if ($this->conexion->connect_errno) {

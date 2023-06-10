@@ -1,11 +1,3 @@
-/*
-
-Tooplate 2113 Earth
-
-https://www.tooplate.com/view/2113-earth
-
-*/
-
 @keyframes seq-preloader {
   50% {
     opacity: 1;
@@ -407,4 +399,62 @@ nav a::before {
 .second-content {
   top: 20% !important;
   transform: translateY(-20%);
+}
+
+.formulario {
+  width: fit-content;
+  margin: auto;
+}
+
+.form_animation {
+  animation: scale-up-horizontal-center 0.4s
+}
+
+@keyframes scale-up-horizontal-center {
+  0% {
+    transform: scale(0);
+    filter: blur(12px);
+    opacity: 0
+  }
+
+  100% {
+    transform: scale(1);
+    filter: blur(0);
+    opacity: 1
+  }
+}
+.color_rojo_inputs{
+  border-color: red;
+}
+.inputs_vacios {
+  animation: shake-horizontal 0.4s linear both;
+}
+
+@keyframes shake-horizontal {
+
+  0%,
+  100% {
+    transform: translateX(0)
+  }
+
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-10px)
+  }
+
+  20%,
+  40%,
+  60% {
+    transform: translateX(10px)
+  }
+
+  80% {
+    transform: translateX(8px)
+  }
+
+  90% {
+    transform: translateX(-8px)
+  }
 }
