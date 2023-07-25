@@ -116,7 +116,7 @@ function guardarinventario(event) {
             }
         }
     } else {
-        API.post(formDatainventario, "supertablero/saveinventario").then(
+        API.post(formDatainventario, "inventario/saveinventario").then(
             data => {
                 if (data.success) {
                     cancelarinventario();
@@ -150,7 +150,7 @@ function aplicarFiltroinventario(element) {
 
 function cargarDatosinventario() {
     const API = new Api();
-    API.get("supertablero/getAllinventario").then(
+    API.get("inventario/getAllinventario").then(
         data => {
             if (data.success) {
                 objDatosinventario.records = data.records;
@@ -226,15 +226,15 @@ function crearTablainventario() {
             if ((index >= recordIni) && (index <= recordFin)) {
                 html += `
                         <tr>
-                        <td>${index + 1}</td>
-                        <td>${item.insumo}</td>               
-                        <td>$${item.precio}</td>               
-                        <td>${item.unidades}</td>
-                        <td>$${item.total}</td>
-                        <td>${item.fecha}</td>
-                        <td>${item.provee}</td>
-                        <td>${item.n_factura}</td>
-                        <td>${item.comprador}</td>
+                        <td onclick="editarinventario(${item.id_inventario})">${index + 1}</td>
+                        <td onclick="editarinventario(${item.id_inventario})">${item.insumo}</td>               
+                        <td onclick="editarinventario(${item.id_inventario})">$${item.precio}</td>               
+                        <td onclick="editarinventario(${item.id_inventario})">${item.unidades}</td>
+                        <td onclick="editarinventario(${item.id_inventario})">$${item.total}</td>
+                        <td onclick="editarinventario(${item.id_inventario})">${item.fecha}</td>
+                        <td onclick="editarinventario(${item.id_inventario})">${item.provee}</td>
+                        <td onclick="editarinventario(${item.id_inventario})">${item.n_factura}</td>
+                        <td onclick="editarinventario(${item.id_inventario})">${item.comprador}</td>
                         <td>
                             <button class="btn btn-primary" onclick="editarinventario(${item.id_inventario})"><img src="publico/images/lapiz.png"></button>
                             <button class="btn btn-danger" onclick="eliminarinventario(${item.id_inventario})"><img src="publico/images/paquete.png"></button>
@@ -285,11 +285,13 @@ function crearPaginacioninventario() {
 }
 
 function editarinventario(id_inventario) {
-    limpiarForminventario(1);
-    panelDatosinventario.classList.add("d-none");
-    panelForminventario.classList.remove("d-none");
+    agregarinventario();
+    // panelDatosinventario.classList.add("form_animation");
+    // panelForminventario.classList.add("form_animation");
+    // panelDatosinventario.classList.add("d-none");
+    // panelForminventario.classList.remove("d-none");
     const API = new Api();
-    API.get("supertablero/getOneinventario?id_inventario=" + id_inventario).then(
+    API.get("inventario/getOneinventario?id_inventario=" + id_inventario).then(
         data => {
             if (data.success) {
                 mostrarDatosForminventario(data.records[0]);
@@ -329,7 +331,7 @@ function eliminarinventario(id_inventario) {
         resultado => {
             if (resultado.isConfirmed) {
                 const API = new Api();
-                API.get("supertablero/deleteinventario?id_inventario=" + id_inventario).then(
+                API.get("inventario/deleteinventario?id_inventario=" + id_inventario).then(
                     data => {
                         if (data.success) {
                             cancelarinventario();

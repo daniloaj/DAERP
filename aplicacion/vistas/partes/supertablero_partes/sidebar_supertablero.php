@@ -1,7 +1,14 @@
+<!--Logo-->
+<div class="logo">
+  <img style="width: 100%; margin-top: 25px;" src="publico/images/logo_nombre.png">
+</div>
+
+<!-- sidebar -->
 <nav>
   <ul>
     <li>
-      <a href="#1"><em>
+    <a href="<?php echo URL ?>supertablero">
+        <em>
           <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
           <lord-icon src="https://cdn.lordicon.com/osuxyevn.json" trigger="loop" delay="2000" colors="primary:#ffffff"
             style="width: 32px;height:32px">
@@ -12,7 +19,8 @@
     </li>
 
     <li>
-      <a href="#2"><em>
+      <a href="<?php echo URL ?>inventario">
+        <em>
           <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
           <lord-icon src="https://cdn.lordicon.com/isugonwi.json" trigger="loop" delay="2000" colors="primary:#ffffff"
             style="width:32px;height:32px">

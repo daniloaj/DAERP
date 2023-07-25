@@ -165,43 +165,4 @@ class supertableroControlador extends controlador {
         $info=array('success'=>true,'records'=>$records);
         echo json_encode($info);
     }
-/*iventario......................................................................... */
-    public function deleteinventario() {
-        $records=$this->supertablero->deleteinventario($_GET["id_inventario"]);
-        $info=array('success'=>true,'msg'=>"Registro eliminado con exito");
-        echo json_encode($info);
-    }
-
-    public function getOneinventario() {
-        $records=$this->supertablero->getOneinventario($_GET["id_inventario"]);
-        if (count($records)>0) {
-            $info=array('success'=>true,'records'=>$records);
-        } else {
-            $info=array('success'=>false,'msg'=>'El registro no existe');
-        }
-        echo json_encode($info);
-    }
-
-    public function saveinventario() {
-        if ($_POST["id_inventario"]=="0") {
-            $datossupertablero=$this->supertablero->getinventarioByName($_POST["insumo"]);
-            $records=$this->supertablero->saveinventario($_POST);
-            $info=array('success'=>true,'msg'=>"Insumo registrado con exito");
-        } else {
-            $records=$this->supertablero->updateinventario($_POST);
-            $info=array('success'=>true,'msg'=>"Insumo actualizado con exito");
-        }
-        echo json_encode($info);
-    }
-
-    public function getAllinventario() {
-        $records=$this->supertablero->getAllinventario();
-        $info=array('success'=>true,'records'=>$records);
-        echo json_encode($info);
-    }
-    public function getAllhistorialinventario() {
-        $records=$this->supertablero->getAllhistorialinventario();
-        $info=array('success'=>true,'records'=>$records);
-        echo json_encode($info);
-    }
 }
