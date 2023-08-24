@@ -140,14 +140,14 @@
                     </div>
                 </div>
                 <div class="centrar">
-                <button type="button" class="btn btn-secondary" id="btnCancelarinventario">
-                    <i class="bi bi-x-octagon-fill"></i> 
-                    Cancelar
-                </button>
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-hdd-fill"></i>
-                    Guardar
-                </button>
+                    <button type="button" class="btn btn-secondary" id="btnCancelarinventario">
+                        <i class="bi bi-x-octagon-fill"></i>
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-hdd-fill"></i>
+                        Guardar
+                    </button>
                 </div>
             </form>
         </div>

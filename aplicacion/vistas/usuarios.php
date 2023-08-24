@@ -1,5 +1,19 @@
-<div class="content second-content">
-    <h1>Sistema de Usuarios DAERP</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Archivos adicionales CSS -->
+    <link rel="stylesheet" href="publico/css/super.css">
+    <title>Usuarios</title>
+</head>
+    <body>
+    <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
+    <div class="data">
+    <h1 class="centrar">Sistema de Usuarios DAERP</h1>
     <br>
     <div id="contentListusuarios">
         <button class="btn btn-success float-right" id="btnAgregarUsuarios">
@@ -27,17 +41,11 @@
                     <th>Nombre <img onclick="sortTableUsuarios(1, 'str')" src="publico/images/flecha.png"></th>
                     <th>Usuario <img onclick="sortTableUsuarios(2, 'str')" src="publico/images/flecha.png"></th>
                     <th>Tipo <img onclick="sortTableUsuarios(3, 'str')" src="publico/images/flecha.png"></th>
+                    <th>Departamento <img onclick="sortTableUsuarios(3, 'str')" src="publico/images/flecha.png"></th>
                     <th>Opciones</th>
                 </thead>
                 <tbody>
-                    <td>1</td>
-                    <td>Danilo Aguilar</td>
-                    <td>daniloAJ</td>
-                    <td>usuario</td>
-                    <td>
-                        <button class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
-                        <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                    </td>
+                    
                 </tbody>
             </table>
             <div class="">
@@ -58,10 +66,25 @@
         <hr>
         <form id="formusuarios" enctype="multipart/form-data">
             <div class="row mb-3">
-                <label for="nombre" class="col-sm-2 col-form-label">Nombre: *</label>
+                <label for="nombre" class="col-sm-2 col-form-label">Nombre Completo: *</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="nombre" name="nombre" required>
                     <input type="hidden" name="id_usuario" id="id_usuario" value="0">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="depa" class="col-sm-2 col-form-label">Departamento: *</label>
+                <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <select class="form-control text-capitalize" name="depa" id="depa">
+                        <?php
+                        // Verificamos la conexión con el servidor y la base de datos
+                        $mysqli = new mysqli('localhost', 'root', 'asd', 'daerp');
+                        $query = $mysqli->query("SELECT id_dep, nom_depa FROM departamentos ");
+                        while ($valores = mysqli_fetch_array($query)) {
+                            echo '<option value="' . $valores[id_dep] . '">' . $valores[nom_depa] . '</option>';
+                        }
+                        ?>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
@@ -134,3 +157,10 @@
         }
     }
 </script>
+<!--Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!--Additional Scripts -->
+<?php include_once "aplicacion/vistas/partes/javascript.php"; ?>
+    </body>
+</html>

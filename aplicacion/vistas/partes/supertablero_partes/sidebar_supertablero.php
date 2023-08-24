@@ -57,7 +57,7 @@
     </li>
 
     <li  >
-      <a href="#4"><em>
+      <a href="<?php echo URL ?>usuarios"><em>
           <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
           <lord-icon src="https://cdn.lordicon.com/fbdgkenc.json" trigger="loop" delay="2000" colors="primary:#ffffff"
             style="width: 45px;height:45px; margin-left:5px">

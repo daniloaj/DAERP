@@ -286,10 +286,6 @@ function crearPaginacioninventario() {
 
 function editarinventario(id_inventario) {
     agregarinventario();
-    // panelDatosinventario.classList.add("form_animation");
-    // panelForminventario.classList.add("form_animation");
-    // panelDatosinventario.classList.add("d-none");
-    // panelForminventario.classList.remove("d-none");
     const API = new Api();
     API.get("inventario/getOneinventario?id_inventario=" + id_inventario).then(
         data => {

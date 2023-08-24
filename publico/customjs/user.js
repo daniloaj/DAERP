@@ -37,7 +37,7 @@ function guardarusuario(event) {
     event.preventDefault();
     const formDatausuario=new FormData(formusuario);
     const API=new Api();
-    API.post(formDatausuario,"supertablero/saveusuarios").then(
+    API.post(formDatausuario,"usuarios/saveusuarios").then(
         data=> {
             if (data.success) {
                 cancelarusuario();
@@ -70,7 +70,7 @@ function aplicarFiltrousuario(element) {
 
 function cargarDatosusuario() {
     const API=new Api();
-    API.get("supertablero/getAllusuarios").then(
+    API.get("usuarios/getAllusuarios").then(
         data=>{
             if (data.success) {
                 objDatosusuario.records=data.records;
@@ -124,6 +124,9 @@ function crearTablausuario() {
             if (tipo.toUpperCase().search(objDatosusuario.filter.toUpperCase())!=-1) {
                 return item;
             }
+            if (nom_depa.toUpperCase().search(objDatosusuario.filter.toUpperCase())!=-1) {
+                return item;
+            }
         });
     }
     const recordIni=(objDatosusuario.currentPage*objDatosusuario.recordsShow)-objDatosusuario.recordsShow;
@@ -133,11 +136,12 @@ function crearTablausuario() {
         (item,index)=> {
             if ((index>=recordIni) && (index<=recordFin)) {
                 html+=`
-                    <tr>
+                    <tr class="text-capitalize">
                     <td>${index+1}</td>
                     <td>${item.nombre}</td>               
                     <td>${item.usuario}</td>               
                     <td>${item.tipo}</td>
+                    <td>${item.nom_depa}</td>
                     <td>
                         <button class="btn btn-primary" onclick="editarusuario(${item.id_usuario})"><img src="publico/images/lapiz.png"></button>
                         <button class="btn btn-danger" onclick="eliminarusuario(${item.id_usuario})"><img src="publico/images/bote.png"></button>
@@ -192,7 +196,7 @@ function editarusuario(id_usuario) {
     panelDatosusuarios.classList.add("d-none");
     panelFormusuarios.classList.remove("d-none");
     const API=new Api();
-    API.get("supertablero/getOneusuario?id_usuario="+id_usuario).then(
+    API.get("usuarios/getOneusuario?id_usuario="+id_usuario).then(
         data=>{
             if (data.success) {
                 mostrarDatosFormusuarios(data.records[0]);
@@ -212,12 +216,13 @@ function editarusuario(id_usuario) {
 }
 
 function mostrarDatosFormusuarios(record) {
-    const {id_usuario, nombre, usuario,password,tipo}=record;
+    const {id_usuario, nombre, usuario,password,tipo,id_dep}=record;
     document.querySelector("#id_usuario").value=id_usuario;
     document.querySelector("#nombre").value=nombre;
     document.querySelector("#usuario").value=usuario;
     document.querySelector("#password").value=password;
     document.querySelector("#tipo").value=tipo;
+    document.querySelector("#depa").value=id_dep;
 }
 
 
@@ -231,7 +236,7 @@ function eliminarusuario(id_usuario) {
         resultado=>{
             if (resultado.isConfirmed) {
                 const API=new Api();
-                API.get("supertablero/deleteusuario?id_usuario="+id_usuario).then(
+                API.get("usuarios/deleteusuario?id_usuario="+id_usuario).then(
                     data=>{
                         if (data.success) {
                             cancelarusuario();
