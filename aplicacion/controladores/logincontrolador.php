@@ -14,7 +14,8 @@ class LoginControlador extends controlador {
     public function validar() {
         $user=$_POST["usuario"] ?? "";
         $pass=$_POST["password"] ?? "";
-        $record=$this->user->validarLogin($user,$pass);
+        $id_dep=$_POST["depa"] ?? "";
+        $record=$this->user->validarLogin($user,$pass,$id_dep);
         if ($record) {
             if (!isset($_SESSION)) {
                 session_start();
@@ -26,6 +27,7 @@ class LoginControlador extends controlador {
             $_SESSION["usuario"]=$record["usuario"];
             $_SESSION["password"]=$record["password"];
             $_SESSION["tipo"]=$record["tipo"];
+            $_SESSION["id_dep"]=$record["id_dep"];
             
             //Identificamos el tipo de usuario que está iniciando sesión
             if ($record["tipo"]=='super usuario') {
@@ -38,7 +40,7 @@ class LoginControlador extends controlador {
                 $info=array("success"=>true,"msg"=>"Usuario valido","url"=>URL."tablero");
             }
         } else {
-            $info=array("success"=>false,"msg"=>"Usuario o contraseña incorrecta");    
+            $info=array("success"=>false,"msg"=>"Usuario, contraseña o departamento incorrecto");    
         }
         echo json_encode($info);
     }

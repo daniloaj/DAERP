@@ -11,23 +11,46 @@
     
   <main class="form-signin">
   <form action="login.php" id="formlogin" method="post">
+
     <img class="logo" src="<?php echo URL;?>publico/images/logo.png">
+
+    <div class="form-floating">
+      <select class="form-control text-capitalize" name="depa" id="depa">
+          <?php
+          // Verificamos la conexión con el servidor y la base de datos
+          $mysqli = new mysqli('localhost', 'root', 'asd', 'daerp');
+          $query = $mysqli->query("SELECT id_dep, nom_depa FROM departamentos ");
+          while ($valores = mysqli_fetch_array($query)) {
+              echo '<option value="0">Departamento</option>';
+              echo '<option value="' . $valores[id_dep] . '">' . $valores[nom_depa] . '</option>';
+          }
+          ?>
+      </select>
+      <label for="floatingInput">Departamento</label>
+    </div>
+
+    <br>
+
     <div class="form-floating">
       <input name="usuario" type="text" class="form-control" id="floatingInput" placeholder="Usuario">
       <label for="floatingInput">Usuario</label>
     </div>
+
     <br>
+
     <div class="form-floating">
       <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Contraseña</label>
     </div>
+
     <div class="alert alert-danger d-none mt-3" role="alert" id="mensaje">
       Mensaje
     </div>
+    
     <br>
 
     <button class="w-100  btn-lg btn btn-primary" type="submit">Iniciar Sesion</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+    <p class="mt-5 mb-3 text-muted">&copy; DAERP</p>
   </form>
   </main>
     <script src="<?php echo URL?>publico/customjs/api.js"></script>
