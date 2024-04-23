@@ -37,20 +37,15 @@
             </div>
 
             <div id="contentTableinventario">
-                <table style="font-size: 15px" class="table table-hover" id="myTableinventario">
+                <table class="table table-hover" style="text-transform: capitalize" id="myTableinventario">
                     <thead>
                         <th>Id <img onclick="sortTableinventario(0, 'int')" src="publico/images/flecha.png"></th>
+                        <th>Fecha <img onclick="sortTableinventario(5, 'str')" src="publico/images/flecha.png"></th>
                         <th>Producto <img onclick="sortTableinventario(1, 'str')" src="publico/images/flecha.png"></th>
                         <th>Costo <img onclick="sortTableinventario(2, 'str')" src="publico/images/flecha.png"></th>
                         <th>Cantidad <img onclick="sortTableinventario(3, 'str')" src="publico/images/flecha.png"></th>
                         <th>Total<img onclick="sortTableinventario(4, 'str')" src="publico/images/flecha.png"></th>
-                        <th>Fecha <img onclick="sortTableinventario(5, 'str')" src="publico/images/flecha.png"></th>
-                        <th>Proveedor <img onclick="sortTableinventario(6, 'str')" src="publico/images/flecha.png"></th>
-                        <th>N° factura <img onclick="sortTableinventario(7, 'str')" src="publico/images/flecha.png">
-                        </th>
-                        <th>Responsable <img onclick="sortTableinventario(8, 'str')" src="publico/images/flecha.png">
-                        </th>
-                        <th>Opciones</th>
+                        <th style="text-align:center">Opciones</th>
                     </thead>
                     <tbody>
                         <td>1</td>
@@ -59,9 +54,6 @@
                         <td>1</td>
                         <td>$100</td>
                         <td>2022-11-2</td>
-                        <td>Siman</td>
-                        <td>220025</td>
-                        <td>DAERP</td>
                         <td>
                             <button class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-danger">
@@ -73,50 +65,56 @@
                         </td>
                     </tbody>
                 </table>
-                <div>
-                    <ul id="paginainven" class="pagination float-right">
-                        <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
-                    </ul>
+
+                <div class="row">
+                    <div  class="col-md-8 col-sm-8 col-lg-8 col-xl-8">
+                        <ul id="paginainven" class="pagination ">
+                            <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2 col-xl-2 mt-2">
+                        <b>Total: $<span id="total">0</span></b>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="contentForminventario" class="d-none formulario">
+        <div id="contentForminventario" class="d-none formulario mt-5">
             <h4 class='centrar'>
-                Agregar Inventario
+                Inventario Producto
             </h4>
             <hr>
             <form id="forminventario" enctype="multipart/form-data">
+
                 <div class="row mb-3">
-                    <label for="insumo" class="mt-2">Producto: </label>
-                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                        <label for="insumo" class="mt-2">Producto: </label>
                         <input type="text" class="form-control" id="insumo" name="insumo">
                         <input type="hidden" name="id_inventario" id="id_inventario" value="0">
                     </div>
-                    <label for="precio" class="mt-2">Costo unitario: </label>
-                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                        <label for="insumo" class="mt-2">Costo unitario: </label>
                         <input type="float" class="form-control" id="precio" name="precio">
                     </div>
                 </div>
+
                 <div class="row mb-3">
-                </div>
-                <div class="row mb-3">
-                    <label for="unidades" class="mt-2">Cantidad: </label>
-                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                        <label for="unidades" class="mt-2">Cantidad: </label>
                         <input type="number" class="form-control" id="unidades" name="unidades">
                     </div>
-                    <label for="fecha" class="mt-2">Fecha compra: </label>
-                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                        <label for="fecha" class="mt-2">Fecha compra: </label>
                         <input type="date" class="form-control" id="fecha" name="fecha">
                     </div>
                 </div>
 
                 <div class="row mb-3">
-                    <label for="provee" class="mt-2">Proveedor:</label>
-                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                        <label for="provee" class="mt-2">Proveedor:</label>
                         <select class="form-control" name="provee" id="provee">
                             <?php
                             // Verificamos la conexión con el servidor y la base de datos
@@ -128,15 +126,15 @@
                             ?>
                         </select>
                     </div>
-                    <label for="n_factura" class="mt-2">N° factura: </label>
-                    <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
-                        <input type="text" class="form-control " style="width: 110%;" id="n_factura" name="n_factura">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                        <label for="n_factura" class="mt-2">N° factura: </label>
+                        <input type="text" class="form-control" id="n_factura" name="n_factura">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="comprador" class="mt-2">Responsable: </label>
-                    <div class="col-md-9 col-sm-9 col-lg-9 col-xl-9">
-                        <input type="text" class="form-control" style="width: 105%" id="comprador" name="comprador">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                        <label for="comprador" class="mt-2">Responsable: </label>
+                        <input type="text" class="form-control" id="comprador" name="comprador">
                     </div>
                 </div>
                 <div class="centrar">
@@ -155,6 +153,9 @@
     <!--Scripts de inventario-->
     <script src="<?php echo URL ?>publico/customjs/inventario.js"></script>
     <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
         function sortTableinventario(n, type) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 

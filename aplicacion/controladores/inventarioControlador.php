@@ -24,12 +24,23 @@ class inventariocontrolador extends controlador {
 
     public function saveinventario() {
         if ($_POST["id_inventario"]=="0") {
-            $datosinventario=$this->inventario->getinventarioByName($_POST["insumo"]);
             $records=$this->inventario->saveinventario($_POST);
-            $info=array('success'=>true,'msg'=>"Insumo registrado con exito");
+            if ($records) {
+                http_response_code(200);
+                $info=array('success'=>true,'msg'=>"Insumo registrado con exito");
+            }else{
+                http_response_code(200);
+                $info=array('success'=>false,'msg'=>"Error");
+            }
         } else {
             $records=$this->inventario->updateinventario($_POST);
-            $info=array('success'=>true,'msg'=>"Insumo actualizado con exito");
+            if ($records) {
+                http_response_code(200);
+                $info=array('success'=>true,'msg'=>"Insumo actualizado con exito");
+            }else{
+                http_response_code(200);
+                $info=array('success'=>false,'msg'=>"Error");
+            }
         }
         echo json_encode($info);
     }

@@ -7,10 +7,20 @@ class inventario extends BaseDeDatos
     {
         parent::conectar();
     }
-    /*inventario.................................................................................................................................... */
     public function getAllinventario()
     {
-        return $this->executeQuery("SELECT id_inventario, insumo, precio,unidades, total, fecha, empresa as provee, n_factura,comprador FROM inventario, proveedores WHERE proveedores.id_proveedor=inventario.provee order by id_inventario");
+        return $this->executeQuery("SELECT 
+        id_inventario, 
+        insumo, 
+        precio,
+        unidades, 
+        total, 
+        DATE_FORMAT(fecha,'%d/%m/%Y') as fecha_format, 
+        empresa as provee, 
+        n_factura,comprador 
+        FROM inventario, proveedores 
+        WHERE proveedores.id_proveedor=inventario.provee 
+        order by id_inventario desc");
     }
     public function getAllhistorialinventario()
     {
@@ -18,22 +28,46 @@ class inventario extends BaseDeDatos
     }
     public function saveinventario($data)
     {
-        return $this->executeInsert("insert into inventario set insumo='{$data["insumo"]}',precio='{$data["precio"]}', unidades='{$data["unidades"]}', total=ROUND('{$data["unidades"]}'*'{$data["precio"]}',2), fecha='{$data["fecha"]}', provee='{$data["provee"]}', n_factura='{$data["n_factura"]}', comprador='{$data["comprador"]}'");
-    }
-
-    public function getinventarioByName($insumo)
-    {
-        return $this->executeQuery("SELECT * FROM inventario where insumo='{$insumo}'");
+        return $this->executeInsert("insert into inventario set 
+        insumo='{$data["insumo"]}',
+        precio='{$data["precio"]}', 
+        unidades='{$data["unidades"]}', 
+        total=ROUND('{$data["unidades"]}'*'{$data["precio"]}',2), 
+        fecha='{$data["fecha"]}', 
+        provee='{$data["provee"]}', 
+        n_factura='{$data["n_factura"]}', 
+        comprador='{$data["comprador"]}'");
     }
 
     public function getOneinventario($id_inventario)
     {
-        return $this->executeQuery("SELECT * FROM inventario where id_inventario='{$id_inventario}'");
+        return $this->executeQuery("SELECT i.*, 
+        DATE_FORMAT(i.fecha,'%d/%m/%Y') as fecha_format,
+        fecha, 
+        p.empresa 
+        FROM inventario i 
+        INNER JOIN proveedores p 
+        on p.id_proveedor=i.provee 
+        where id_inventario='{$id_inventario}'");
     }
 
     public function updateinventario($data)
     {
-        return $this->executeInsert("update inventario set insumo='{$data["insumo"]}', precio='{$data["precio"]}',unidades='{$data["unidades"]}',total=ROUND('{$data["unidades"]}'*'{$data["precio"]}',2), fecha='{$data["fecha"]}', provee='{$data["provee"]}', n_factura='{$data["n_factura"]}', comprador='{$data["comprador"]}' where id_inventario='{$data["id_inventario"]}'");
+        $consulta=$this->executeInsert("update inventario set 
+        insumo='{$data["insumo"]}', 
+        precio='{$data["precio"]}',
+        unidades='{$data["unidades"]}',
+        total=ROUND('{$data["unidades"]}'*'{$data["precio"]}',2), 
+        fecha='{$data["fecha"]}', 
+        provee='{$data["provee"]}', 
+        n_factura='{$data["n_factura"]}', 
+        comprador='{$data["comprador"]}' 
+        where id_inventario='{$data["id_inventario"]}'");
+        if ($consulta==0) {
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     public function deleteinventario($id_inventario)

@@ -6,6 +6,7 @@ const contentTableinventario = document.querySelector("#contentTableinventario t
 const txtSearchinventario = document.querySelector("#txtSearchinventario");
 const paginainventario = document.querySelector("#paginainven");
 const forminventario = document.querySelector("#forminventario");
+let total = document.querySelector("#total");
 const objDatosinventario = {
     records: [],
     recordsFilter: [],
@@ -155,6 +156,12 @@ function cargarDatosinventario() {
             if (data.success) {
                 objDatosinventario.records = data.records;
                 objDatosinventario.currentPage = 1;
+                let count = 0
+                total.innerHTML = 0
+                data.records.forEach(element => {
+                    count = count + Number(element.total)
+                });
+                total.innerHTML = count
                 crearTablainventario();
             } else {
                 console.log("Error al recuperar registros");
@@ -194,7 +201,7 @@ function crearTablainventario() {
         objDatosinventario.recordsFilter = objDatosinventario.records.map(item => item);
     } else {
         objDatosinventario.recordsFilter = objDatosinventario.records.filter(item => {
-            const { insumo, precio, unidades, fecha, provee, n_factura, comprador } = item;
+            const { insumo, precio, unidades, fecha_format } = item;
             if (insumo.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
                 return item;
             }
@@ -204,20 +211,17 @@ function crearTablainventario() {
             if (unidades.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
                 return item;
             }
-            if (fecha.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
-                return item;
-            }
-            if (provee.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
-                return item;
-            }
-            if (n_factura.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
-                return item;
-            }
-            if (comprador.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
+            if (fecha_format.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
                 return item;
             }
         });
     }
+    let count = 0
+    total.innerHTML = 0
+    objDatosinventario.recordsFilter.forEach(element => {
+        count = count + Number(element.total)
+    });
+    total.innerHTML = count
     const recordIni = (objDatosinventario.currentPage * objDatosinventario.recordsShow) - objDatosinventario.recordsShow;
     const recordFin = (recordIni + objDatosinventario.recordsShow) - 1;
     let html = "";
@@ -226,18 +230,16 @@ function crearTablainventario() {
             if ((index >= recordIni) && (index <= recordFin)) {
                 html += `
                         <tr>
-                        <td onclick="editarinventario(${item.id_inventario})">${index + 1}</td>
-                        <td onclick="editarinventario(${item.id_inventario})">${item.insumo}</td>               
-                        <td onclick="editarinventario(${item.id_inventario})">$${item.precio}</td>               
-                        <td onclick="editarinventario(${item.id_inventario})">${item.unidades}</td>
-                        <td onclick="editarinventario(${item.id_inventario})">$${item.total}</td>
-                        <td onclick="editarinventario(${item.id_inventario})">${item.fecha}</td>
-                        <td onclick="editarinventario(${item.id_inventario})">${item.provee}</td>
-                        <td onclick="editarinventario(${item.id_inventario})">${item.n_factura}</td>
-                        <td onclick="editarinventario(${item.id_inventario})">${item.comprador}</td>
-                        <td>
-                            <button class="btn btn-primary" onclick="editarinventario(${item.id_inventario})"><img src="publico/images/lapiz.png"></button>
-                            <button class="btn btn-danger" onclick="eliminarinventario(${item.id_inventario})"><img src="publico/images/paquete.png"></button>
+                        <td onclick="ver_detalle_producto(${item.id_inventario})">${index + 1}</td>
+                        <td onclick="ver_detalle_producto(${item.id_inventario})">${item.fecha_format}</td>
+                        <td data-toggle="tooltip" title="${item.insumo}" onclick="ver_detalle_producto(${item.id_inventario})">${truncate(item.insumo, 15)}</td>               
+                        <td onclick="ver_detalle_producto(${item.id_inventario})">$${item.precio}</td>               
+                        <td onclick="ver_detalle_producto(${item.id_inventario})">${item.unidades}</td>
+                        <td onclick="ver_detalle_producto(${item.id_inventario})">$${item.total}</td>
+                        <td style="text-align:center">
+                            <button class="btn btn-primary" onclick="editarinventario(${item.id_inventario}, false)"><img src="publico/images/edit.svg"></button>
+                            <button class="btn btn-danger" onclick="eliminarinventario(${item.id_inventario})"><img src="publico/images/delete.svg"></button>
+                            <button class="btn btn-info" onclick="editarinventario(${item.id_inventario}, true)"><img src="publico/images/copy.svg"></button>
                         </td>
                         </tr>
                     `;
@@ -247,7 +249,12 @@ function crearTablainventario() {
     contentTableinventario.innerHTML = html;
     crearPaginacioninventario();
 }
-
+function truncate(text, value) {
+    if (text.length > value) {
+        return text.slice(0, value) + '...'
+    }
+    return text
+}
 function crearPaginacioninventario() {
 
     paginainventario.innerHTML = "";
@@ -284,13 +291,88 @@ function crearPaginacioninventario() {
     paginainventario.append(elSiguiente);
 }
 
-function editarinventario(id_inventario) {
-    agregarinventario();
+function ver_detalle_producto(id_inventario) {
     const API = new Api();
     API.get("inventario/getOneinventario?id_inventario=" + id_inventario).then(
         data => {
             if (data.success) {
-                mostrarDatosForminventario(data.records[0]);
+                Swal.fire({
+                    title: "Producto: " + data.records[0].insumo,
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "Editar",
+                    denyButtonText: `Eliminar`,
+                    width: 600,
+                    html: `
+                    <div class="mt-3" style="width: 97%; padding-left:13%">
+
+                    <div class='row mb-4' style="text-align: left">
+                        <div class='col-md-4 col-sm-4 col-lg-4 col-xl-4'>
+                            <b class='mt-2'>Cantidad: </b> <br>
+                            <label class='mt-2'>${data.records[0].unidades}</label>
+                        </div>
+                        <div class='col-md-4 col-sm-4 col-lg-4 col-xl-4'>
+                            <b class='mt-2'>Costo unitario: </b> <br>
+                            <label class='mt-2'>$${data.records[0].precio}</label>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                            <b class="mt-2">Total: </b> <br>
+                            <label class='mt-2'>${data.records[0].total}</label>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4" style="text-align: left">
+                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                            <b class="mt-2">Fecha compra: </b><br>
+                            <label class='mt-2'>${data.records[0].fecha_format}</label>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                            <b class="mt-2">Proveedor: </b><br>
+                            <label class='mt-2'>${data.records[0].empresa}</label>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3" style="text-align: left">
+                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                            <b class="mt-2">N° Factura: </b><br>
+                            <label class='mt-2'>${data.records[0].n_factura}</label>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                            <b class="mt-2">Responsable: </b><br>
+                            <label class='mt-2'>${data.records[0].comprador}</label>
+                        </div>
+                    </div>
+                    </div>
+                    `
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        agregarinventario();
+                        mostrarDatosForminventario(data.records[0], false);
+                    } else if (result.isDenied) {
+                        eliminarinventario(id_inventario)
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: data.msg
+                });
+            }
+        }
+    ).catch(
+        error => {
+            console.log("Error:", error);
+        }
+    );
+}
+function editarinventario(id_inventario, copy) {
+    const API = new Api();
+    API.get("inventario/getOneinventario?id_inventario=" + id_inventario).then(
+        data => {
+            if (data.success) {
+                agregarinventario();
+                mostrarDatosForminventario(data.records[0], copy);
             } else {
                 Swal.fire({
                     icon: "error",
@@ -306,9 +388,10 @@ function editarinventario(id_inventario) {
     );
 }
 
-function mostrarDatosForminventario(record) {
+function mostrarDatosForminventario(record, copy) {
+    console.log(copy);
     const { id_inventario, insumo, precio, unidades, fecha, provee, n_factura, comprador } = record;
-    document.querySelector("#id_inventario").value = id_inventario;
+    document.querySelector("#id_inventario").value = copy == false ? id_inventario : 0;
     document.querySelector("#insumo").value = insumo;
     document.querySelector("#precio").value = precio;
     document.querySelector("#unidades").value = unidades;
