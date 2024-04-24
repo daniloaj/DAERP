@@ -2,6 +2,7 @@ const botoninventario = document.querySelector("#btnAgregarinventario");
 const panelDatosinventario = document.querySelector("#contentListinventario");
 const panelForminventario = document.querySelector("#contentForminventario");
 const btnCancelarinventario = document.querySelector("#btnCancelarinventario");
+const btnSaveInventario = document.querySelector("#btnSaveInventario");
 const contentTableinventario = document.querySelector("#contentTableinventario table tbody");
 const txtSearchinventario = document.querySelector("#txtSearchinventario");
 const paginainventario = document.querySelector("#paginainven");
@@ -120,7 +121,9 @@ function guardarinventario(event) {
         API.post(formDatainventario, "inventario/saveinventario").then(
             data => {
                 if (data.success) {
+                    
                     cancelarinventario();
+
                     Swal.fire({
                         icon: "info",
                         text: data.msg
@@ -175,10 +178,10 @@ function cargarDatosinventario() {
 }
 
 function agregarinventario() {
-    panelDatosinventario.classList.add("form_animation");
-    panelForminventario.classList.add("form_animation");
-    panelDatosinventario.classList.add("d-none");
-    panelForminventario.classList.remove("d-none");
+    // panelDatosinventario.classList.add("form_animation");
+    // panelForminventario.classList.add("form_animation");
+    // panelDatosinventario.classList.add("d-none");
+    // panelForminventario.classList.remove("d-none");
     limpiarForminventario();
 }
 
@@ -189,8 +192,10 @@ function limpiarForminventario() {
 
 
 function cancelarinventario() {
-    panelDatosinventario.classList.remove("d-none");
-    panelForminventario.classList.add("d-none");
+    // panelDatosinventario.classList.remove("d-none");
+    // panelForminventario.classList.add("d-none");
+    btnCancelarinventario.setAttribute("data-bs-dismiss", "modal");
+    btnCancelarinventario.classList.add('close-modal');
     cargarDatosinventario();
     quitar_rojo_inputs()
 }
@@ -237,9 +242,9 @@ function crearTablainventario() {
                         <td onclick="ver_detalle_producto(${item.id_inventario})">${item.unidades}</td>
                         <td onclick="ver_detalle_producto(${item.id_inventario})">$${item.total}</td>
                         <td style="text-align:center">
-                            <button class="btn btn-primary" onclick="editarinventario(${item.id_inventario}, false)"><img src="publico/images/edit.svg"></button>
-                            <button class="btn btn-danger" onclick="eliminarinventario(${item.id_inventario})"><img src="publico/images/delete.svg"></button>
-                            <button class="btn btn-info" onclick="editarinventario(${item.id_inventario}, true)"><img src="publico/images/copy.svg"></button>
+                            <button href="#modal_form" data-bs-toggle="modal" class="btn btn-primary" onclick="editarinventario(${item.id_inventario}, false)"><img src="publico/images/edit.svg"></button>
+                            <button href="#modal_form" data-bs-toggle="modal" class="btn btn-danger" onclick="eliminarinventario(${item.id_inventario})"><img src="publico/images/delete.svg"></button>
+                            <button href="#modal_form" data-bs-toggle="modal" class="btn btn-info" onclick="editarinventario(${item.id_inventario}, true)"><img src="publico/images/copy.svg"></button>
                         </td>
                         </tr>
                     `;

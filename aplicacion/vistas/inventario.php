@@ -67,7 +67,7 @@
                 </table>
 
                 <div class="row">
-                    <div  class="col-md-8 col-sm-8 col-lg-8 col-xl-8">
+                    <div class="col-md-8 col-sm-8 col-lg-8 col-xl-8">
                         <ul id="paginainven" class="pagination ">
                             <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
                             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -82,72 +82,82 @@
                 </div>
             </div>
         </div>
-        <div id="contentForminventario" class="d-none formulario mt-5">
-            <h4 class='centrar'>
-                Inventario Producto
-            </h4>
-            <hr>
-            <form id="forminventario" enctype="multipart/form-data">
-
-                <div class="row mb-3">
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                        <label for="insumo" class="mt-2">Producto: </label>
-                        <input type="text" class="form-control" id="insumo" name="insumo">
-                        <input type="hidden" name="id_inventario" id="id_inventario" value="0">
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                        <label for="insumo" class="mt-2">Costo unitario: </label>
-                        <input type="float" class="form-control" id="precio" name="precio">
+        <div style="z-index: 9000" class="modal fade" id="modal_form" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="border-radius: 10px; margin-top: -5%">
+                    <div class="container">
+                        <div class="modal-body">
+                            <div id="contentForminventario" style="font-size: 20px" class="formulario">
+                                <h3 class='centrar'>
+                                    Inventario Producto
+                                </h3>
+                                <hr>
+                                <form id="forminventario" enctype="multipart/form-data">
+    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                                            <label for="insumo" class="mt-2">Producto: </label>
+                                            <input type="text" class="form-control" id="insumo" name="insumo">
+                                            <input type="hidden" name="id_inventario" id="id_inventario" value="0">
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                                            <label for="insumo" class="mt-2">Costo unitario: </label>
+                                            <input type="float" class="form-control" id="precio" name="precio">
+                                        </div>
+                                    </div>
+    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                                            <label for="unidades" class="mt-2">Cantidad: </label>
+                                            <input type="number" class="form-control" id="unidades" name="unidades">
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                                            <label for="fecha" class="mt-2">Fecha compra: </label>
+                                            <input type="date" class="form-control" id="fecha" name="fecha">
+                                        </div>
+                                    </div>
+    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                                            <label for="provee" class="mt-2">Proveedor:</label>
+                                            <select class="form-control" name="provee" id="provee">
+                                                <?php
+                                                // Verificamos la conexión con el servidor y la base de datos
+                                                $mysqli = new mysqli('localhost', 'root', 'asd', 'daerp');
+                                                $query = $mysqli->query("SELECT id_proveedor, empresa FROM proveedores ");
+                                                while ($valores = mysqli_fetch_array($query)) {
+                                                    echo '<option value="' . $valores[id_proveedor] . '">' . $valores[empresa] . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                                            <label for="n_factura" class="mt-2">N° factura: </label>
+                                            <input type="text" class="form-control" id="n_factura" name="n_factura">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                                            <label for="comprador" class="mt-2">Responsable: </label>
+                                            <input type="text" class="form-control" id="comprador" name="comprador">
+                                        </div>
+                                    </div>
+                                    <div class="centrar">
+                                        <button type="button" class="btn btn-secondary" id="btnCancelarinventario">
+                                            <i class="bi bi-x-octagon-fill"></i>
+                                            Cancelar
+                                        </button>
+                                        <button data-bs-dismiss="modal" type="submit" class="btn btn-primary close-modal" id="btnSaveInventario">
+                                            <i class="bi bi-hdd-fill"></i>
+                                            Guardar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                        <label for="unidades" class="mt-2">Cantidad: </label>
-                        <input type="number" class="form-control" id="unidades" name="unidades">
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                        <label for="fecha" class="mt-2">Fecha compra: </label>
-                        <input type="date" class="form-control" id="fecha" name="fecha">
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                        <label for="provee" class="mt-2">Proveedor:</label>
-                        <select class="form-control" name="provee" id="provee">
-                            <?php
-                            // Verificamos la conexión con el servidor y la base de datos
-                            $mysqli = new mysqli('localhost', 'root', 'asd', 'daerp');
-                            $query = $mysqli->query("SELECT id_proveedor, empresa FROM proveedores ");
-                            while ($valores = mysqli_fetch_array($query)) {
-                                echo '<option value="' . $valores[id_proveedor] . '">' . $valores[empresa] . '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                        <label for="n_factura" class="mt-2">N° factura: </label>
-                        <input type="text" class="form-control" id="n_factura" name="n_factura">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
-                        <label for="comprador" class="mt-2">Responsable: </label>
-                        <input type="text" class="form-control" id="comprador" name="comprador">
-                    </div>
-                </div>
-                <div class="centrar">
-                    <button type="button" class="btn btn-secondary" id="btnCancelarinventario">
-                        <i class="bi bi-x-octagon-fill"></i>
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-hdd-fill"></i>
-                        Guardar
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
     <!--Scripts de inventario-->

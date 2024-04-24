@@ -96,9 +96,9 @@ body {
   width: 12%;
 }
 .data{
-  width: 75%;
-  left: 15%;
-  top: 5%;
+  width: 85%;
+  left: 10%;
+  top: 3%;
   position: absolute;
 }
 .centrar{
@@ -219,7 +219,7 @@ body {
 }
 
 .formulario {
-  width: 50%;
+  /* width: 50%; */
   margin: auto;
 }
 
