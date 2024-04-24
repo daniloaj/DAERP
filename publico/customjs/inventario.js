@@ -95,7 +95,6 @@ function guardarinventario(event) {
     const formDatainventario = new FormData(forminventario);
     const API = new Api();
 
-
     if (($('#insumo').val().length == 0)
         || ($('#comprador').val().length == 0)
         || ($('#n_factura').val().length == 0)
@@ -121,9 +120,8 @@ function guardarinventario(event) {
         API.post(formDatainventario, "inventario/saveinventario").then(
             data => {
                 if (data.success) {
-                    
                     cancelarinventario();
-
+                    btnCancelarinventario.click();
                     Swal.fire({
                         icon: "info",
                         text: data.msg
@@ -178,10 +176,6 @@ function cargarDatosinventario() {
 }
 
 function agregarinventario() {
-    // panelDatosinventario.classList.add("form_animation");
-    // panelForminventario.classList.add("form_animation");
-    // panelDatosinventario.classList.add("d-none");
-    // panelForminventario.classList.remove("d-none");
     limpiarForminventario();
 }
 

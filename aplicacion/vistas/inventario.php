@@ -18,7 +18,7 @@
         <h1 class='centrar'>Sistema de Inventario DAERP</h1>
         <br>
         <div id="contentListinventario">
-            <button class="btn btn-success float-right" id="btnAgregarinventario">
+            <button href="#modal_form" data-bs-toggle="modal" class="btn btn-success float-right" id="btnAgregarinventario">
                 <i class="bi bi-plus-square-fill"></i>
                 Agregar inventario
             </button>
@@ -147,7 +147,7 @@
                                             <i class="bi bi-x-octagon-fill"></i>
                                             Cancelar
                                         </button>
-                                        <button data-bs-dismiss="modal" type="submit" class="btn btn-primary close-modal" id="btnSaveInventario">
+                                        <button type="submit" class="btn btn-primary" id="btnSaveInventario">
                                             <i class="bi bi-hdd-fill"></i>
                                             Guardar
                                         </button>
