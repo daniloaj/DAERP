@@ -26,8 +26,8 @@ class usuariosControlador extends controlador {
     }
 
     public function saveusuarios() {
+        $datosUser=$this->usuarios->getusuariosByName($_POST);
         if ($_POST["id_usuario"]=="0") {
-            $datosUser=$this->usuarios->getusuariosByName($_POST["usuario"]);
             if (count($datosUser)>0) {
                 $info=array('success'=>false,'msg'=>"El usuario ya existe");
             } else {
@@ -35,8 +35,12 @@ class usuariosControlador extends controlador {
                 $info=array('success'=>true,'msg'=>"Usuario guardado con exito");
             }
         } else {
-            $records=$this->usuarios->updateusuarios($_POST);
-            $info=array('success'=>true,'msg'=>"Usuario actualizado con exito");
+            if (count($datosUser)>0) {
+                $info=array('success'=>false,'msg'=>"El usuario ya existe");
+            } else {
+                $records=$this->usuarios->updateusuarios($_POST);
+                $info=array('success'=>true,'msg'=>"Usuario actualizado con exito");
+            }
         }
         echo json_encode($info);
     }

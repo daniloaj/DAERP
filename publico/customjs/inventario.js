@@ -186,8 +186,6 @@ function limpiarForminventario() {
 
 
 function cancelarinventario() {
-    // panelDatosinventario.classList.remove("d-none");
-    // panelForminventario.classList.add("d-none");
     btnCancelarinventario.setAttribute("data-bs-dismiss", "modal");
     btnCancelarinventario.classList.add('close-modal');
     cargarDatosinventario();
@@ -237,7 +235,7 @@ function crearTablainventario() {
                         <td onclick="ver_detalle_producto(${item.id_inventario})">$${item.total}</td>
                         <td style="text-align:center">
                             <button href="#modal_form" data-bs-toggle="modal" class="btn btn-primary" onclick="editarinventario(${item.id_inventario}, false)"><img src="publico/images/edit.svg"></button>
-                            <button href="#modal_form" data-bs-toggle="modal" class="btn btn-danger" onclick="eliminarinventario(${item.id_inventario})"><img src="publico/images/delete.svg"></button>
+                            <button class="btn btn-danger" onclick="eliminarinventario(${item.id_inventario})"><img src="publico/images/delete.svg"></button>
                             <button href="#modal_form" data-bs-toggle="modal" class="btn btn-info" onclick="editarinventario(${item.id_inventario}, true)"><img src="publico/images/copy.svg"></button>
                         </td>
                         </tr>
@@ -345,6 +343,7 @@ function ver_detalle_producto(id_inventario) {
                     `
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        botoninventario.click()
                         agregarinventario();
                         mostrarDatosForminventario(data.records[0], false);
                     } else if (result.isDenied) {
@@ -388,7 +387,6 @@ function editarinventario(id_inventario, copy) {
 }
 
 function mostrarDatosForminventario(record, copy) {
-    console.log(copy);
     const { id_inventario, insumo, precio, unidades, fecha, provee, n_factura, comprador } = record;
     document.querySelector("#id_inventario").value = copy == false ? id_inventario : 0;
     document.querySelector("#insumo").value = insumo;

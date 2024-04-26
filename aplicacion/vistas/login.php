@@ -20,8 +20,8 @@
           // Verificamos la conexión con el servidor y la base de datos
           $mysqli = new mysqli('localhost', 'root', 'asd', 'daerp');
           $query = $mysqli->query("SELECT id_dep, nom_depa FROM departamentos ");
+          echo '<option value="0">Departamento</option>';
           while ($valores = mysqli_fetch_array($query)) {
-              echo '<option value="0">Departamento</option>';
               echo '<option value="' . $valores[id_dep] . '">' . $valores[nom_depa] . '</option>';
           }
           ?>
