@@ -6,6 +6,8 @@ const contentTableusuarios = document.querySelector("#contentTableUsuarios table
 const txtSearchusuarios = document.querySelector("#txtSearchUsuarios");
 const paginationusuario = document.querySelector("#paginauser");
 const formusuario = document.querySelector("#formusuarios");
+const send_mail_button = document.querySelector("#send_mail");
+const cancelar_mail_button = document.querySelector("#cancelar_mail");
 const objDatosusuario = {
     records: [],
     recordsFilter: [],
@@ -23,23 +25,63 @@ function eventListiners() {
     document.querySelector("#apellidos").addEventListener("input", validar_apellidos)
     document.querySelector("#usuario").addEventListener("input", validar_usuario)
     document.querySelector("#password").addEventListener("input", validar_password)
-
+    document.querySelector("#correo").addEventListener("input", validar_Correo)
+    document.querySelector("#whatsapp").addEventListener("input", validar_Whatsapp)
+    document.querySelector("#tel").addEventListener("input", validar_tel)
     formusuario.addEventListener("submit", guardarusuario);
-
     botonusuarios.addEventListener("click", agregarusuario);
-
+    cancelar_mail_button.addEventListener("click", cancelar_mail);
+    send_mail_button.addEventListener("click", enviar_correo);
     btnCancelarusuario.addEventListener("click", cancelarusuario);
-
     document.addEventListener("DOMContentLoaded", cargarDatosusuario);
-
     txtSearchusuarios.addEventListener("input", aplicarFiltrousuario);
 }
-
+function cancelar_mail() {
+    $('#modal_mails').modal('hide')
+    document.getElementById("asunto").value = ""
+    document.getElementById("mensaje").value = ""
+}
+function enviar_correo() {
+    let correo = document.getElementById("correo_usuario").innerHTML.split(":")[1].trim()
+    let asunto = document.getElementById("asunto").value
+    let mensaje = document.getElementById("mensaje").value
+    const API = new Api()
+    const formData = new FormData();
+    formData.append("correo", correo);
+    formData.append("asunto", asunto);
+    formData.append("mensaje", mensaje);
+    API.post(formData, "usuarios/send_mail").then(response => {
+        console.log(response);
+    }).catch(error => {
+        console.log(error);
+    })
+}
 function validar_nombre() {
     if ($('#nombre').val().length == 0) {
         document.querySelector("#nombre").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#nombre").classList.remove('color_rojo_inputs')
+    }
+}
+function validar_tel() {
+    if ($('#tel').val().length == 0) {
+        document.querySelector("#tel").classList.add('color_rojo_inputs')
+    } else {
+        document.querySelector("#tel").classList.remove('color_rojo_inputs')
+    }
+}
+function validar_Whatsapp() {
+    if ($('#whatsapp').val().length == 0) {
+        document.querySelector("#whatsapp").classList.add('color_rojo_inputs')
+    } else {
+        document.querySelector("#whatsapp").classList.remove('color_rojo_inputs')
+    }
+}
+function validar_Correo() {
+    if ($('#correo').val().length == 0) {
+        document.querySelector("#correo").classList.add('color_rojo_inputs')
+    } else {
+        document.querySelector("#correo").classList.remove('color_rojo_inputs')
     }
 }
 function validar_apellidos() {
@@ -81,6 +123,9 @@ function guardarusuario(event) {
         || (id_user == 0 && $('#password').val().length == 0 ? true : false)
         || ($('#apellidos').val().length == 0)
         || ($('#usuario').val().length == 0)
+        || ($('#tel').val().length == 0)
+        || ($('#whatsapp').val().length == 0)
+        || ($('#correo').val().length == 0)
     ) {
         let inputs = document.querySelectorAll('input');
 
@@ -116,7 +161,7 @@ function guardarusuario(event) {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $('#modal_form').modal('show')
-                        } 
+                        }
                     });;
                 }
             }
@@ -162,9 +207,8 @@ function agregarusuario() {
 function limpiarFormusuario() {
     formusuario.reset();
     document.querySelector("#id_usuario").value = "0";
-    id_user=0
+    id_user = 0
 }
-
 
 function cancelarusuario() {
     btnCancelarusuario.setAttribute("data-bs-dismiss", "modal");
@@ -173,13 +217,12 @@ function cancelarusuario() {
     quitar_rojo_inputs()
 }
 
-
 function crearTablausuario() {
     if (objDatosusuario.filter === "") {
         objDatosusuario.recordsFilter = objDatosusuario.records.map(item => item);
     } else {
         objDatosusuario.recordsFilter = objDatosusuario.records.filter(item => {
-            const { nombre,apellido, usuario } = item;
+            const { nombre, apellido, usuario } = item;
             if (nombre.toUpperCase().search(objDatosusuario.filter.toUpperCase()) != -1) {
                 return item;
             }
@@ -209,9 +252,11 @@ function crearTablausuario() {
                     <td onclick="ver_detalle(${item.id_usuario})" >${item.nombre}</td>               
                     <td onclick="ver_detalle(${item.id_usuario})" >${item.apellido}</td>               
                     <td onclick="ver_detalle(${item.id_usuario})" >${item.usuario}</td>
+                    <td style="color: blue" onclick="ver_detalle(${item.id_usuario})" >${item.correo}</td>
                     <td style="text-align:center">
                         <button href="#modal_form" data-bs-toggle="modal" class="btn btn-primary" onclick="editarusuario(${item.id_usuario}, false)"><img src="publico/images/edit.svg"></button>
                         <button class="btn btn-danger" onclick="eliminarusuario(${item.id_usuario})"><img src="publico/images/delete.svg"></button>
+                        <button class="btn btn-primary" onclick="open_mail_modal(${item.id_usuario}, false)"><img src="publico/images/mail.svg"></button>
                     </td>
                     </tr>
                 `;
@@ -220,6 +265,17 @@ function crearTablausuario() {
     );
     contentTableusuarios.innerHTML = html;
     crearPaginacionusuario();
+}
+function open_mail_modal(id) {
+    const API = new Api();
+    API.get("usuarios/getOneusuario?id_usuario=" + id).then(
+        data => {
+            $('#modal_mails').modal('show')
+            document.getElementById("correo_usuario").innerHTML = "Enviar correo a: " + data.records[0].correo
+        }
+    ).catch(error => {
+        console.log("Error:", error);
+    })
 }
 function ver_detalle(id) {
     const API = new Api();
@@ -234,7 +290,7 @@ function ver_detalle(id) {
                     denyButtonText: `Eliminar`,
                     width: 600,
                     html: `
-                    <div class="mt-3 text-capitalize" style="width: 97%; padding-left:13%">
+                    <div class="mt-3" style="width: 97%; padding-left:13%">
                         <div class='row mb-4' style="text-align: left">
                             <div class='col-md-4 col-sm-4 col-lg-4 col-xl-4'>
                                 <b class='mt-2'>Usuario: </b> <br>
@@ -249,6 +305,25 @@ function ver_detalle(id) {
                                 <label class='mt-2'>${data.records[0].nom_depa}</label>
                             </div>
                         </div>
+                        
+                        <div class='row mb-4' style="text-align: left">
+                            <div class='col-md-6 col-sm-6 col-lg-6 col-xl-6'>
+                                <b class='mt-2'>Teléfono: </b> <br>
+                                <label class='mt-2'>${data.records[0].tel}</label>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                                <b class="mt-2">Whatsapp: </b><br>
+                                <label class='mt-2'>${data.records[0].whatsapp}</label>
+                            </div>
+                        </div>
+                        
+                        <div class='row mb-4' style="text-align: left">
+                            <div class='col-md-8 col-sm-8 col-lg-8 col-xl-8'>
+                                <b class='mt-2'>Correo: </b> <br>
+                                <label class='mt-2'>${data.records[0].correo}</label>
+                            </div>
+                        </div>
+                            
                     </div>
                     `
                 }).then((result) => {
@@ -333,14 +408,17 @@ function editarusuario(id_usuario) {
 }
 
 function mostrarDatosFormusuarios(record) {
-    const { id_usuario, nombre, apellido, usuario, tipo, id_dep } = record;
-    id_user=id_usuario
+    const { id_usuario, nombre, apellido, usuario, tipo, id_dep, tel, correo, whatsapp } = record;
+    id_user = id_usuario
     document.querySelector("#id_usuario").value = id_usuario;
     document.querySelector("#nombre").value = nombre;
     document.querySelector("#apellidos").value = apellido;
     document.querySelector("#usuario").value = usuario;
     document.querySelector("#tipo").value = tipo;
     document.querySelector("#depa").value = id_dep;
+    document.querySelector("#correo").value = correo;
+    document.querySelector("#whatsapp").value = whatsapp;
+    document.querySelector("#tel").value = tel;
 }
 
 

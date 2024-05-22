@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="aplicacion/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Archivos adicionales CSS -->
     <link rel="stylesheet" href="publico/css/super.css">
     <title>Inventario</title>
@@ -206,8 +206,8 @@
         }
     </script>
     <!--Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="aplicacion/vendor/jquery/jquery.min.js"></script>
+    <script src="aplicacion/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     <!--Additional Scripts -->

@@ -4,10 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb80cc7bffa01587c445e723bb8fa9f68
+class ComposerStaticInit4eb8b6908db5ba53816b92c15345ed52
 {
     public static $files = array (
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        'db356362850385d08a5381de2638b5fd' => __DIR__ . '/..' . '/mpdf/mpdf/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -18,9 +19,12 @@ class ComposerStaticInitb80cc7bffa01587c445e723bb8fa9f68
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
         ),
         'M' => 
         array (
+            'Mpdf\\PsrLogAwareTrait\\' => 22,
+            'Mpdf\\PsrHttpMessageShim\\' => 24,
             'Mpdf\\' => 5,
         ),
         'D' => 
@@ -37,6 +41,18 @@ class ComposerStaticInitb80cc7bffa01587c445e723bb8fa9f68
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'Mpdf\\PsrLogAwareTrait\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/psr-log-aware-trait/src',
+        ),
+        'Mpdf\\PsrHttpMessageShim\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/psr-http-message-shim/src',
         ),
         'Mpdf\\' => 
         array (
@@ -55,9 +71,9 @@ class ComposerStaticInitb80cc7bffa01587c445e723bb8fa9f68
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb80cc7bffa01587c445e723bb8fa9f68::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb80cc7bffa01587c445e723bb8fa9f68::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitb80cc7bffa01587c445e723bb8fa9f68::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit4eb8b6908db5ba53816b92c15345ed52::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit4eb8b6908db5ba53816b92c15345ed52::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit4eb8b6908db5ba53816b92c15345ed52::$classMap;
 
         }, null, ClassLoader::class);
     }

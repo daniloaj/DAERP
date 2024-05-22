@@ -121,7 +121,7 @@ function guardarinventario(event) {
             data => {
                 if (data.success) {
                     cancelarinventario();
-                    btnCancelarinventario.click();
+                    $('#modal_form').modal('hide')
                     Swal.fire({
                         icon: "info",
                         text: data.msg

@@ -1,6 +1,8 @@
 <?php
 // se llama al modelo de usuarios para hacer uso de sus funciones
+include_once "mailercontroller.php";
 include_once "aplicacion/modelos/usuarios.php";
+
 class usuariosControlador extends controlador {
     private $usuarios;
     public function __construct($parametro) {
@@ -43,6 +45,30 @@ class usuariosControlador extends controlador {
             }
         }
         echo json_encode($info);
+    }
+
+    public function send_mail() {
+        $correo = $_POST['correo'];
+        $issue = $_POST['asunto'];
+        $message = $_POST['mensaje'];
+
+        $mail = new EnvioCorreo();
+        $mail->configMail('DAERP');
+        $result = $mail->enviarMail(
+            $correo,
+            $issue,
+            $message,
+            '',
+            ''
+        );
+
+        if ($result) {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'msg' => 'Correo enviado'));
+        } else {
+            http_response_code(500);
+            echo json_encode(array('success' => true, 'msg' => 'Error al enviar el correo'));
+        }
     }
 
     public function getAllusuarios() {

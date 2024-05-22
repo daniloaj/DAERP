@@ -9,7 +9,7 @@
   <title>DAERP</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="aplicacion/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Archivos adicionales CSS -->
   <link rel="stylesheet" href="publico/css/super.css">
 
@@ -59,8 +59,8 @@
     </div>
 
     <!--Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="aplicacion/vendor/jquery/jquery.min.js"></script>
+    <script src="aplicacion/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     <!--Additional Scripts -->

@@ -1,6 +1,6 @@
 <?php
 include_once "aplicacion/modelos/supertablero.php";
-include_once "vendor/autoload.php";
+include_once "aplicacion/vendor/autoload.php";
 class reportecomprascontrolador extends controlador {
     private $compra;
     //Metodo constructor
