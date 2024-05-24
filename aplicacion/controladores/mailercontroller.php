@@ -1,6 +1,6 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
-require_once "vendor/autoload.php";
+require_once "aplicacion/vendor/autoload.php";
 require_once "aplicacion/vendor/phpmailer/phpmailer/src/PHPMailer.php";
 
     class EnvioCorreo {
@@ -8,7 +8,7 @@ require_once "aplicacion/vendor/phpmailer/phpmailer/src/PHPMailer.php";
         
         public function configMail($fromname) {
             $this->mail = new PHPMailer();
-            $this->mail->SMTPDebug  = 2;
+            // $this->mail->SMTPDebug  = 2;
             $this->mail->isSMTP();
             $this->mail->Host = "smtp.gmail.com";
             $this->mail->From = "agilardanilo@gmail.com";

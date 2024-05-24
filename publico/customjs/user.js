@@ -8,6 +8,7 @@ const paginationusuario = document.querySelector("#paginauser");
 const formusuario = document.querySelector("#formusuarios");
 const send_mail_button = document.querySelector("#send_mail");
 const cancelar_mail_button = document.querySelector("#cancelar_mail");
+const enviar_varios_mail_button = document.querySelector("#enviar_varios_correos");
 const objDatosusuario = {
     records: [],
     recordsFilter: [],
@@ -16,6 +17,7 @@ const objDatosusuario = {
     filter: ""
 };
 let id_user = 0
+let correos=[]
 
 eventListiners();
 
@@ -30,11 +32,16 @@ function eventListiners() {
     document.querySelector("#tel").addEventListener("input", validar_tel)
     formusuario.addEventListener("submit", guardarusuario);
     botonusuarios.addEventListener("click", agregarusuario);
+    enviar_varios_mail_button.addEventListener("click", enviar_varios_mail);
     cancelar_mail_button.addEventListener("click", cancelar_mail);
     send_mail_button.addEventListener("click", enviar_correo);
     btnCancelarusuario.addEventListener("click", cancelarusuario);
     document.addEventListener("DOMContentLoaded", cargarDatosusuario);
     txtSearchusuarios.addEventListener("input", aplicarFiltrousuario);
+}
+function enviar_varios_mail() {
+    $('#modal_mails').modal('show')
+    document.getElementById("correo_usuario").innerHTML = "Enviar correo a: <br> Todos los usuarios" 
 }
 function cancelar_mail() {
     $('#modal_mails').modal('hide')
@@ -42,19 +49,37 @@ function cancelar_mail() {
     document.getElementById("mensaje").value = ""
 }
 function enviar_correo() {
-    let correo = document.getElementById("correo_usuario").innerHTML.split(":")[1].trim()
+    let correo = document.getElementById("correo_usuario").innerHTML.split(">")[1].trim()
     let asunto = document.getElementById("asunto").value
     let mensaje = document.getElementById("mensaje").value
     const API = new Api()
     const formData = new FormData();
-    formData.append("correo", correo);
     formData.append("asunto", asunto);
     formData.append("mensaje", mensaje);
-    API.post(formData, "usuarios/send_mail").then(response => {
-        console.log(response);
-    }).catch(error => {
-        console.log(error);
-    })
+
+    if (correo=="Todos los usuarios") {
+        formData.append("correo", JSON.stringify(correos));
+        API.post(formData, "usuarios/send_many_mails").then(response => {
+            cancelar_mail()
+            Swal.fire({
+                icon: "info",
+                text: response.msg
+            });
+        }).catch(error => {
+            console.log(error);
+        })
+    } else {
+        formData.append("correo", correo);
+        API.post(formData, "usuarios/send_mail").then(response => {
+            cancelar_mail()
+            Swal.fire({
+                icon: "info",
+                text: response.msg
+            });
+        }).catch(error => {
+            console.log(error);
+        })
+    }
 }
 function validar_nombre() {
     if ($('#nombre').val().length == 0) {
@@ -173,13 +198,11 @@ function guardarusuario(event) {
     }
 }
 
-
 function aplicarFiltrousuario(element) {
     element.preventDefault();
     objDatosusuario.filter = this.value;
     crearTablausuario();
 }
-
 
 function cargarDatosusuario() {
     const API = new Api();
@@ -189,6 +212,12 @@ function cargarDatosusuario() {
                 objDatosusuario.records = data.records;
                 objDatosusuario.currentPage = 1;
                 crearTablausuario();
+                data.records.forEach(element => {
+                    const array={
+                        correo: element.correo
+                    }
+                    correos.push(array)
+                });
             } else {
                 console.log("Error al recuperar registros");
             }
@@ -247,16 +276,16 @@ function crearTablausuario() {
         (item, index) => {
             if ((index >= recordIni) && (index <= recordFin)) {
                 html += `
-                    <tr class="text-capitalize">
+                    <tr style="cursor:pointer;" class="text-capitalize">
                     <td onclick="ver_detalle(${item.id_usuario})" >${index + 1}</td>
                     <td onclick="ver_detalle(${item.id_usuario})" >${item.nombre}</td>               
                     <td onclick="ver_detalle(${item.id_usuario})" >${item.apellido}</td>               
                     <td onclick="ver_detalle(${item.id_usuario})" >${item.usuario}</td>
-                    <td style="color: blue" onclick="ver_detalle(${item.id_usuario})" >${item.correo}</td>
+                    <td style="color: #4942E4;cursor:pointer;" onclick="ver_detalle(${item.id_usuario})" >${item.correo}</td>
                     <td style="text-align:center">
                         <button href="#modal_form" data-bs-toggle="modal" class="btn btn-primary" onclick="editarusuario(${item.id_usuario}, false)"><img src="publico/images/edit.svg"></button>
                         <button class="btn btn-danger" onclick="eliminarusuario(${item.id_usuario})"><img src="publico/images/delete.svg"></button>
-                        <button class="btn btn-primary" onclick="open_mail_modal(${item.id_usuario}, false)"><img src="publico/images/mail.svg"></button>
+                        <button class="btn btn-info" onclick="open_mail_modal(${item.id_usuario}, false)"><img src="publico/images/mail.svg"></button>
                     </td>
                     </tr>
                 `;
@@ -271,7 +300,7 @@ function open_mail_modal(id) {
     API.get("usuarios/getOneusuario?id_usuario=" + id).then(
         data => {
             $('#modal_mails').modal('show')
-            document.getElementById("correo_usuario").innerHTML = "Enviar correo a: " + data.records[0].correo
+            document.getElementById("correo_usuario").innerHTML = "Enviar correo a: <br>" + data.records[0].correo
         }
     ).catch(error => {
         console.log("Error:", error);
@@ -320,7 +349,7 @@ function ver_detalle(id) {
                         <div class='row mb-4' style="text-align: left">
                             <div class='col-md-8 col-sm-8 col-lg-8 col-xl-8'>
                                 <b class='mt-2'>Correo: </b> <br>
-                                <label class='mt-2'>${data.records[0].correo}</label>
+                                <label class='mt-2' style="color: #4942E4;cursor:pointer;" onclick="open_mail_modal(${id})">${data.records[0].correo}</label>
                             </div>
                         </div>
                             
@@ -329,7 +358,6 @@ function ver_detalle(id) {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         botonusuarios.click()
-                        agregarusuario();
                         mostrarDatosFormusuarios(data.records[0], false);
                     } else if (result.isDenied) {
                         eliminarusuario(id)

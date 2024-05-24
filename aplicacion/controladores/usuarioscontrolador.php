@@ -46,7 +46,6 @@ class usuariosControlador extends controlador {
         }
         echo json_encode($info);
     }
-
     public function send_mail() {
         $correo = $_POST['correo'];
         $issue = $_POST['asunto'];
@@ -64,13 +63,41 @@ class usuariosControlador extends controlador {
 
         if ($result) {
             http_response_code(200);
-            echo json_encode(array('success' => true, 'msg' => 'Correo enviado'));
+            echo json_encode(array('success' => true, 'msg' => 'Correo enviado exitosamente'));
+        } else {
+            http_response_code(500);
+            echo json_encode(array('success' => true, 'msg' => 'Error al enviar el correo'));
+        }
+    }
+    public function send_many_mails() {
+        $issue = $_POST['asunto'];
+        $message = $_POST['mensaje'];
+
+        $correos = json_decode($_POST['correo']);
+
+        $mail = new EnvioCorreo();
+        $mail->configMail('DAERP');
+
+        for ($i = 0; $i < count($correos); $i++) {
+            $result = $mail->enviarMail(
+                $correos[$i]->correo,
+                $issue ? $issue : '',
+                $message ? $message : '',
+                '',
+                ''
+            );
+        }
+
+        if ($result) {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'msg' => 'Correo enviado exitosamente'));
         } else {
             http_response_code(500);
             echo json_encode(array('success' => true, 'msg' => 'Error al enviar el correo'));
         }
     }
 
+    
     public function getAllusuarios() {
         $records=$this->usuarios->getAllusuarios();
         $info=array('success'=>true,'records'=>$records);

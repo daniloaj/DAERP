@@ -22,6 +22,10 @@
                 <i class="bi bi-plus-square-fill"></i>
                 Agregar Usuarios
             </button>
+            <button href="#modal_mails" data-bs-toggle="modal" class="btn btn-success float-right mr-3" id="enviar_varios_correos">
+                <i class="bi bi-plus-square-fill"></i>
+                Enviar correo a todos
+            </button>
 
             <div class="col-md-4">
                 <div class="input-group mb-3">
@@ -37,7 +41,7 @@
             <div id="contentTableUsuarios">
                 <table class="table table-hover" id="myTableUsuarios">
                     <thead>
-                        <th>Id <img onclick="sortTableUsuarios(0, 'int')" src="publico/images/flecha.png"></th>
+                        <th># <img onclick="sortTableUsuarios(0, 'int')" src="publico/images/flecha.png"></th>
                         <th>Nombre <img onclick="sortTableUsuarios(1, 'str')" src="publico/images/flecha.png"></th>
                         <th>Apellido <img onclick="sortTableUsuarios(2, 'str')" src="publico/images/flecha.png"></th>
                         <th>Usuario <img onclick="sortTableUsuarios(3, 'str')" src="publico/images/flecha.png"></th>
