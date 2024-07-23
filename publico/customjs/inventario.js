@@ -20,14 +20,13 @@ const objDatosinventario = {
 eventListiners();
 
 function eventListiners() {
-    botoninventario.addEventListener("click", agregarinventario);
-
-    btnCancelarinventario.addEventListener("click", cancelarinventario);
-
     document.addEventListener("DOMContentLoaded", cargarDatosinventario);
-
+    document.addEventListener("DOMContentLoaded", getProveedores);
+    
+    botoninventario.addEventListener("click", agregarinventario);
+    btnCancelarinventario.addEventListener("click", cancelarinventario);
+    
     txtSearchinventario.addEventListener("input", aplicarFiltroinventario);
-
     document.querySelector("#insumo").addEventListener("input", validar_insumo)
     document.querySelector("#precio").addEventListener("input", validar_precio)
     document.querySelector("#unidades").addEventListener("input", validar_unidades)
@@ -149,6 +148,15 @@ function aplicarFiltroinventario(element) {
     crearTablainventario();
 }
 
+function getProveedores() {
+    const API = new Api()
+    API.get("proveedores/proveedoresList").then(response=>{
+        console.log(response);
+    }).catch(error=>{
+        console.log(error);
+    })
+    
+}
 
 function cargarDatosinventario() {
     const API = new Api();

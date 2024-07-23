@@ -3,21 +3,22 @@ use PHPMailer\PHPMailer\PHPMailer;
 require_once "aplicacion/vendor/autoload.php";
 require_once "aplicacion/vendor/phpmailer/phpmailer/src/PHPMailer.php";
 
-    class EnvioCorreo {
-        private $mail;
-        
-        public function configMail($fromname) {
+class EnvioCorreo {
+    private $mail;
+    
+    public function configMail($fromname) {
+            $credentials = require "aplicacion/modelos/credentials_config.php";
             $this->mail = new PHPMailer();
             // $this->mail->SMTPDebug  = 2;
             $this->mail->isSMTP();
             $this->mail->Host = "smtp.gmail.com";
-            $this->mail->From = "agilardanilo@gmail.com";
+            $this->mail->From = $credentials["mail"];
             $this->mail->FromName = $fromname;
             $this->mail->SMTPAuth = true;
             $this->mail->SMTPSecure = "tls";
             $this->mail->Port = 587;
-            $this->mail->Username = "agilardanilo@gmail.com";
-            $this->mail->Password = "gujs orrg izxb oiwy";
+            $this->mail->Username = $credentials["mail"];
+            $this->mail->Password = $credentials["passMail"];
 
         }
         

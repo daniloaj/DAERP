@@ -25,12 +25,10 @@
 
             <div class="col-md-4">
                 <div class="input-group mb-3">
-                    <input placeholder="Buscar registro" type="search" class="form-control"
-                        aria-describedby="basic-addon2" id="txtSearchinventario">
+                    <input placeholder="Buscar registro" type="search" class="form-control" aria-describedby="basic-addon2" id="txtSearchinventario">
                     <span class="input-group-text" id="basic-addon2">
                         <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
-                        <lord-icon src="https://cdn.lordicon.com/xfftupfv.json" trigger="loop"
-                            style="width:25px;height:25px">
+                        <lord-icon src="https://cdn.lordicon.com/xfftupfv.json" trigger="loop" style="width:25px;height:25px">
                         </lord-icon></i>
                     </span>
                 </div>
@@ -40,11 +38,11 @@
                 <table class="table table-hover" style="text-transform: capitalize" id="myTableinventario">
                     <thead>
                         <th>Id <img onclick="sortTableinventario(0, 'int')" src="publico/images/flecha.png"></th>
-                        <th>Fecha <img onclick="sortTableinventario(5, 'str')" src="publico/images/flecha.png"></th>
-                        <th>Producto <img onclick="sortTableinventario(1, 'str')" src="publico/images/flecha.png"></th>
-                        <th>Costo <img onclick="sortTableinventario(2, 'str')" src="publico/images/flecha.png"></th>
-                        <th>Cantidad <img onclick="sortTableinventario(3, 'str')" src="publico/images/flecha.png"></th>
-                        <th>Total<img onclick="sortTableinventario(4, 'str')" src="publico/images/flecha.png"></th>
+                        <th>Fecha <img onclick="sortTableinventario(1, 'str')" src="publico/images/flecha.png"></th>
+                        <th>Producto <img onclick="sortTableinventario(2, 'str')" src="publico/images/flecha.png"></th>
+                        <th>Costo <img onclick="sortTableinventario(3, 'str')" src="publico/images/flecha.png"></th>
+                        <th>Cantidad <img onclick="sortTableinventario(4, 'int')" src="publico/images/flecha.png"></th>
+                        <th>Total<img onclick="sortTableinventario(5, 'int')" src="publico/images/flecha.png"></th>
                         <th style="text-align:center">Opciones</th>
                     </thead>
                     <tbody>
@@ -58,8 +56,7 @@
                             <button class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-danger">
                                 <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
-                                <lord-icon src="https://cdn.lordicon.com/kfzfxczd.json" trigger="hover"
-                                    colors="primary:#ffffff" style="width:15px;height:15px">
+                                <lord-icon src="https://cdn.lordicon.com/kfzfxczd.json" trigger="hover" colors="primary:#ffffff" style="width:15px;height:15px">
                                 </lord-icon>
                             </button>
                         </td>
@@ -93,7 +90,7 @@
                                 </h3>
                                 <hr>
                                 <form id="forminventario" enctype="multipart/form-data">
-    
+
                                     <div class="row mb-3">
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label for="insumo" class="mt-2">Producto: </label>
@@ -105,7 +102,7 @@
                                             <input type="float" class="form-control" id="precio" name="precio">
                                         </div>
                                     </div>
-    
+
                                     <div class="row mb-3">
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label for="unidades" class="mt-2">Cantidad: </label>
@@ -116,7 +113,7 @@
                                             <input type="date" class="form-control" id="fecha" name="fecha">
                                         </div>
                                     </div>
-    
+
                                     <div class="row mb-3">
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label for="provee" class="mt-2">Proveedor:</label>
@@ -163,11 +160,13 @@
     <!--Scripts de inventario-->
     <script src="<?php echo URL ?>publico/customjs/inventario.js"></script>
     <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+        let tooltips = document.querySelectorAll('[data-toggle="tooltip"]');
+        tooltips.forEach(function(tooltip) {
+            new bootstrap.Tooltip(tooltip);
+        });
+
         function sortTableinventario(n, type) {
-            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 
             table = document.getElementById("myTableinventario");
             switching = true;

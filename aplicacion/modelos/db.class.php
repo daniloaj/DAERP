@@ -8,7 +8,9 @@ class BaseDeDatos {
     
     public function conectar()  {
         //introducimos los datos para que el sistema acceda a la bd
-        $this->conexion=new mysqli("localhost","root","asd","daerp");
+        $credentials = require "aplicacion/modelos/credentials_config.php";
+
+        $this->conexion=new mysqli($credentials["host"],$credentials["usernamebd"],$credentials["passbd"],$credentials["bd"]);
 
         //validamos la conexión 
         if ($this->conexion->connect_errno) {
