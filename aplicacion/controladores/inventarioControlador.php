@@ -33,7 +33,7 @@ class inventariocontrolador extends controlador {
                 $info=array('success'=>false,'msg'=>"Error");
             }
         } else {
-            $records=$this->inventario->updateinventario($_POST);
+            $records=$this->inventario->updateinventario($_POST["id_inventario"] ,$_POST);
             if ($records) {
                 http_response_code(200);
                 $info=array('success'=>true,'msg'=>"Insumo actualizado con exito");

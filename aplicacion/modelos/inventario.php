@@ -9,7 +9,7 @@ class inventario extends BaseDeDatos
     }
     public function getAllinventario()
     {
-        return $this->executeQuery("SELECT 
+        $query = "SELECT 
         id_inventario, 
         insumo, 
         precio,
@@ -20,7 +20,9 @@ class inventario extends BaseDeDatos
         n_factura,comprador 
         FROM inventario, proveedores 
         WHERE proveedores.id_proveedor=inventario.provee 
-        order by id_inventario desc");
+        order by id_inventario desc";
+        $params = array();
+        return $this->preparar_seleccion($query, $params);
     }
     public function getAllhistorialinventario()
     {
@@ -28,51 +30,69 @@ class inventario extends BaseDeDatos
     }
     public function saveinventario($data)
     {
-        return $this->executeInsert("insert into inventario set 
-        insumo='{$data["insumo"]}',
-        precio='{$data["precio"]}', 
-        unidades='{$data["unidades"]}', 
-        total=ROUND('{$data["unidades"]}'*'{$data["precio"]}',2), 
-        fecha='{$data["fecha"]}', 
-        provee='{$data["provee"]}', 
-        n_factura='{$data["n_factura"]}', 
-        comprador='{$data["comprador"]}'");
+        $table = "inventario";
+
+        $datosInsertar = array(
+            "insumo" => $data["insumo"],
+            "precio" => $data["precio"],
+            "unidades" => $data["unidades"],
+            "total" => round($data["unidades"] * $data["precio"], 2),
+            "fecha" => $data["fecha"],
+            "provee" => $data["provee"],
+            "n_factura" => $data["n_factura"],
+            "comprador" => $data["comprador"]
+        );
+
+        return $this->preparar_insertar($table, $datosInsertar);
     }
 
     public function getOneinventario($id_inventario)
     {
-        return $this->executeQuery("SELECT i.*, 
+        $query = "SELECT i.*, 
         DATE_FORMAT(i.fecha,'%d/%m/%Y') as fecha_format,
         fecha, 
         p.empresa 
         FROM inventario i 
         INNER JOIN proveedores p 
         on p.id_proveedor=i.provee 
-        where id_inventario='{$id_inventario}'");
+        where id_inventario=?";
+        $params = array($id_inventario); // Array of parameters to be bound
+        return $this->preparar_seleccion($query, $params);
     }
 
-    public function updateinventario($data)
+    public function updateinventario($id_inventario, $data)
     {
-        $consulta=$this->executeInsert("update inventario set 
-        insumo='{$data["insumo"]}', 
-        precio='{$data["precio"]}',
-        unidades='{$data["unidades"]}',
-        total=ROUND('{$data["unidades"]}'*'{$data["precio"]}',2), 
-        fecha='{$data["fecha"]}', 
-        provee='{$data["provee"]}', 
-        n_factura='{$data["n_factura"]}', 
-        comprador='{$data["comprador"]}' 
-        where id_inventario='{$data["id_inventario"]}'");
-        if ($consulta==0) {
-            return 1;
-        }else{
-            return 0;
-        }
+        $table = "inventario"; // Nombre de la tabla donde quieres hacer la actualización
+
+        // Datos que deseas actualizar en la tabla
+        $datosActualizar = array(
+            "insumo" => $data["insumo"],
+            "precio" => $data["precio"],
+            "unidades" => $data["unidades"],
+            "total" => round($data["unidades"] * $data["precio"], 2), // Calcula el total redondeado
+            "fecha" => $data["fecha"],
+            "provee" => $data["provee"],
+            "n_factura" => $data["n_factura"],
+            "comprador" => $data["comprador"]
+        );
+
+        // Condición para la cláusula WHERE
+        $condition = "id_inventario = ?";
+
+        // Agregar el ID de inventario al final del array para la condición WHERE
+        $datosActualizar["id_inventario"] = $id_inventario;
+
+        // Llamar a preparar_actualizar() con el nombre de la tabla, los datos y la condición
+        return $this->preparar_actualizar($table, $datosActualizar, $condition);
     }
+
+
 
     public function deleteinventario($id_inventario)
     {
-        return $this->executeInsert("delete from inventario where id_inventario='$id_inventario'");
+        $query = "DELETE from inventario where id_inventario=?";
+        $params = array("id_inventario" => $id_inventario);
+        return $this->preparar_eliminar($query, $params);
     }
     public function getinventarioReporte($data)
     {
