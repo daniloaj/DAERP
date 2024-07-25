@@ -3,50 +3,72 @@
 include_once "mailercontroller.php";
 include_once "aplicacion/modelos/usuarios.php";
 
-class usuariosControlador extends controlador {
+class usuariosControlador extends controlador
+{
     private $usuarios;
-    public function __construct($parametro) {
-        $this->usuarios=new usuarios();
-        parent::__construct("usuarios",$parametro,true);
+    public function __construct($parametro)
+    {
+        $this->usuarios = new usuarios();
+        parent::__construct("usuarios", $parametro, true);
     }
 
-/*Usuarios......................................................................... */
-    public function deleteusuario() {
-        $records=$this->usuarios->deleteusuario($_GET["id_usuario"]);
-        $info=array('success'=>true,'msg'=>"Usuario eliminado con exito");
-        echo json_encode($info);
-    }
-
-    public function getOneusuario() {
-        $records=$this->usuarios->getOneusuario($_GET["id_usuario"]);
-        if (count($records)>0) {
-            $info=array('success'=>true,'records'=>$records);
+    public function deleteusuario()
+    {
+        $records = $this->usuarios->deleteusuario($_GET["id_usuario"]);
+        if ($records) {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'msg' => "Usuario eliminado con exito"));
         } else {
-            $info=array('success'=>false,'msg'=>'El registro no existe');
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'msg' => "Usuario eliminado con exito"));
         }
-        echo json_encode($info);
     }
 
-    public function saveusuarios() {
-        $datosUser=$this->usuarios->getusuariosByName($_POST);
-        if ($_POST["id_usuario"]=="0") {
-            if (count($datosUser)>0) {
-                $info=array('success'=>false,'msg'=>"El usuario ya existe");
+    public function getOneusuario()
+    {
+        $records = $this->usuarios->getOneusuario($_GET["id_usuario"]);
+        if (count($records) > 0) {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'records' => $records));
+        } else {
+            http_response_code(200);
+            echo json_encode(array('success' => false, 'msg' => 'El registro no existe'));
+        }
+    }
+
+    public function saveusuarios()
+    {
+        $datosUser = $this->usuarios->getusuariosByName($_POST);
+        if ($_POST["id_usuario"] == "0") {
+            if (count($datosUser) > 0) {
+                echo json_encode(array('success' => false, 'msg' => "El usuario ya existe"));
             } else {
-                $records=$this->usuarios->saveusuarios($_POST);
-                $info=array('success'=>true,'msg'=>"Usuario guardado con exito");
+                $records = $this->usuarios->saveusuarios($_POST);
+                if ($records) {
+                    http_response_code(200);
+                    echo json_encode(array('success' => true, 'msg' => "Usuario guardado con exito"));
+                } else {
+                    http_response_code(200);
+                    echo json_encode(array('success' => false, 'msg' => "El usuario no se pudo guardar"));
+                }
             }
         } else {
-            if (count($datosUser)>0) {
-                $info=array('success'=>false,'msg'=>"El usuario ya existe");
+            if (count($datosUser) > 0) {
+                echo json_encode(array('success' => false, 'msg' => "El usuario ya existe"));
             } else {
-                $records=$this->usuarios->updateusuarios($_POST);
-                $info=array('success'=>true,'msg'=>"Usuario actualizado con exito");
+                $records = $this->usuarios->updateusuarios($_POST, $_POST["id_usuario"]);
+                if ($records) {
+                    http_response_code(200);
+                    echo json_encode(array('success' => true, 'msg' => "Usuario actualizado con exito"));
+                } else {
+                    http_response_code(200);
+                    echo json_encode(array('success' => false, 'msg' => "Error"));
+                }
             }
         }
-        echo json_encode($info);
     }
-    public function send_mail() {
+    public function send_mail()
+    {
         $correo = $_POST['correo'];
         $issue = $_POST['asunto'];
         $message = $_POST['mensaje'];
@@ -69,7 +91,8 @@ class usuariosControlador extends controlador {
             echo json_encode(array('success' => true, 'msg' => 'Error al enviar el correo'));
         }
     }
-    public function send_many_mails() {
+    public function send_many_mails()
+    {
         $issue = $_POST['asunto'];
         $message = $_POST['mensaje'];
 
@@ -97,10 +120,15 @@ class usuariosControlador extends controlador {
         }
     }
 
-    
-    public function getAllusuarios() {
-        $records=$this->usuarios->getAllusuarios();
-        $info=array('success'=>true,'records'=>$records);
-        echo json_encode($info);
+    public function getAllusuarios()
+    {
+        $records = $this->usuarios->getAllusuarios();
+        if ($records) {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'records' => $records));
+        } else {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'records' => $records));
+        }
     }
 }

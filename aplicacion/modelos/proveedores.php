@@ -7,26 +7,8 @@ class proveedores extends BaseDeDatos
         parent::conectar();
     }
     public function getAllProveedores() {
-        return $this->executeQuery("SELECT * FROM proveedores order by id_proveedor");
-    }
-
-    public function saveProveedores($data) {
-        return $this->executeInsert("insert into proveedores set empresa='{$data["empresa"]}',representante='{$data["representante"]}', tel1='{$data["tel1"]}', tel2='{$data["tel2"]}', fax='{$data["fax"]}', email='{$data["email"]}'");
-    }
-
-    public function getProveedoresByName($empresa) {
-        return $this->executeQuery("SELECT * FROM proveedores where empresa='{$empresa}'");
-    }
-
-    public function getOneProveedor($id_proveedor) {
-        return $this->executeQuery("SELECT * FROM proveedores where id_proveedor='{$id_proveedor}'");
-    }
-
-    public function updateProveedores($data) {
-        return $this->executeInsert("update proveedores set empresa='{$data["empresa"]}', representante='{$data["representante"]}', tel1='{$data["tel1"]}',tel2='{$data["tel2"]}', fax='{$data["fax"]}', email='{$data["email"]}' where id_proveedor='{$data["id_proveedor"]}'");
-    }
-
-    public function deleteproveedor($id_proveedor) {
-        return $this->executeInsert("delete from proveedores where id_proveedor='$id_proveedor'");
+        $query="SELECT * FROM proveedores order by id_proveedor";
+        $params=array();
+        return $this->preparar_seleccion($query,$params);
     }
 }

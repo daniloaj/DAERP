@@ -8,18 +8,24 @@ class inventariocontrolador extends controlador {
     }
     public function deleteinventario() {
         $records=$this->inventario->deleteinventario($_GET["id_inventario"]);
-        $info=array('success'=>true,'msg'=>"Registro eliminado con exito");
-        echo json_encode($info);
+        if ($records) {
+            http_response_code(200);
+            echo json_encode(array('success'=>true,'msg'=>"Registro eliminado con exito"));
+        } else {
+            http_response_code(200);
+            echo json_encode(array('success'=>false,'msg'=>"Error, no se pudo eliminar el registro"));
+        }
     }
 
     public function getOneinventario() {
         $records=$this->inventario->getOneinventario($_GET["id_inventario"]);
         if (count($records)>0) {
-            $info=array('success'=>true,'records'=>$records);
+            http_response_code(200);
+            echo json_encode(array('success'=>true,'records'=>$records));
         } else {
-            $info=array('success'=>false,'msg'=>'El registro no existe');
+            http_response_code(200);
+            echo json_encode(array('success'=>false,'msg'=>'El registro no existe'));
         }
-        echo json_encode($info);
     }
 
     public function saveinventario() {
@@ -27,32 +33,31 @@ class inventariocontrolador extends controlador {
             $records=$this->inventario->saveinventario($_POST);
             if ($records) {
                 http_response_code(200);
-                $info=array('success'=>true,'msg'=>"Insumo registrado con exito");
+                echo json_encode(array('success'=>true,'msg'=>"Insumo registrado con exito"));
             }else{
                 http_response_code(200);
-                $info=array('success'=>false,'msg'=>"Error");
+                echo json_encode(array('success'=>false,'msg'=>"Error"));
             }
         } else {
             $records=$this->inventario->updateinventario($_POST["id_inventario"] ,$_POST);
             if ($records) {
                 http_response_code(200);
-                $info=array('success'=>true,'msg'=>"Insumo actualizado con exito");
+                echo json_encode(array('success'=>true,'msg'=>"Insumo actualizado con exito"));
             }else{
                 http_response_code(200);
-                $info=array('success'=>false,'msg'=>"Error");
+                echo json_encode(array('success'=>false,'msg'=>"Error"));
             }
         }
-        echo json_encode($info);
     }
 
     public function getAllinventario() {
         $records=$this->inventario->getAllinventario();
-        $info=array('success'=>true,'records'=>$records);
-        echo json_encode($info);
-    }
-    public function getAllhistorialinventario() {
-        $records=$this->inventario->getAllhistorialinventario();
-        $info=array('success'=>true,'records'=>$records);
-        echo json_encode($info);
+        if ($records) {
+            http_response_code(200);
+            echo json_encode(array('success'=>true,'records'=>$records));
+        } else {
+            http_response_code(200);
+            echo json_encode(array('success'=>false,'msg'=>"Error al obtener datos"));
+        }
     }
 }

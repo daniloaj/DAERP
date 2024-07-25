@@ -24,10 +24,7 @@ class inventario extends BaseDeDatos
         $params = array();
         return $this->preparar_seleccion($query, $params);
     }
-    public function getAllhistorialinventario()
-    {
-        return $this->executeQuery("SELECT * FROM inventario_historial group by comprador");
-    }
+
     public function saveinventario($data)
     {
         $table = "inventario";
@@ -49,51 +46,54 @@ class inventario extends BaseDeDatos
     public function getOneinventario($id_inventario)
     {
         $query = "SELECT i.*, 
-        DATE_FORMAT(i.fecha,'%d/%m/%Y') as fecha_format,
-        fecha, 
-        p.empresa 
-        FROM inventario i 
-        INNER JOIN proveedores p 
-        on p.id_proveedor=i.provee 
-        where id_inventario=?";
-        $params = array($id_inventario); // Array of parameters to be bound
+            DATE_FORMAT(i.fecha,'%d/%m/%Y') as fecha_format,
+            fecha, 
+            p.empresa 
+            FROM inventario i 
+            INNER JOIN proveedores p 
+            on p.id_proveedor=i.provee 
+            where id_inventario=?";
+
+        $params = array(
+            $id_inventario
+        ); 
         return $this->preparar_seleccion($query, $params);
     }
 
     public function updateinventario($id_inventario, $data)
     {
-        $table = "inventario"; // Nombre de la tabla donde quieres hacer la actualización
+        $table = "inventario"; 
 
-        // Datos que deseas actualizar en la tabla
         $datosActualizar = array(
             "insumo" => $data["insumo"],
             "precio" => $data["precio"],
             "unidades" => $data["unidades"],
-            "total" => round($data["unidades"] * $data["precio"], 2), // Calcula el total redondeado
+            "total" => round($data["unidades"] * $data["precio"], 2),
             "fecha" => $data["fecha"],
             "provee" => $data["provee"],
             "n_factura" => $data["n_factura"],
             "comprador" => $data["comprador"]
         );
 
-        // Condición para la cláusula WHERE
         $condition = "id_inventario = ?";
 
-        // Agregar el ID de inventario al final del array para la condición WHERE
         $datosActualizar["id_inventario"] = $id_inventario;
 
-        // Llamar a preparar_actualizar() con el nombre de la tabla, los datos y la condición
-        return $this->preparar_actualizar($table, $datosActualizar, $condition);
+        return $this->preparar_actualizar($table, $datosActualizar, $condition,$id_inventario);
     }
-
-
 
     public function deleteinventario($id_inventario)
     {
-        $query = "DELETE from inventario where id_inventario=?";
-        $params = array("id_inventario" => $id_inventario);
+        $query = "DELETE 
+            from inventario 
+            where id_inventario=?";
+
+        $params = array(
+            "id_inventario" => $id_inventario
+        );
         return $this->preparar_eliminar($query, $params);
     }
+
     public function getinventarioReporte($data)
     {
         $condicion = "";
@@ -106,6 +106,8 @@ class inventario extends BaseDeDatos
         if ($data["comprador"] != "0") {
             $condicion .= " and comprador='{$data["comprador"]}'";
         }
-        return $this->executeQuery("SELECT * FROM inventario_historial where 1=1 $condicion");
+        $query="SELECT * FROM inventario_historial where 1=1 $condicion";
+        $params=array();
+        return $this->preparar_seleccion($query,$params);
     }
 }

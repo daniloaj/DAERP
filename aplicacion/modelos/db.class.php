@@ -97,7 +97,7 @@ class BaseDeDatos
         }
     }
 
-    public function preparar_actualizar($table, $data, $condition)
+    public function preparar_actualizar($table, $data, $condition, $id)
     {
         // Construye la parte SET de la consulta UPDATE dinámicamente basada en el array $data
         $setClause = [];
@@ -105,7 +105,7 @@ class BaseDeDatos
         $params = []; // Array para almacenar los valores a vincular
 
         foreach ($data as $key => $value) {
-            if ($key === 'id_inventario') {
+            if ($key === $id) {
                 continue; // Saltar el ID de inventario, que es para la condición WHERE
             }
             $setClause[] = "$key = ?";
@@ -115,7 +115,7 @@ class BaseDeDatos
 
         // Agrega el tipo 'i' para el ID de inventario en la condición WHERE
         $types .= 'i';
-        $params[] = $data['id_inventario'];
+        $params[] = $id;
 
         // Construye la consulta UPDATE completa con la condición WHERE
         $query = "UPDATE $table SET " . implode(', ', $setClause) . " WHERE $condition";
@@ -139,9 +139,6 @@ class BaseDeDatos
             return false;
         }
     }
-
-
-
 
     public function preparar_insertar($table, $data)
     {
@@ -186,7 +183,6 @@ class BaseDeDatos
         }
         return $refs;
     }
-
 
     public function preparar_eliminar($query, $params)
     {
