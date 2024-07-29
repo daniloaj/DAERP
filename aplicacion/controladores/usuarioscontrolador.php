@@ -131,4 +131,16 @@ class usuariosControlador extends controlador
             echo json_encode(array('success' => true, 'records' => $records));
         }
     }
+
+    public function departamentList() {
+        $data=$this->usuarios->departamentList();
+        if ($data) {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'records' => $data));
+        } else {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'records' => $data));
+        }
+        
+    }
 }

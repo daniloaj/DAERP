@@ -40,26 +40,13 @@
                         <th>Id <img onclick="sortTableinventario(0, 'int')" src="publico/images/flecha.png"></th>
                         <th>Fecha <img onclick="sortTableinventario(1, 'str')" src="publico/images/flecha.png"></th>
                         <th>Producto <img onclick="sortTableinventario(2, 'str')" src="publico/images/flecha.png"></th>
-                        <th>Costo <img onclick="sortTableinventario(3, 'str')" src="publico/images/flecha.png"></th>
-                        <th>Cantidad <img onclick="sortTableinventario(4, 'int')" src="publico/images/flecha.png"></th>
-                        <th>Total<img onclick="sortTableinventario(5, 'int')" src="publico/images/flecha.png"></th>
+                        <th style="text-align:center">$ Costo <img onclick="sortTableinventario(3, 'int')" src="publico/images/flecha.png"></th>
+                        <th style="text-align:center">Cantidad <img onclick="sortTableinventario(4, 'int')" src="publico/images/flecha.png"></th>
+                        <th style="text-align:center">$ Total<img onclick="sortTableinventario(5, 'int')" src="publico/images/flecha.png"></th>
                         <th style="text-align:center">Opciones</th>
                     </thead>
                     <tbody>
-                        <td>1</td>
-                        <td>Bocina</td>
-                        <td>$100</td>
-                        <td>1</td>
-                        <td>$100</td>
-                        <td>2022-11-2</td>
-                        <td>
-                            <button class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-danger">
-                                <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
-                                <lord-icon src="https://cdn.lordicon.com/kfzfxczd.json" trigger="hover" colors="primary:#ffffff" style="width:15px;height:15px">
-                                </lord-icon>
-                            </button>
-                        </td>
+
                     </tbody>
                 </table>
 
@@ -118,14 +105,7 @@
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label for="provee" class="mt-2">Proveedor:</label>
                                             <select class="form-control" name="provee" id="provee">
-                                                <?php
-                                                // Verificamos la conexión con el servidor y la base de datos
-                                                $mysqli = new mysqli('localhost', 'root', 'asd', 'daerp');
-                                                $query = $mysqli->query("SELECT id_proveedor, empresa FROM proveedores ");
-                                                while ($valores = mysqli_fetch_array($query)) {
-                                                    echo '<option value="' . $valores[id_proveedor] . '">' . $valores[empresa] . '</option>';
-                                                }
-                                                ?>
+                                                
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">

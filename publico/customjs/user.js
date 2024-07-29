@@ -37,6 +37,7 @@ function eventListiners() {
     send_mail_button.addEventListener("click", enviar_correo);
     btnCancelarusuario.addEventListener("click", cancelarusuario);
     document.addEventListener("DOMContentLoaded", cargarDatosusuario);
+    document.addEventListener("DOMContentLoaded", getDepartament);
     txtSearchusuarios.addEventListener("input", aplicarFiltrousuario);
 }
 function enviar_varios_mail() {
@@ -47,6 +48,20 @@ function cancelar_mail() {
     $('#modal_mails').modal('hide')
     document.getElementById("asunto").value = ""
     document.getElementById("mensaje").value = ""
+}
+function getDepartament() {
+    const API = new Api()
+    API.get("usuarios/departamentList").then(response => {
+        const select = document.getElementById("depa")
+        response.records.forEach(element => {
+            const option = document.createElement('option')
+            option.value = element.id_dep
+            option.textContent = element.nom_depa
+            select.appendChild(option)
+        });
+    }).catch(error => {
+        console.log(error);
+    })
 }
 function enviar_correo() {
     let correo = document.getElementById("correo_usuario").innerHTML.split(">")[1].trim()

@@ -22,10 +22,10 @@ eventListiners();
 function eventListiners() {
     document.addEventListener("DOMContentLoaded", cargarDatosinventario);
     document.addEventListener("DOMContentLoaded", getProveedores);
-    
+
     botoninventario.addEventListener("click", agregarinventario);
     btnCancelarinventario.addEventListener("click", cancelarinventario);
-    
+
     txtSearchinventario.addEventListener("input", aplicarFiltroinventario);
     document.querySelector("#insumo").addEventListener("input", validar_insumo)
     document.querySelector("#precio").addEventListener("input", validar_precio)
@@ -150,12 +150,17 @@ function aplicarFiltroinventario(element) {
 
 function getProveedores() {
     const API = new Api()
-    API.get("proveedores/proveedoresList").then(response=>{
-        console.log(response);
-    }).catch(error=>{
+    API.get("proveedores/proveedoresList").then(response => {
+        const select = document.getElementById("provee")
+        response.data.forEach(data => {
+            const option = document.createElement('option')
+            option.value = data.id_proveedor
+            option.textContent = data.empresa
+            select.appendChild(option)
+        });
+    }).catch(error => {
         console.log(error);
     })
-    
 }
 
 function cargarDatosinventario() {
@@ -206,17 +211,20 @@ function crearTablainventario() {
         objDatosinventario.recordsFilter = objDatosinventario.records.map(item => item);
     } else {
         objDatosinventario.recordsFilter = objDatosinventario.records.filter(item => {
-            const { insumo, precio, unidades, fecha_format } = item;
+            const { insumo, precio, unidades, fecha_format, total } = item;
             if (insumo.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
                 return item;
             }
-            if (precio.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
+            if (precio.toString().toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
                 return item;
             }
-            if (unidades.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
+            if (unidades.toString().toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
                 return item;
             }
             if (fecha_format.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
+                return item;
+            }
+            if (total.toString().toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
                 return item;
             }
         });
@@ -238,9 +246,9 @@ function crearTablainventario() {
                         <td onclick="ver_detalle_producto(${item.id_inventario})">${index + 1}</td>
                         <td onclick="ver_detalle_producto(${item.id_inventario})">${item.fecha_format}</td>
                         <td data-toggle="tooltip" title="${item.insumo}" onclick="ver_detalle_producto(${item.id_inventario})">${truncate(item.insumo, 15)}</td>               
-                        <td onclick="ver_detalle_producto(${item.id_inventario})">$${item.precio}</td>               
-                        <td onclick="ver_detalle_producto(${item.id_inventario})">${item.unidades}</td>
-                        <td onclick="ver_detalle_producto(${item.id_inventario})">$${item.total}</td>
+                        <td style="text-align:center" onclick="ver_detalle_producto(${item.id_inventario})">${item.precio}</td>               
+                        <td style="text-align:center" onclick="ver_detalle_producto(${item.id_inventario})">${item.unidades}</td>
+                        <td style="text-align:center" onclick="ver_detalle_producto(${item.id_inventario})">${item.total}</td>
                         <td style="text-align:center">
                             <button href="#modal_form" data-bs-toggle="modal" class="btn btn-primary" onclick="editarinventario(${item.id_inventario}, false)"><img src="publico/images/edit.svg"></button>
                             <button class="btn btn-danger" onclick="eliminarinventario(${item.id_inventario})"><img src="publico/images/delete.svg"></button>

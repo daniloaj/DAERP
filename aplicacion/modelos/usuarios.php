@@ -112,4 +112,10 @@ class usuarios extends BaseDeDatos
         );
         return $this->preparar_eliminar($query,$params);
     }
+    
+    public function departamentList() {
+        $query = "SELECT id_dep, nom_depa FROM departamentos";
+        $params = array();
+        return $this->preparar_seleccion($query, $params);
+    }
 }
