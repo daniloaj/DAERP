@@ -1,12 +1,15 @@
 <?php
 //llamamos al modelo del login para poder utilizar sus funciones
 include_once "aplicacion/modelos/login.php";
+include_once "aplicacion/modelos/usuarios.php";
 class LoginControlador extends controlador {
     private $user;
+    private $usuarios;
 
     //utilizamos el metodo constructor para poder llamar a la vista por medio del parametro
     public function __construct($parametro) {
         $this->user=new Login();
+        $this->usuarios = new usuarios();
         parent::__construct("login",$parametro);
     }
 
@@ -44,6 +47,19 @@ class LoginControlador extends controlador {
         }
         echo json_encode($info);
     }
+
+    public function departamentList() {
+        $data=$this->usuarios->departamentList();
+        if ($data) {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'records' => $data));
+        } else {
+            http_response_code(200);
+            echo json_encode(array('success' => true, 'records' => $data));
+        }
+        
+    }
+
     //cerramos sesión llamando al login en las vistas
     public function cerrar() {
         if (!isset($_SESSION)) {
