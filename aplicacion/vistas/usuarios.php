@@ -223,9 +223,6 @@
             }
         }
     </script>
-    <!--Bootstrap core JavaScript -->
-    <script src="aplicacion/vendor/jquery/jquery.min.js"></script>
-    <script src="aplicacion/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!--Additional Scripts -->
     <?php include_once "aplicacion/vistas/partes/javascript.php"; ?>
 </body>

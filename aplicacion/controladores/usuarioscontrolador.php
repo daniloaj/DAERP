@@ -43,26 +43,36 @@ class usuariosControlador extends controlador
             if (count($datosUser) > 0) {
                 echo json_encode(array('success' => false, 'msg' => "El usuario ya existe"));
             } else {
-                $records = $this->usuarios->saveusuarios($_POST);
-                if ($records) {
-                    http_response_code(200);
-                    echo json_encode(array('success' => true, 'msg' => "Usuario guardado con exito"));
+                $mail_ws_exist = $this->usuarios->valid_mail_ws($_POST);
+                if ($mail_ws_exist[0]["usuarios"]!==0 || !$mail_ws_exist) {
+                    echo json_encode(array('success' => false, 'msg' => "Email o whatsapp ya existen"));
                 } else {
-                    http_response_code(200);
-                    echo json_encode(array('success' => false, 'msg' => "El usuario no se pudo guardar"));
+                    $records = $this->usuarios->saveusuarios($_POST);
+                    if ($records) {
+                        http_response_code(200);
+                        echo json_encode(array('success' => true, 'msg' => "Usuario guardado con exito"));
+                    } else {
+                        http_response_code(404);
+                        echo json_encode(array('success' => false, 'msg' => "El usuario no se pudo guardar"));
+                    }
                 }
             }
         } else {
             if (count($datosUser) > 0) {
                 echo json_encode(array('success' => false, 'msg' => "El usuario ya existe"));
             } else {
-                $records = $this->usuarios->updateusuarios($_POST, $_POST["id_usuario"]);
-                if ($records) {
-                    http_response_code(200);
-                    echo json_encode(array('success' => true, 'msg' => "Usuario actualizado con exito"));
-                } else {
-                    http_response_code(200);
-                    echo json_encode(array('success' => false, 'msg' => "Error"));
+                $mail_ws_exist = $this->usuarios->valid_mail_ws($_POST);
+                if ($mail_ws_exist[0]["usuarios"]!==0 || !$mail_ws_exist) {
+                    echo json_encode(array('success' => false, 'msg' => "Email o whatsapp ya existen"));
+                }else{
+                    $records = $this->usuarios->updateusuarios($_POST, $_POST["id_usuario"]);
+                    if ($records) {
+                        http_response_code(200);
+                        echo json_encode(array('success' => true, 'msg' => "Usuario actualizado con exito"));
+                    } else {
+                        http_response_code(404);
+                        echo json_encode(array('success' => false, 'msg' => "Error"));
+                    }
                 }
             }
         }
@@ -132,8 +142,9 @@ class usuariosControlador extends controlador
         }
     }
 
-    public function departamentList() {
-        $data=$this->usuarios->departamentList();
+    public function departamentList()
+    {
+        $data = $this->usuarios->departamentList();
         if ($data) {
             http_response_code(200);
             echo json_encode(array('success' => true, 'records' => $data));
@@ -141,6 +152,5 @@ class usuariosControlador extends controlador
             http_response_code(200);
             echo json_encode(array('success' => true, 'records' => $data));
         }
-        
     }
 }

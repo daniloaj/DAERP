@@ -5,11 +5,11 @@ const form = document.querySelector("#formlogin");
 //llamamos el evento submit del post 
 form.addEventListener("submit", login);
 document.addEventListener("DOMContentLoaded", getDepartament);
-
+const API = new Api();
 //de forma asincrona validamos el usuario, si hay un error con los datos no nos dejará pasar
 async function login(event) {
     event.preventDefault();
-    const API = new Api();
+    // const API = new Api();
     const formData = new FormData(form);
     API.post(formData, "login/validar").then(
         data => {
@@ -27,8 +27,6 @@ async function login(event) {
     );
 }
 function getDepartament() {
-    const API = new Api();
-
     API.get("login/departamentList").then(response => {
         console.log(response);
         const select = document.getElementById("depa")

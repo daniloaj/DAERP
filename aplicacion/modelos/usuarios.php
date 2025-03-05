@@ -92,30 +92,42 @@ class usuarios extends BaseDeDatos
             "whatsapp" => $data["whatsapp"],
             "correo" => $data["correo"],
             "id_dep" => $data["depa"],
-            "id_usuario"=>$data["id_usuario"]
+            "id_usuario" => $data["id_usuario"]
         );
         if (!empty($data["password"])) {
-            $data["password"] = sha1($data["password"]); 
+            $data["password"] = sha1($data["password"]);
         } else {
-            unset($data["password"]); 
+            unset($data["password"]);
         }
         $condition = "id_usuario = ?";
 
-        return $this->preparar_actualizar($table, $data, $condition,$id_usuario);
+        return $this->preparar_actualizar($table, $data, $condition, $id_usuario);
     }
 
     public function deleteusuario($id_usuario)
     {
-        $query="DELETE from usuarios where id_usuario=?";
-        $params=array(
-            "id_usuario"=>$id_usuario,
+        $query = "DELETE from usuarios where id_usuario=?";
+        $params = array(
+            "id_usuario" => $id_usuario,
         );
-        return $this->preparar_eliminar($query,$params);
+        return $this->preparar_eliminar($query, $params);
     }
-    
-    public function departamentList() {
+
+    public function departamentList()
+    {
         $query = "SELECT id_dep, nom_depa FROM departamentos";
         $params = array();
+        return $this->preparar_seleccion($query, $params);
+    }
+
+    public function valid_mail_ws($data)
+    {
+        $query = "SELECT COUNT(id_usuario) as usuarios, correo from usuarios where id_usuario<>? and (whatsapp=? OR correo=?)";
+        $params = array(
+            "whatsapp" => $data["whatsapp"],
+             "correo" => $data["correo"], 
+             "id_usuario" => $data["id_usuario"]
+            );
         return $this->preparar_seleccion($query, $params);
     }
 }

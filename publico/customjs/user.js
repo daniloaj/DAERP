@@ -8,7 +8,14 @@ const paginationusuario = document.querySelector("#paginauser");
 const formusuario = document.querySelector("#formusuarios");
 const send_mail_button = document.querySelector("#send_mail");
 const cancelar_mail_button = document.querySelector("#cancelar_mail");
+const nombre = document.querySelector("#nombre");
+const apellidos = document.querySelector("#apellidos");
+const usuario = document.querySelector("#usuario");
+const password = document.querySelector("#password");
+const correo = document.querySelector("#correo");
 const enviar_varios_mail_button = document.querySelector("#enviar_varios_correos");
+const whatsapp = document.querySelector("#whatsapp");
+const tel = document.querySelector("#tel");
 const objDatosusuario = {
     records: [],
     recordsFilter: [],
@@ -17,19 +24,19 @@ const objDatosusuario = {
     filter: ""
 };
 let id_user = 0
-let correos=[]
+let correos = []
 
 eventListiners();
 
 function eventListiners() {
 
-    document.querySelector("#nombre").addEventListener("input", validar_nombre)
-    document.querySelector("#apellidos").addEventListener("input", validar_apellidos)
-    document.querySelector("#usuario").addEventListener("input", validar_usuario)
-    document.querySelector("#password").addEventListener("input", validar_password)
-    document.querySelector("#correo").addEventListener("input", validar_Correo)
-    document.querySelector("#whatsapp").addEventListener("input", validar_Whatsapp)
-    document.querySelector("#tel").addEventListener("input", validar_tel)
+    nombre.addEventListener("input", validar_nombre)
+    apellidos.addEventListener("input", validar_apellidos)
+    usuario.addEventListener("input", validar_usuario)
+    password.addEventListener("input", validar_password)
+    correo.addEventListener("input", validar_Correo)
+    whatsapp.addEventListener("input", validar_Whatsapp)
+    tel.addEventListener("input", validar_tel)
     formusuario.addEventListener("submit", guardarusuario);
     botonusuarios.addEventListener("click", agregarusuario);
     enviar_varios_mail_button.addEventListener("click", enviar_varios_mail);
@@ -41,11 +48,15 @@ function eventListiners() {
     txtSearchusuarios.addEventListener("input", aplicarFiltrousuario);
 }
 function enviar_varios_mail() {
-    $('#modal_mails').modal('show')
-    document.getElementById("correo_usuario").innerHTML = "Enviar correo a: <br> Todos los usuarios" 
+    let modalElement = document.getElementById('modal_mails');
+    let modalInstance = bootstrap.Modal.getInstance(modalElement);
+    modalInstance.show();
+    document.getElementById("correo_usuario").innerHTML = "Enviar correo a: <br> Todos los usuarios"
 }
 function cancelar_mail() {
-    $('#modal_mails').modal('hide')
+    let modalElement = document.getElementById('modal_mails');
+    let modalInstance = bootstrap.Modal.getInstance(modalElement);
+    modalInstance.hide();
     document.getElementById("asunto").value = ""
     document.getElementById("mensaje").value = ""
 }
@@ -72,7 +83,7 @@ function enviar_correo() {
     formData.append("asunto", asunto);
     formData.append("mensaje", mensaje);
 
-    if (correo=="Todos los usuarios") {
+    if (correo == "Todos los usuarios") {
         formData.append("correo", JSON.stringify(correos));
         API.post(formData, "usuarios/send_many_mails").then(response => {
             cancelar_mail()
@@ -97,49 +108,49 @@ function enviar_correo() {
     }
 }
 function validar_nombre() {
-    if ($('#nombre').val().length == 0) {
+    if (nombre.value.length == 0) {
         document.querySelector("#nombre").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#nombre").classList.remove('color_rojo_inputs')
     }
 }
 function validar_tel() {
-    if ($('#tel').val().length == 0) {
+    if (tel.value.length == 0) {
         document.querySelector("#tel").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#tel").classList.remove('color_rojo_inputs')
     }
 }
 function validar_Whatsapp() {
-    if ($('#whatsapp').val().length == 0) {
+    if (whatsapp.value.length == 0) {
         document.querySelector("#whatsapp").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#whatsapp").classList.remove('color_rojo_inputs')
     }
 }
 function validar_Correo() {
-    if ($('#correo').val().length == 0) {
+    if (correo.value.length == 0) {
         document.querySelector("#correo").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#correo").classList.remove('color_rojo_inputs')
     }
 }
 function validar_apellidos() {
-    if ($('#apellidos').val().length == 0) {
+    if (apellidos.value.length == 0) {
         document.querySelector("#apellidos").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#apellidos").classList.remove('color_rojo_inputs')
     }
 }
 function validar_usuario() {
-    if ($('#usuario').val().length == 0) {
+    if (usuario.value.length == 0) {
         document.querySelector("#usuario").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#usuario").classList.remove('color_rojo_inputs')
     }
 }
 function validar_password() {
-    if ($('#password').val().length == 0) {
+    if (password.value.length == 0) {
         document.querySelector("#password").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#password").classList.remove('color_rojo_inputs')
@@ -154,18 +165,19 @@ function quitar_rojo_inputs() {
         inputs[i].classList.remove('color_rojo_inputs');
     }
 }
+
 function guardarusuario(event) {
     event.preventDefault();
     const formDatausuario = new FormData(formusuario);
     const API = new Api();
     if (
-        ($('#nombre').val().length == 0)
-        || (id_user == 0 && $('#password').val().length == 0 ? true : false)
-        || ($('#apellidos').val().length == 0)
-        || ($('#usuario').val().length == 0)
-        || ($('#tel').val().length == 0)
-        || ($('#whatsapp').val().length == 0)
-        || ($('#correo').val().length == 0)
+        (nombre.value.length == 0)
+        || (id_user == 0 && password.value.length == 0 ? true : false)
+        || (apellidos.value.length == 0)
+        || (usuario.value.length == 0)
+        || (tel.value.length == 0)
+        || (whatsapp.value.length == 0)
+        || (correo.value.length == 0)
     ) {
         let inputs = document.querySelectorAll('input');
 
@@ -192,7 +204,9 @@ function guardarusuario(event) {
                         text: data.msg
                     });
                 } else {
-                    $('#modal_form').modal('hide')
+                    let modalElement = document.getElementById('modal_form');
+                    let modalInstance = bootstrap.Modal.getInstance(modalElement);
+                    modalInstance.hide();
                     Swal.fire({
                         icon: "error",
                         title: "Error",
@@ -200,7 +214,9 @@ function guardarusuario(event) {
                         confirmButtonText: "Reintentar"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            $('#modal_form').modal('show')
+                            let modalElement = document.getElementById('modal_form');
+                            let modalInstance = bootstrap.Modal.getInstance(modalElement);
+                            modalInstance.show();
                         }
                     });;
                 }
@@ -228,7 +244,7 @@ function cargarDatosusuario() {
                 objDatosusuario.currentPage = 1;
                 crearTablausuario();
                 data.records.forEach(element => {
-                    const array={
+                    const array = {
                         correo: element.correo
                     }
                     correos.push(array)
@@ -266,7 +282,7 @@ function crearTablausuario() {
         objDatosusuario.recordsFilter = objDatosusuario.records.map(item => item);
     } else {
         objDatosusuario.recordsFilter = objDatosusuario.records.filter(item => {
-            const { nombre, apellido, usuario } = item;
+            const { nombre, apellido, usuario, correo } = item;
             if (nombre.toUpperCase().search(objDatosusuario.filter.toUpperCase()) != -1) {
                 return item;
             }
@@ -276,10 +292,7 @@ function crearTablausuario() {
             if (usuario.toUpperCase().search(objDatosusuario.filter.toUpperCase()) != -1) {
                 return item;
             }
-            if (tipo.toUpperCase().search(objDatosusuario.filter.toUpperCase()) != -1) {
-                return item;
-            }
-            if (nom_depa.toUpperCase().search(objDatosusuario.filter.toUpperCase()) != -1) {
+            if (correo.toUpperCase().search(objDatosusuario.filter.toUpperCase()) != -1) {
                 return item;
             }
         });
@@ -314,7 +327,8 @@ function open_mail_modal(id) {
     const API = new Api();
     API.get("usuarios/getOneusuario?id_usuario=" + id).then(
         data => {
-            $('#modal_mails').modal('show')
+            let modal = new bootstrap.Modal(document.getElementById('modal_mails'));
+            modal.show();
             document.getElementById("correo_usuario").innerHTML = "Enviar correo a: <br>" + data.records[0].correo
         }
     ).catch(error => {

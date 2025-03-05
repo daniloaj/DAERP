@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 04-01-2024 a las 15:44:25
--- Versión del servidor: 5.7.31
--- Versión de PHP: 7.4.9
+-- Tiempo de generación: 05-03-2025 a las 15:11:09
+-- Versión del servidor: 5.5.62
+-- Versión de PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `inventario` (
   `n_factura` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `comprador` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id_inventario`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `inventario`
@@ -211,7 +211,8 @@ CREATE TABLE IF NOT EXISTS `inventario` (
 INSERT INTO `inventario` (`id_inventario`, `insumo`, `precio`, `unidades`, `total`, `fecha`, `provee`, `n_factura`, `comprador`) VALUES
 (1, 'el microondas', 0.25, 5, 1.25, '2022-11-10', '1', 'qwe52', 'CoordinaciÃ³n OT-CBUES'),
 (3, 'a', 52, 5, 260, '2023-03-24', '1', '85', 'yui'),
-(10, 'asdasdas', 5555, 25, 138875, '2023-07-13', '1', '55', 'sdd');
+(10, 'refrigeradora', 255, 25, 6375, '2023-07-13', '1', '55988', 'danilo'),
+(11, 'refrigeradora', 255, 25, 6375, '2023-07-13', '1', '55988', 'danilo');
 
 --
 -- Disparadores `inventario`
@@ -245,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `inventario_historial` (
   `n_factura` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `comprador` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id_inventario`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `inventario_historial`
@@ -261,7 +262,8 @@ INSERT INTO `inventario_historial` (`id_inventario`, `insumo`, `precio`, `unidad
 (6, 'microasdasd', 5, 25, 125, '2023-06-08', 'No especificado', '5', 'OT-CBUES'),
 (7, 'microasdasd', 45, 5, 225, '2023-06-07', 'No especificado', 'as11d1as1', 'OT-CBUES'),
 (8, 'aasd', 25, 5, 125, '2023-06-07', '1', '5', 'asdasdasdasdasda'),
-(10, 'asdasdas', 5555, 25, 138875, '2023-07-13', '1', '55', 'sdd');
+(10, 'refrigeradora', 255, 25, 6375, '2023-07-13', '1', '55988', 'danilo'),
+(11, 'refrigeradora', 255, 25, 6375, '2023-07-13', '1', '55988', 'danilo');
 
 -- --------------------------------------------------------
 
@@ -298,11 +300,15 @@ INSERT INTO `proveedores` (`id_proveedor`, `empresa`, `representante`, `tel1`, `
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `usuario` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apellido` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `usuario` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_dep` int(11) DEFAULT NULL,
+  `tel` int(11) DEFAULT NULL,
+  `whatsapp` int(11) DEFAULT NULL,
+  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -310,8 +316,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `usuario`, `password`, `tipo`, `id_dep`) VALUES
-(2, 'danilo', 'danilo', 'f10e2821bbbea527ea02200352313bc059445190', 'super usuario', 9);
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `usuario`, `password`, `tipo`, `id_dep`, `tel`, `whatsapp`, `correo`) VALUES
+(2, 'danilo', 'aguilar', 'danilo', 'f10e2821bbbea527ea02200352313bc059445190', 'super usuario', 9, 64200859, 64200859, 'agilardanilo@gmail.com');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

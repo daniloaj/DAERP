@@ -242,7 +242,8 @@ body {
 }
 
 .color_rojo_inputs {
-  border-color: red;
+  border-color: red !important;
+  border-width: 3px;
 }
 
 .inputs_vacios {

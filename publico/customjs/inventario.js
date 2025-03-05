@@ -7,6 +7,12 @@ const contentTableinventario = document.querySelector("#contentTableinventario t
 const txtSearchinventario = document.querySelector("#txtSearchinventario");
 const paginainventario = document.querySelector("#paginainven");
 const forminventario = document.querySelector("#forminventario");
+const insumo = document.querySelector("#insumo");
+const precio = document.querySelector("#precio");
+const unidades = document.querySelector("#unidades");
+const fecha = document.querySelector("#fecha");
+const n_factura = document.querySelector("#n_factura");
+const comprador = document.querySelector("#comprador");
 let total = document.querySelector("#total");
 const objDatosinventario = {
     records: [],
@@ -27,53 +33,53 @@ function eventListiners() {
     btnCancelarinventario.addEventListener("click", cancelarinventario);
 
     txtSearchinventario.addEventListener("input", aplicarFiltroinventario);
-    document.querySelector("#insumo").addEventListener("input", validar_insumo)
-    document.querySelector("#precio").addEventListener("input", validar_precio)
-    document.querySelector("#unidades").addEventListener("input", validar_unidades)
-    document.querySelector("#fecha").addEventListener("input", validar_fecha)
-    document.querySelector("#n_factura").addEventListener("input", validar_n_factura)
-    document.querySelector("#comprador").addEventListener("input", validar_comprador)
+    insumo.addEventListener("input", validar_insumo)
+    precio.addEventListener("input", validar_precio)
+    unidades.addEventListener("input", validar_unidades)
+    fecha.addEventListener("input", validar_fecha)
+    n_factura.addEventListener("input", validar_n_factura)
+    comprador.addEventListener("input", validar_comprador)
 
     forminventario.addEventListener("submit", guardarinventario);
 }
 
 function validar_insumo() {
-    if ($('#insumo').val().length == 0) {
+    if (insumo.value.length == 0) {
         document.querySelector("#insumo").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#insumo").classList.remove('color_rojo_inputs')
     }
 }
 function validar_precio() {
-    if ($('#precio').val().length == 0) {
+    if (precio.value.length == 0) {
         document.querySelector("#precio").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#precio").classList.remove('color_rojo_inputs')
     }
 }
 function validar_unidades() {
-    if ($('#unidades').val().length == 0) {
+    if (unidades.value.length == 0) {
         document.querySelector("#unidades").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#unidades").classList.remove('color_rojo_inputs')
     }
 }
 function validar_fecha() {
-    if ($('#fecha').val().length == 0) {
+    if (fecha.value.length == 0) {
         document.querySelector("#fecha").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#fecha").classList.remove('color_rojo_inputs')
     }
 }
 function validar_n_factura() {
-    if ($('#n_factura').val().length == 0) {
+    if (n_factura.value.length == 0) {
         document.querySelector("#n_factura").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#n_factura").classList.remove('color_rojo_inputs')
     }
 }
 function validar_comprador() {
-    if ($('#comprador').val().length == 0) {
+    if (comprador.value.length == 0) {
         document.querySelector("#comprador").classList.add('color_rojo_inputs')
     } else {
         document.querySelector("#comprador").classList.remove('color_rojo_inputs')
@@ -94,12 +100,12 @@ function guardarinventario(event) {
     const formDatainventario = new FormData(forminventario);
     const API = new Api();
 
-    if (($('#insumo').val().length == 0)
-        || ($('#comprador').val().length == 0)
-        || ($('#n_factura').val().length == 0)
-        || ($('#fecha').val().length == 0)
-        || ($('#unidades').val().length == 0)
-        || ($('#precio').val().length == 0)) {
+    if ((insumo.value.length == 0)
+        || (comprador.value.length == 0)
+        || (n_factura.value.length == 0)
+        || (fecha.value.length == 0)
+        || (unidades.value.length == 0)
+        || (precio.value.length == 0)) {
 
         let inputs = document.querySelectorAll('input');
 
@@ -120,7 +126,9 @@ function guardarinventario(event) {
             data => {
                 if (data.success) {
                     cancelarinventario();
-                    $('#modal_form').modal('hide')
+                    let modalElement = document.getElementById('modal_form');
+                    let modalInstance = bootstrap.Modal.getInstance(modalElement); 
+                    modalInstance.hide();
                     Swal.fire({
                         icon: "info",
                         text: data.msg
