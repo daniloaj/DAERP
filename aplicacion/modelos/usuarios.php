@@ -119,15 +119,4 @@ class usuarios extends BaseDeDatos
         $params = array();
         return $this->preparar_seleccion($query, $params);
     }
-
-    public function valid_mail_ws($data)
-    {
-        $query = "SELECT COUNT(id_usuario) as usuarios, correo from usuarios where id_usuario<>? and (whatsapp=? OR correo=?)";
-        $params = array(
-            "whatsapp" => $data["whatsapp"],
-             "correo" => $data["correo"], 
-             "id_usuario" => $data["id_usuario"]
-            );
-        return $this->preparar_seleccion($query, $params);
-    }
 }

@@ -43,36 +43,26 @@ class usuariosControlador extends controlador
             if (count($datosUser) > 0) {
                 echo json_encode(array('success' => false, 'msg' => "El usuario ya existe"));
             } else {
-                $mail_ws_exist = $this->usuarios->valid_mail_ws($_POST);
-                if ($mail_ws_exist[0]["usuarios"]!==0 || !$mail_ws_exist) {
-                    echo json_encode(array('success' => false, 'msg' => "Email o whatsapp ya existen"));
+                $records = $this->usuarios->saveusuarios($_POST);
+                if ($records) {
+                    http_response_code(200);
+                    echo json_encode(array('success' => true, 'msg' => "Usuario guardado con exito"));
                 } else {
-                    $records = $this->usuarios->saveusuarios($_POST);
-                    if ($records) {
-                        http_response_code(200);
-                        echo json_encode(array('success' => true, 'msg' => "Usuario guardado con exito"));
-                    } else {
-                        http_response_code(404);
-                        echo json_encode(array('success' => false, 'msg' => "El usuario no se pudo guardar"));
-                    }
+                    http_response_code(404);
+                    echo json_encode(array('success' => false, 'msg' => "El usuario no se pudo guardar"));
                 }
             }
         } else {
             if (count($datosUser) > 0) {
                 echo json_encode(array('success' => false, 'msg' => "El usuario ya existe"));
             } else {
-                $mail_ws_exist = $this->usuarios->valid_mail_ws($_POST);
-                if ($mail_ws_exist[0]["usuarios"]!==0 || !$mail_ws_exist) {
-                    echo json_encode(array('success' => false, 'msg' => "Email o whatsapp ya existen"));
-                }else{
-                    $records = $this->usuarios->updateusuarios($_POST, $_POST["id_usuario"]);
-                    if ($records) {
-                        http_response_code(200);
-                        echo json_encode(array('success' => true, 'msg' => "Usuario actualizado con exito"));
-                    } else {
-                        http_response_code(404);
-                        echo json_encode(array('success' => false, 'msg' => "Error"));
-                    }
+                $records = $this->usuarios->updateusuarios($_POST, $_POST["id_usuario"]);
+                if ($records) {
+                    http_response_code(200);
+                    echo json_encode(array('success' => true, 'msg' => "Usuario actualizado con exito"));
+                } else {
+                    http_response_code(404);
+                    echo json_encode(array('success' => false, 'msg' => "Error"));
                 }
             }
         }

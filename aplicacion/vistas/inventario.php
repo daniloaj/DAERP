@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-    <!-- Bootstrap core CSS -->
-    <link href="aplicacion/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Archivos adicionales CSS -->
     <link rel="stylesheet" href="publico/css/super.css">
     <title>Inventario</title>

@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-    <!-- Bootstrap core CSS -->
-    <link href="aplicacion/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Archivos adicionales CSS -->
     <link rel="stylesheet" href="publico/css/super.css">
     <title>Usuarios</title>
@@ -126,6 +124,7 @@
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label class="mt-2">Whatsapp: </label>
                                             <input type="text" class="form-control" id="whatsapp" name="whatsapp">
+                                            <p id="error_wp" class="repetido d-none">Whatsapp existente en otro usuario</p>
                                         </div>
                                     </div>
 
@@ -142,6 +141,7 @@
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label class="mt-2">Usuario: </label>
                                             <input type="text" class="form-control" id="usuario" name="usuario">
+                                            <p id="error_user" class="repetido d-none">Usuario existente en otro registro</p>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label class="mt-2">Contraseña:</label>
@@ -153,6 +153,7 @@
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label class="mt-2">Correo: </label>
                                             <input type="text" class="form-control" id="correo" name="correo">
+                                            <p id="error_mail" class="repetido d-none">Correo existente en otro usuario</p>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label for="n_factura" class="mt-2">Tipo de usuario: </label>

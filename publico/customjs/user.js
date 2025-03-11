@@ -25,6 +25,7 @@ const objDatosusuario = {
 };
 let id_user = 0
 let correos = []
+let usuarios = []
 
 eventListiners();
 
@@ -122,17 +123,43 @@ function validar_tel() {
     }
 }
 function validar_Whatsapp() {
+    let duplicate = usuarios.filter(item => item.whatsapp == whatsapp.value && id_user!==item.id_usuario)    
     if (whatsapp.value.length == 0) {
-        document.querySelector("#whatsapp").classList.add('color_rojo_inputs')
+        whatsapp.classList.add('color_rojo_inputs')
+        whatsapp.classList.add('inputs_vacios')
     } else {
-        document.querySelector("#whatsapp").classList.remove('color_rojo_inputs')
+        whatsapp.classList.remove('color_rojo_inputs')
+        whatsapp.classList.remove('inputs_vacios')
+    }
+
+    if (duplicate.length>0) {
+        whatsapp.classList.add('color_rojo_inputs')
+        whatsapp.classList.add('inputs_vacios')
+        document.getElementById("error_wp").classList.remove("d-none")
+    } else {
+        whatsapp.classList.remove('color_rojo_inputs')
+        whatsapp.classList.remove('inputs_vacios')
+        document.getElementById("error_wp").classList.add("d-none")
     }
 }
 function validar_Correo() {
+
+    let duplicate = usuarios.filter(item => item.correo	== correo.value && id_user!==item.id_usuario)    
+
     if (correo.value.length == 0) {
-        document.querySelector("#correo").classList.add('color_rojo_inputs')
+        correo.classList.add('color_rojo_inputs')
     } else {
-        document.querySelector("#correo").classList.remove('color_rojo_inputs')
+        correo.classList.remove('color_rojo_inputs')
+    }
+
+    if (duplicate.length>0) {
+        correo.classList.add('color_rojo_inputs')
+        correo.classList.add('inputs_vacios')
+        document.getElementById("error_mail").classList.remove("d-none")
+    } else {
+        correo.classList.remove('color_rojo_inputs')
+        correo.classList.remove('inputs_vacios')
+        document.getElementById("error_mail").classList.add("d-none")
     }
 }
 function validar_apellidos() {
@@ -143,10 +170,22 @@ function validar_apellidos() {
     }
 }
 function validar_usuario() {
+    let duplicate = usuarios.filter(item => item.usuario == usuario.value && id_user!==item.id_usuario)    
+
     if (usuario.value.length == 0) {
-        document.querySelector("#usuario").classList.add('color_rojo_inputs')
+        usuario.classList.add('color_rojo_inputs')
     } else {
-        document.querySelector("#usuario").classList.remove('color_rojo_inputs')
+        usuario.classList.remove('color_rojo_inputs')
+    }
+
+    if (duplicate.length>0) {
+        usuario.classList.add('color_rojo_inputs')
+        usuario.classList.add('inputs_vacios')
+        document.getElementById("error_user").classList.remove("d-none")
+    } else {
+        usuario.classList.remove('color_rojo_inputs')
+        usuario.classList.remove('inputs_vacios')
+        document.getElementById("error_user").classList.add("d-none")
     }
 }
 function validar_password() {
@@ -164,6 +203,10 @@ function quitar_rojo_inputs() {
         inputs[i].classList.remove('inputs_vacios');
         inputs[i].classList.remove('color_rojo_inputs');
     }
+    document.getElementById("error_user").classList.add("d-none")
+    document.getElementById("error_mail").classList.add("d-none")
+    document.getElementById("error_wp").classList.add("d-none")
+
 }
 
 function guardarusuario(event) {
@@ -248,6 +291,7 @@ function cargarDatosusuario() {
                         correo: element.correo
                     }
                     correos.push(array)
+                    usuarios.push(element)
                 });
             } else {
                 console.log("Error al recuperar registros");
@@ -268,6 +312,7 @@ function limpiarFormusuario() {
     formusuario.reset();
     document.querySelector("#id_usuario").value = "0";
     id_user = 0
+    quitar_rojo_inputs()
 }
 
 function cancelarusuario() {

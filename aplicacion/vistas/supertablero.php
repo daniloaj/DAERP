@@ -7,9 +7,6 @@
   <meta name="author" content="Tooplate">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
   <title>DAERP</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="aplicacion/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Archivos adicionales CSS -->
   <link rel="stylesheet" href="publico/css/super.css">
 

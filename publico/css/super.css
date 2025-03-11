@@ -245,7 +245,10 @@ body {
   border-color: red !important;
   border-width: 3px;
 }
-
+.repetido{
+  color: red;
+  font-size: 16px;
+}
 .inputs_vacios {
   animation: shake-horizontal 0.4s linear both;
 }
