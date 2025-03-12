@@ -28,7 +28,6 @@ async function login(event) {
 }
 function getDepartament() {
     API.get("login/departamentList").then(response => {
-        console.log(response);
         const select = document.getElementById("depa")
         response.records.forEach(element => {
             const option = document.createElement('option')

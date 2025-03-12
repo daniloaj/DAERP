@@ -17,8 +17,7 @@ class LoginControlador extends controlador {
     public function validar() {
         $user=$_POST["usuario"] ?? "";
         $pass=$_POST["password"] ?? "";
-        $id_dep=$_POST["depa"] ?? "";
-        $record=$this->user->validarLogin($user,$pass,$id_dep);
+        $record=$this->user->validarLogin($user,$pass);
         if ($record) {
             if (!isset($_SESSION)) {
                 session_start();

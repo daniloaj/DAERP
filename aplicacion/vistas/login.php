@@ -11,29 +11,20 @@
 
 <body class="text-center">
 
-  <main class="form-signin">
+
+  <div class="form-signin">
     <form action="login.php" id="formlogin" method="post">
-
-      <img class="logo" src="<?php echo URL; ?>publico/images/logo.png">
-
-      <div class="form-floating">
-        <select class="form-control text-capitalize" name="depa" id="depa">
-
-        </select>
-        <label for="floatingInput">Departamento</label>
-      </div>
-
-      <br>
+      <img class="logo mt-3" src="<?php echo URL; ?>publico/images/logo.png">
 
       <div class="form-floating">
-        <input name="usuario" type="text" class="form-control" id="floatingInput" placeholder="Usuario">
+        <input name="usuario" type="text" class="form-control inputs" id="floatingInput" placeholder="Usuario">
         <label for="floatingInput">Usuario</label>
       </div>
 
       <br>
 
       <div class="form-floating">
-        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input name="password" type="password" class="form-control inputs" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Contraseña</label>
       </div>
 
@@ -41,12 +32,22 @@
         Mensaje
       </div>
 
+
       <br>
 
-      <button class="w-100  btn-lg btn btn-primary" type="submit">Iniciar Sesion</button>
-      <p class="mt-5 mb-3 text-muted">&copy; DAERP</p>
+      <button class="w-100 btn-lg btn btn-primary inputs" type="submit">Iniciar Sesion</button>
+      <br>
+      <div class="mt-3 forgot_pass">
+        Olvidé mi contraseña
+      </div>
+
+      <select name="language" id="language" class="form-control mt-3 inputs " >
+        <option value="en">Inglés</option>
+        <option value="es">Español</option>
+      </select>
     </form>
-  </main>
+  </div>
+
   <script src="<?php echo URL ?>publico/customjs/api.js"></script>
   <script src="<?php echo URL ?>publico/customjs/login.js"></script>
 </body>
