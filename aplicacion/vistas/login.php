@@ -18,36 +18,34 @@
 
       <div class="form-floating">
         <input name="usuario" type="text" class="form-control inputs" id="floatingInput" placeholder="Usuario">
-        <label for="floatingInput">Usuario</label>
+        <label id="user" for="floatingInput"></label>
       </div>
 
       <br>
 
       <div class="form-floating">
         <input name="password" type="password" class="form-control inputs" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Contraseña</label>
+        <label id="pass" for="floatingPassword"></label>
       </div>
 
       <div class="alert alert-danger d-none mt-3" role="alert" id="mensaje">
-        Mensaje
+        
       </div>
-
 
       <br>
 
-      <button class="w-100 btn-lg btn btn-primary inputs" type="submit">Iniciar Sesion</button>
+      <button class="w-100 btn-lg btn btn-primary inputs" id="login_b" type="submit"></button>
       <br>
-      <div class="mt-3 forgot_pass">
-        Olvidé mi contraseña
+      <div class="mt-3 forgot_pass" id="forgot_pass">
       </div>
-
+      
       <select name="language" id="language" class="form-control mt-3 inputs " >
-        <option value="en">Inglés</option>
         <option value="es">Español</option>
+        <option value="en">English</option>
       </select>
     </form>
   </div>
-
+  <?php include "publico/customjs/login.js.php" ?>
   <script src="<?php echo URL ?>publico/customjs/api.js"></script>
   <script src="<?php echo URL ?>publico/customjs/login.js"></script>
 </body>

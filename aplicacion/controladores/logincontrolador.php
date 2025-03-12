@@ -17,6 +17,8 @@ class LoginControlador extends controlador {
     public function validar() {
         $user=$_POST["usuario"] ?? "";
         $pass=$_POST["password"] ?? "";
+        $lang=$_POST["language"] ?? "";
+        $language= include "aplicacion/vistas/partes/language/" . $lang .".php";
         $record=$this->user->validarLogin($user,$pass);
         if ($record) {
             if (!isset($_SESSION)) {
@@ -42,7 +44,7 @@ class LoginControlador extends controlador {
                 $info=array("success"=>true,"msg"=>"Usuario valido","url"=>URL."tablero");
             }
         } else {
-            $info=array("success"=>false,"msg"=>"Usuario, contraseña o departamento incorrecto");    
+            $info=array("success"=>false,"msg"=>$language["bad_login"]);    
         }
         echo json_encode($info);
     }
