@@ -2,6 +2,7 @@
 //llamamos al modelo del login para poder utilizar sus funciones
 include_once "aplicacion/modelos/login.php";
 include_once "aplicacion/modelos/usuarios.php";
+include_once "mailercontroller.php";
 class LoginControlador extends controlador {
     private $user;
     private $usuarios;
@@ -17,7 +18,7 @@ class LoginControlador extends controlador {
     public function validar() {
         $user=$_POST["usuario"] ?? "";
         $pass=$_POST["password"] ?? "";
-        $lang=$_POST["language"] ?? "";
+        $lang=$_POST["language"] ?? "es";
         $language= include "aplicacion/vistas/partes/language/" . $lang .".php";
         $record=$this->user->validarLogin($user,$pass);
         if ($record) {
@@ -29,9 +30,6 @@ class LoginControlador extends controlador {
             $_SESSION["id_usuario"]=$record["id_usuario"];
             $_SESSION["nombre"]=$record["nombre"];
             $_SESSION["usuario"]=$record["usuario"];
-            $_SESSION["password"]=$record["password"];
-            $_SESSION["tipo"]=$record["tipo"];
-            $_SESSION["id_dep"]=$record["id_dep"];
             
             //Identificamos el tipo de usuario que está iniciando sesión
             if ($record["tipo"]=='super usuario') {
@@ -49,19 +47,35 @@ class LoginControlador extends controlador {
         echo json_encode($info);
     }
 
-    public function departamentList() {
-        $data=$this->usuarios->departamentList();
-        if ($data) {
+    public function send_mail() {
+
+        $lang=$_POST["lang"] ?? "es";
+        $language= include "aplicacion/vistas/partes/language/" . $lang .".php";
+
+        $correo = $_POST['mail'];
+        $user = $_POST['user'];
+        $message =$language["mail_message"] . $language["my_user"] . $user . $language["my_mail"] . $correo;
+
+        $mail = new EnvioCorreo();
+        $mail->configMail('DAERP');
+        $result = $mail->enviarMail(
+            "agilardanilo@gmail.com",
+            $language["reset_pass"],
+            $message,
+            '',
+            ''
+        );
+
+        if ($result) {
             http_response_code(200);
-            echo json_encode(array('success' => true, 'records' => $data));
+            echo json_encode(array('success' => true, 'msg' => $language["mail_success"]));
         } else {
-            http_response_code(404);
-            echo json_encode(array('success' => false));
+            http_response_code(500);
+            echo json_encode(array('success' => true, 'msg' => 'Error'));
         }
         
     }
 
-    //cerramos sesión llamando al login en las vistas
     public function cerrar() {
         if (!isset($_SESSION)) {
             session_start();

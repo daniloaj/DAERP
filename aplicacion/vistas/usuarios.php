@@ -132,7 +132,7 @@
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label class="mt-2">Departamento: </label>
                                             <select class="form-control text-capitalize" name="depa" id="depa">
-                                              
+
                                             </select>
                                         </div>
                                     </div>

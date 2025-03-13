@@ -29,22 +29,58 @@
       </div>
 
       <div class="alert alert-danger d-none mt-3" role="alert" id="mensaje">
-        
+
       </div>
 
       <br>
 
       <button class="w-100 btn-lg btn btn-primary inputs" id="login_b" type="submit"></button>
       <br>
-      <div class="mt-3 forgot_pass" id="forgot_pass">
+      <div href="#modal_mails" data-bs-toggle="modal" class="mt-3 forgot_pass" id="forgot_pass">
       </div>
-      
-      <select name="language" id="language" class="form-control mt-3 inputs " >
+
+      <select name="language" id="language" class="form-control mt-3 inputs ">
         <option value="es">Español</option>
         <option value="en">English</option>
       </select>
     </form>
   </div>
+
+  <!-- send mail users -->
+  <div style="z-index: 9000" class="modal fade" data-bs-backdrop="static" id="modal_mails" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content inputs">
+        <div class="container">
+          <div class="modal-body">
+            <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h3 class='centrar' id="title_forgot_pass">
+
+            </h3>
+            <hr>    
+            <p id="message_forgot_pass">
+
+            </p>
+            <div class="form-floating">
+              <input name="mail_pass" class="inputs form-control forgot_inputs" id="mail_pass" placeholder="mail">
+              <label id="mail_forgot_pass" for="mail_pass"></label>
+            </div>
+
+            <div class="form-floating mt-3">
+              <input name="user_forgot_pass" class="inputs form-control forgot_inputs" id="user_forgot" placeholder="mail">
+              <label id="user_forgot_pass" for="user_forgot_pass"></label>
+            </div>
+
+            <div class="centrar mt-3">
+              <button id="cancelar_mail" class=" w-25 btn btn-secondary">Cancelar</button>
+              <button id="send_mail" class=" w-25 btn btn-primary disabled">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <?php include "aplicacion/vistas/partes/javascript.php"; ?>
   <?php include "publico/customjs/login.js.php" ?>
   <script src="<?php echo URL ?>publico/customjs/api.js"></script>
   <script src="<?php echo URL ?>publico/customjs/login.js"></script>
