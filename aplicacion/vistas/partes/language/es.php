@@ -18,5 +18,11 @@ return array(
     "my_user" => "Mi usuario es: ",
     "mail_success" => "Mail enviado exitosamente: ",
     "reset_pass" => "Reset password ",
+    "y" => "y",
+    "edit" => "Editar",
+    "delete" => "Eliminar",
+    "duplicate" => "Duplicar",
+    "send_mail" => "Enviar mail",
+
 )
 ?>

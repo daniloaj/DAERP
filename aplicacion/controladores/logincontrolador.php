@@ -26,10 +26,10 @@ class LoginControlador extends controlador {
                 session_start();
             }
 
-            //utilizamos los campos de la tabla usuarios para validar el inicio de sesión
             $_SESSION["id_usuario"]=$record["id_usuario"];
             $_SESSION["nombre"]=$record["nombre"];
             $_SESSION["usuario"]=$record["usuario"];
+            $_SESSION["language"]=$lang;
             
             //Identificamos el tipo de usuario que está iniciando sesión
             if ($record["tipo"]=='super usuario') {
@@ -54,7 +54,7 @@ class LoginControlador extends controlador {
 
         $correo = $_POST['mail'];
         $user = $_POST['user'];
-        $message =$language["mail_message"] . $language["my_user"] . $user . $language["my_mail"] . $correo;
+        $message =$language["mail_message"] . $language["my_user"] . $user . " " .  $language["y"] . " " .  $language["my_mail"] . $correo;
 
         $mail = new EnvioCorreo();
         $mail->configMail('DAERP');

@@ -46,7 +46,7 @@
     </form>
   </div>
 
-  <!-- send mail users -->
+  <!-- send mail forgot password -->
   <div style="z-index: 9000" class="modal fade" data-bs-backdrop="static" id="modal_mails" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content inputs">
@@ -73,6 +73,9 @@
             <div class="centrar mt-3">
               <button id="cancelar_mail" class=" w-25 btn btn-secondary">Cancelar</button>
               <button id="send_mail" class=" w-25 btn btn-primary disabled">Enviar</button>
+              <button id="loading" class="w-25 btn btn-primary d-none" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              </button>
             </div>
           </div>
         </div>

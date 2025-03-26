@@ -320,3 +320,106 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+
+/* Estilo básico del botón */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-target {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+/* El texto del tooltip, inicialmente oculto */
+.tooltip-text-blue {
+  visibility: hidden;
+  width: 150px;
+  background-color: rgba(13,110,253,255);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Posicionamos el tooltip por encima del botón */
+  left: 50%;
+  margin-left: -75px; 
+  opacity: 0;
+  transition: opacity 0.3s; /* Transición suave */
+  word-break: break-all;
+}
+.tooltip-container:hover .tooltip-text-blue {
+  visibility: visible;
+  opacity: 1;
+}
+.tooltip-text-red {
+  visibility: hidden;
+  width: 150px;
+  background-color: rgba(220,53,69,255);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Posicionamos el tooltip por encima del botón */
+  left: 50%;
+  margin-left: -75px; /* Para centrar el tooltip */
+  opacity: 0;
+  transition: opacity 0.3s; /* Transición suave */
+  word-break: break-all;
+
+}
+.tooltip-container:hover .tooltip-text-red {
+  visibility: visible;
+  opacity: 1;
+}
+.tooltip-text-yellow {
+  visibility: hidden;
+  width: 150px;
+  background-color: rgba(255,193,7,255);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  word-break: break-all;
+  bottom: 125%; /* Posicionamos el tooltip por encima del botón */
+  left: 50%;
+  margin-left: -75px; /* Para centrar el tooltip */
+  opacity: 0;
+  transition: opacity 0.3s; /* Transición suave */
+}
+.tooltip-container:hover .tooltip-text-yellow {
+  visibility: visible;
+  opacity: 1;
+}
+.tooltip-text-lightblue {
+  visibility: hidden;
+  width: 150px;
+  background-color: rgba(13,202,240,255);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Posicionamos el tooltip por encima del botón */
+  left: 50%;
+  word-break: break-all;
+  margin-left: -75px; /* Para centrar el tooltip */
+  opacity: 0;
+  transition: opacity 0.3s; /* Transición suave */
+}
+.tooltip-container:hover .tooltip-text-lightblue {
+  visibility: visible;
+  opacity: 1;
+}

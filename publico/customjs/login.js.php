@@ -16,10 +16,14 @@ $languages = [
     const mail_forgot_pass = document.querySelector("#mail_forgot_pass");
     const message_forgot_pass = document.querySelector("#message_forgot_pass");
     const user_forgot_pass = document.querySelector("#user_forgot_pass");
-    const send_mail_text = document.querySelector("#send_mail");
+    const send_mail = document.querySelector("#send_mail");
     const cancelar = document.querySelector("#cancelar_mail");
     const mail_input = document.querySelector("#mail_pass");
     const user_input = document.querySelector("#user_forgot");
+    const loading = document.querySelector("#loading");
+
+    send_mail.addEventListener("click", send_mail_forgot_pass);
+    cancelar.addEventListener("click", cancelar_mail);
 
     function change_language() {
         const lang = languageSelect.value;
@@ -32,11 +36,14 @@ $languages = [
         mail_forgot_pass.textContent = translations[lang]["mail"];
         message_forgot_pass.textContent = translations[lang]["forgot_pass_message"];
         user_forgot_pass.textContent = translations[lang]["user"];
-        send_mail_text.textContent = translations[lang]["send"];
+        send_mail.textContent = translations[lang]["send"];
         cancelar.textContent = translations[lang]["cancel"];
     }
 
     function send_mail_forgot_pass() {
+        
+        send_mail.classList.add("d-none")
+        loading.classList.remove("d-none")
 
         const formData = new FormData();
 
@@ -53,6 +60,16 @@ $languages = [
         }).catch(error => {
             console.log(error);
         })
+    }
+
+    function cancelar_mail() {
+        let modalElement = document.getElementById('modal_mails');
+        let modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
+        document.getElementById("user_forgot").value = ""
+        document.getElementById("mail_pass").value = ""
+        send_mail.classList.remove("d-none")
+        loading.classList.add("d-none")
     }
 
     languageSelect.addEventListener("change", change_language);
