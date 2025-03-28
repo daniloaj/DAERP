@@ -77,6 +77,20 @@ class usuarios extends BaseDeDatos
         );
         return $this->preparar_seleccion($query, $params);
     }
+    public function getHashPassword($id_usuario)
+    {
+        $query = "SELECT id_usuario, 
+            usuario,
+            password, 
+            correo
+        FROM usuarios 
+        where id_usuario=?";
+
+        $params = array(
+            $id_usuario
+        );
+        return $this->preparar_seleccion($query, $params);
+    }
 
     public function updateusuarios($data, $id_usuario)
     {
@@ -118,5 +132,16 @@ class usuarios extends BaseDeDatos
         $query = "SELECT id_dep, nom_depa FROM departamentos";
         $params = array();
         return $this->preparar_seleccion($query, $params);
+    }
+    public function reset_pass($data, $id)
+    {
+        $table = "usuarios";
+
+        $data = array(
+            "password" => md5($data["username"]),            
+        );
+        $condition = "id_usuario = ?";
+
+        return $this->preparar_actualizar($table, $data, $condition, $id);
     }
 }

@@ -30,3 +30,7 @@ body {
   color: blue;
   cursor:pointer
 }
+
+.error_message{
+  color: red;
+}

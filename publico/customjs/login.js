@@ -2,6 +2,7 @@
 const mensaje = document.querySelector("#mensaje");
 const form = document.querySelector("#formlogin");
 const mail = document.querySelector("#mail_pass");
+const rehacer_contra = document.querySelector("#rehacer_contra");
 const user = document.querySelector("#user_forgot");
 
 //llamamos el evento submit del post 
@@ -17,11 +18,15 @@ async function login(event) {
     const formData = new FormData(form);
     API.post(formData, "login/validar").then(
         data => {
-            if (data.success) {
-                window.location = data.url;
+            if (data.success_reset) {
+                rehacer_contra.click()
             } else {
-                mensaje.classList.remove("d-none");
-                mensaje.innerHTML = data.msg;
+                if (data.success) {
+                    window.location = data.url;
+                } else {
+                    mensaje.classList.remove("d-none");
+                    mensaje.innerHTML = data.msg;
+                }
             }
         }
     ).catch(

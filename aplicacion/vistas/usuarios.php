@@ -183,7 +183,6 @@
             </div>
         </div>
     </div>
-    <script src="<?php echo URL ?>publico/customjs/user.js"></script>
     <?php include "publico/customjs/user.js.php" ?>
     <script>
         function sortTableUsuarios(n, type) {

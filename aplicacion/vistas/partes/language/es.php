@@ -16,13 +16,20 @@ return array(
     "mail_message" => "¡Hola! he olvidado mi contraseña, necesito recuperarla. ",
     "my_mail" => "Mi correo es: ",
     "my_user" => "Mi usuario es: ",
-    "mail_success" => "Mail enviado exitosamente: ",
+    "mail_success" => "Mail enviado exitosamente ",
     "reset_pass" => "Reset password ",
     "y" => "y",
     "edit" => "Editar",
     "delete" => "Eliminar",
     "duplicate" => "Duplicar",
     "send_mail" => "Enviar mail",
-
+    "reset_pass_title" => "¿Está seguro de hacer un reset password?",
+    "dear_user" => "Querido/a usuario",
+    "send_reset_pass_body" => ", para crear su nueva contraseña porfavor ingrese las siguientes credenciales: ",
+    "success_reset_pass" => "Reset password realizado correctamente",
+    "new_pass" => "Por favor, ingrese una nueva contraseña",
+    "new_pass_repite" => "Repita la contraseña",
+    "accept" => "Aceptar",
+    "no_match_pass" => "Las contraseñas no coinciden",
 )
 ?>

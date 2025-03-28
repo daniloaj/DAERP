@@ -83,6 +83,48 @@
     </div>
   </div>
 
+  <div href="#modal_rehacer_pass" data-bs-toggle="modal" class="mt-3 forgot_pass d-none" id="rehacer_contra">
+      </div>
+  <!-- rehacer la contra -->
+  <div style="z-index: 9000" class="modal fade" data-bs-backdrop="static" id="modal_rehacer_pass" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content inputs">
+        <div class="container">
+          <div class="modal-body">
+            <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h3 class='centrar' id="reset_pass_title">
+
+            </h3>
+            <hr>    
+            <p id="message_reset_pass">
+
+            </p>
+            <div class="form-floating">
+              <input name="pass_reset" type="password" class="inputs form-control forgot_inputs" id="new_pass" placeholder="mail">
+              <label id="pass_reset" for="pass_reset"></label>
+            </div>
+
+            <div class="form-floating mt-3">
+              <input name="repeat_pass" type="password" class="inputs form-control forgot_inputs" id="repeat_new_pass" placeholder="mail">
+              <label id="repeat_pass" for="repeat_pass"></label>
+            </div>
+            <div class="mt-3">
+              <label id="no_match" class="error_message d-none" ></label>
+            </div>
+
+            <div class="centrar mt-3">
+              <button id="cancelar_reset_password" class=" w-25 btn btn-secondary">Cancelar</button>
+              <button id="change_pass" class=" w-25 btn btn-primary disabled">Enviar</button>
+              <button id="loading_pass" class="w-25 btn btn-primary d-none" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <?php include "aplicacion/vistas/partes/javascript.php"; ?>
   <?php include "publico/customjs/login.js.php" ?>
   <script src="<?php echo URL ?>publico/customjs/api.js"></script>
