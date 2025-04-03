@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,55 +14,73 @@
 </head>
 
 <body>
+  <div class="container">
+    <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
+  </div>
   <!-- sidebar -->
-  <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
 
   <!--Cuerpo-->
-  <div class="slides">
-    <div class="slide" id="1">
-      <div id="slider-wrapper">
+  <main class="data">
+    <header>
+      <h1>Hello, Yehor</h1>
+      <div class="header-info">
+        <div>Your balance: <span>$1000</span></div>
+        <div class="profile">Yehor H.</div>
+      </div>
+    </header>
 
-        <!--Imagenes del pie de la pagina de inicio-->
-        <div id="thumbnail">
-          <ul>
-            <li style="color: white;">Departamento de <br> "Contabilidad"<img src="publico/images/contabilidad.jpg" /></li>
-            <li style="color: white;">Departamento de <br> "Recursos humanos"<img src="publico/images/rh.png" /></li>
-            <li style="color: white;">Departamento de<br> "Marketing"<img src="publico/images/marketing.jpg" /></li>
-            <li style="color: white;">Departamento de<br> "Comercial"<img src="publico/images/comercio.png" /></li>
-            <li style="color: white;">Departamento de<br> "Compras"<img src="publico/images/compras.jpg" /></li>
-            <li style="color: white;">Departamento de<br> "Logistica"<img src="publico/images/logistica.png" /></li>
-            <li style="color: white;">Departamento de<br> "Control de gestión"<img src="publico/images/gestion.jpg" /></li>
-            <li style="color: white;">Departamento de<br> "Dirección general"<img src="publico/images/direccion.jpg" /></li>
-            <li style="color: white;">Comité de<br> "Dirección"<img src="publico/images/jefazos.jpg" /></li>
-          </ul>
+    <section class="stats">
+      <div class="stat-item">12 <br>Courses completed</div>
+      <div class="stat-item">3 <br>Certificates earned</div>
+      <div class="stat-item">2 <br>Courses in progress</div>
+      <div class="stat-item">1 <br>Career path</div>
+      <div class="stat-item start-quiz">Start quiz</div>
+    </section>
+
+    <section class="explore">
+      <h2>Let's explore</h2>
+      <div class="filters">
+        <button>Sort by popular</button>
+        <button>Courses</button>
+        <button>Category: All</button>
+        <button>Filters</button>
+      </div>
+      <div class="course-list">
+        <div class="course-card">
+          <img src="img1.jpg" alt="Course Image">
+          <h3>Cinema 4D Training for beginners</h3>
+          <p>24h left</p>
+        </div>
+        <div class="course-card">
+          <img src="img2.jpg" alt="Course Image">
+          <h3>Sustainability in Architecture</h3>
+          <p>24h left</p>
+        </div>
+        <div class="course-card">
+          <img src="img3.jpg" alt="Course Image">
+          <h3>200 Hour Yoga Teacher Training</h3>
+          <p>24h left</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- slides que se llaman con el panel lateral -->
-    
-    <!--proveedores-->
-    <div class="slide" id="3">
-      <?php require_once "aplicacion/vistas/partes/supertablero_partes/proveedores.php"; ?>
-    </div>
+    <section class="reviews">
+      <h2>My reviews</h2>
+      <div class="review">
+        <p>Anna Holiuk<br><span>200-hour Yoga Teacher Training</span><br><span>⭐⭐⭐⭐⭐</span></p>
+      </div>
+      <div class="review">
+        <p>Alex Chekilov<br><span>Basic Photography Course</span><br><span>⭐⭐⭐⭐</span></p>
+      </div>
+    </section>
 
-    <!--Usuarios-->
-    <div class="slide" id="4">
-      <?php require_once "aplicacion/vistas/partes/supertablero_partes/usuarios.php"; ?>
-    </div>
-
-    <!--Agenda-->
-    <div class="slide" id="5">
-      <?php require_once "aplicacion/vistas/partes/supertablero_partes/agenda.php"; ?>
-    </div>
-
-    <!--Bootstrap core JavaScript -->
-    <script src="aplicacion/vendor/jquery/jquery.min.js"></script>
-    <script src="aplicacion/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
-    <!--Additional Scripts -->
-    <?php include_once "aplicacion/vistas/partes/javascript.php"; ?>
+    <section class="quiz-reminder">
+      <h3>Haven't yet decided what to study?</h3>
+      <button>Start quiz</button>
+    </section>
+  </main>
+  <!--Additional Scripts -->
+  <?php include_once "aplicacion/vistas/partes/javascript.php"; ?>
 
 </body>
 

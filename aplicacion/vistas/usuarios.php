@@ -11,7 +11,9 @@
 </head>
 
 <body>
+<div class="container">
     <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
+  </div>
     <div class="data">
         <h1 class="centrar">Sistema de Usuarios DAERP</h1>
         <br>
