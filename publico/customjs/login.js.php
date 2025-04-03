@@ -26,6 +26,7 @@ $languages = [
     const pass_reset = document.querySelector("#pass_reset");
     const repeat_pass = document.querySelector("#repeat_pass");
     const change_pass = document.querySelector("#change_pass");
+    const loading_change_pass = document.querySelector("#loading_change_pass");
     const no_match = document.querySelector("#no_match");
     const new_pass = document.querySelector("#new_pass");
     const repeat_new_pass = document.querySelector("#repeat_new_pass");
@@ -96,6 +97,8 @@ $languages = [
     function change_password(params) {
         let contra = new_pass.value
         let lang = languageSelect.value
+        change_pass.classList.add("d-none")
+        change_passloading_change_pass.classList.remove("d-none")
         const API = new Api();
         const formData = new FormData();
         formData.append("user", floatingInputUser.value)
@@ -153,6 +156,8 @@ $languages = [
     }
 
     function cancelar_reset() {
+        change_pass.classList.remove("d-none")
+        change_passloading_change_pass.classList.add("d-none")
         new_pass.value = ""
         repeat_new_pass.value = ""
         let modalElement = document.getElementById('modal_rehacer_pass');

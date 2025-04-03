@@ -35,6 +35,9 @@
       <br>
 
       <button class="w-100 btn-lg btn btn-primary inputs" id="login_b" type="submit"></button>
+      <button style="width: 100%;" id="loading_login" class="btn btn-primary d-none" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      </button>
       <br>
       <div href="#modal_mails" data-bs-toggle="modal" class="mt-3 forgot_pass" id="forgot_pass">
       </div>
@@ -74,7 +77,7 @@
               <button id="cancelar_mail" class=" w-25 btn btn-secondary">Cancelar</button>
               <button id="send_mail" class=" w-25 btn btn-primary disabled">Enviar</button>
               <button id="loading" class="w-25 btn btn-primary d-none" type="button" disabled>
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               </button>
             </div>
           </div>
@@ -83,9 +86,9 @@
     </div>
   </div>
 
+  <!-- rehacer la contra -->
   <div href="#modal_rehacer_pass" data-bs-toggle="modal" class="mt-3 forgot_pass d-none" id="rehacer_contra">
       </div>
-  <!-- rehacer la contra -->
   <div style="z-index: 9000" class="modal fade" data-bs-backdrop="static" id="modal_rehacer_pass" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content inputs">
@@ -115,8 +118,8 @@
             <div class="centrar mt-3">
               <button id="cancelar_reset_password" class=" w-25 btn btn-secondary">Cancelar</button>
               <button id="change_pass" class=" w-25 btn btn-primary disabled">Enviar</button>
-              <button id="loading_pass" class="w-25 btn btn-primary d-none" type="button" disabled>
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <button id="loading_change_pass" class="w-25 btn btn-primary d-none" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               </button>
             </div>
           </div>

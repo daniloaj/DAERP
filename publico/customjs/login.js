@@ -4,6 +4,8 @@ const form = document.querySelector("#formlogin");
 const mail = document.querySelector("#mail_pass");
 const rehacer_contra = document.querySelector("#rehacer_contra");
 const user = document.querySelector("#user_forgot");
+const login_b = document.querySelector("#login_b");
+const loading_login = document.querySelector("#loading_login");
 
 //llamamos el evento submit del post 
 form.addEventListener("submit", login);
@@ -15,6 +17,8 @@ const API = new Api();
 async function login(event) {
     event.preventDefault();
     // const API = new Api();
+    login_b.classList.add("d-none")
+    loading_login.classList.remove("d-none")
     const formData = new FormData(form);
     API.post(formData, "login/validar").then(
         data => {
@@ -34,6 +38,8 @@ async function login(event) {
             console.error("Error", error);
         }
     );
+    login_b.classList.remove("d-none")
+    loading_login.classList.add("d-none")
 }
 
 function valid_mail_user() {
