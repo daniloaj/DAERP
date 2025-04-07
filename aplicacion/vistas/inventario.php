@@ -13,26 +13,52 @@
 <body>
     <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
     <div class="data">
-        <h1 class='centrar'>Sistema de Inventario DAERP</h1>
-        <br>
-        <div id="contentListinventario">
-            <button href="#modal_form" data-bs-toggle="modal" class="btn btn-success float-right" id="btnAgregarinventario">
-                <i class="bi bi-plus-square-fill"></i>
-                Agregar inventario
-            </button>
+        <div id="contentListinventario" class="container mt-2">
+            <section class="stats mb-4">
+                <div class="stat-item start-quiz" href="#modal_form" data-bs-toggle="modal" id="btnAgregarinventario"><i class="bi bi-plus-square-fill"></i> <br>Agregar inventario</div>
+                <div class="stat-item" id="filter_busqueda"><i class="bi bi-eye"></i><br>Search filters</div>
+                <div class="stat-item"><i class="bi bi-trash"></i> <br>Delete many</div>
+                <div class="stat-item"><i class="bi bi-download"></i> <br>PDF</div>
+                <div class="stat-item"><i class="bi bi-download"></i> <br>EXCEL</div>
+            </section>
 
-            <div class="col-md-4">
-                <div class="input-group mb-3">
-                    <input placeholder="Buscar registro" type="search" class="form-control" aria-describedby="basic-addon2" id="txtSearchinventario">
-                    <span class="input-group-text" id="basic-addon2">
-                        <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
-                        <lord-icon src="https://cdn.lordicon.com/xfftupfv.json" trigger="loop" style="width:25px;height:25px">
-                        </lord-icon></i>
-                    </span>
+            <div class="row d-none" id="filtros_busqueda">
+
+                <div class="col-md-4">
+                    <div class="input-group mb-3 buscador">
+                        <input placeholder="Buscar registro" type="search" class="form-control" aria-describedby="basic-addon2" id="txtSearchinventario">
+                        <i class="bi bi-search p-2"></i>
+                    </div>
                 </div>
+                <div class="col-md-2">
+                    <div class="input-group mb-3 buscador">
+                        <span class="p-1">Desde: </span>
+                        <input placeholder="Buscar fechas" type="date" class="form-control" aria-describedby="basic-addon2" id="date_desde">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group mb-3 buscador">
+                        <span class="p-1">Hasta: </span>
+                        <input placeholder="Buscar fechas" type="date" class="form-control" aria-describedby="basic-addon2" id="date_hasta">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group mb-3 buscador">
+                        <span class="p-1">Desde: </span>
+                        <input placeholder="$0.00" type="number" class="form-control" aria-describedby="basic-addon2" id="money_desde">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group mb-3 buscador">
+                        <span class="p-1">Hasta: </span>
+                        <input placeholder="$0.00" type="number" class="form-control" aria-describedby="basic-addon2" id="money_hasta">
+                    </div>
+                </div>
+
+
             </div>
 
-            <div id="contentTableinventario">
+            <div id="contentTableinventario" class="tables_border">
                 <table class="table table-hover" style="text-transform: capitalize" id="myTableinventario">
                     <thead>
                         <th>Id <img onclick="sortTableinventario(0, 'int')" src="publico/images/flecha.png"></th>
@@ -64,6 +90,8 @@
                 </div>
             </div>
         </div>
+
+
         <div style="z-index: 9000" class="modal fade" id="modal_form" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content" style="border-radius: 10px; margin-top: -5%">
@@ -103,7 +131,7 @@
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                                             <label for="provee" class="mt-2">Proveedor:</label>
                                             <select class="form-control" name="provee" id="provee">
-                                                
+
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">

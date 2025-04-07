@@ -13,12 +13,13 @@ const unidades = document.querySelector("#unidades");
 const fecha = document.querySelector("#fecha");
 const n_factura = document.querySelector("#n_factura");
 const comprador = document.querySelector("#comprador");
+const filter_busqueda = document.querySelector("#filter_busqueda");
 let total = document.querySelector("#total");
 const objDatosinventario = {
     records: [],
     recordsFilter: [],
     currentPage: 1,
-    recordsShow: 7,
+    recordsShow: 6,
     filter: ""
 };
 
@@ -31,6 +32,7 @@ function eventListiners() {
 
     botoninventario.addEventListener("click", agregarinventario);
     btnCancelarinventario.addEventListener("click", cancelarinventario);
+    filter_busqueda.addEventListener("click", search_and_filters);
 
     txtSearchinventario.addEventListener("input", aplicarFiltroinventario);
     insumo.addEventListener("input", validar_insumo)
@@ -42,7 +44,14 @@ function eventListiners() {
 
     forminventario.addEventListener("submit", guardarinventario);
 }
-
+function search_and_filters() {
+    let filtros=document.getElementById("filtros_busqueda")
+    if (filtros.classList.contains('d-none')) {
+        filtros.classList.remove("d-none")
+    } else {
+        filtros.classList.add("d-none")
+      }
+}
 function validar_insumo() {
     if (insumo.value.length == 0) {
         document.querySelector("#insumo").classList.add('color_rojo_inputs')
