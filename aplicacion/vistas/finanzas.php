@@ -15,9 +15,10 @@
     <div class="data">
         <div id="contentListinventario" class="container mt-2">
             <section class="stats mb-4">
-                <div class="stat-item start-quiz" href="#modal_form" data-bs-toggle="modal" id="btnAgregarinventario"><i class="bi bi-plus-square-fill"></i> <br>Agregar inventario</div>
-                <div class="stat-item" id="filter_busqueda"><i class="bi bi-eye"></i><br>Search filters</div>
-                <div class="stat-item"><i class="bi bi-trash"></i> <br>Delete many</div>
+                <div class="stat-item start-quiz" href="#modal_form" data-bs-toggle="modal" id="btnAgregarinventario"><i class="bi bi-plus-square-fill"></i> <br>Inventario</div>
+                <div class="stat-item" id="filter_busqueda"><i class="bi bi-eye"></i><br>Compras</div>
+                <div class="stat-item"><i class="bi bi-trash"></i> <br>Ventas</div>
+                <div class="stat-item"><i class="bi bi-trash"></i> <br>Retaceo</div>
                 <div class="stat-item"><i class="bi bi-download"></i> <br>PDF</div>
                 <div class="stat-item"><i class="bi bi-download"></i> <br>EXCEL</div>
             </section>

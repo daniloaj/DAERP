@@ -1,5 +1,7 @@
 const sidebar_user_txt = document.getElementById("sidebar_user_txt");
 const sidebar_user_img = document.getElementById("sidebar_user_img");
+const ventas_img = document.getElementById("ventas_img");
+const ventas_txt = document.getElementById("ventas_txt");
 const home_txt = document.getElementById("home_txt");
 const home_img = document.getElementById("home_img");
 const compras_img = document.getElementById("compras_img");
@@ -19,8 +21,8 @@ switch (modulo) {
         compras_txt.style.color = color_azul
         break;
     case "ventas":
-        sidebar_user_img.setAttribute("fill", color_azul)
-        sidebar_user_txt.style.color = color_azul
+        ventas_img.setAttribute("fill", color_azul)
+        ventas_txt.style.color = color_azul
         break;
     case "inventario":
         sidebar_user_img.setAttribute("fill", color_azul)

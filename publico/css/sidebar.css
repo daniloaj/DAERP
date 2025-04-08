@@ -13,7 +13,7 @@
 .main-menu ul {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     list-style-type: none;
     padding: 0;
@@ -52,8 +52,10 @@
 
 hr {
     background-color: white;
-    width: 80%;
-    margin: 20px 0;
+    width: 50%;
+    position: absolute;
+    margin-top: 100px !important;
+
 }
 
 .imagen-logo {
