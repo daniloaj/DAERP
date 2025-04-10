@@ -1,5 +1,6 @@
 <?php
 return array(
+    // login
     "user" => "User",
     "pass" => "Password",
     "login" => "Login",
@@ -31,5 +32,14 @@ return array(
     "new_pass_repite" => "Repeat the password",
     "accept" => "Accept",
     "no_match_pass" => "The passwords doesn't match",
+    "finances"=>"Finances",
+    "administration"=>"Administration",
+
+    // sidebar
+    "finances"=>"Finances",
+    "administration"=>"Administration",
+    "agenda"=>"Agenda",
+    "settings"=>"Settings",
+    "logout"=>"Logout",
 )
 ?>

@@ -1,5 +1,6 @@
 <?php
 return array(
+    // login
     "user" => "Usuario",
     "pass" => "Contraseña",
     "login" => "Iniciar Sesión",
@@ -31,5 +32,12 @@ return array(
     "new_pass_repite" => "Repita la contraseña",
     "accept" => "Aceptar",
     "no_match_pass" => "Las contraseñas no coinciden",
+
+    // sidebar
+    "finances"=>"Finanzas",
+    "administration"=>"Administración",
+    "agenda"=>"Agenda",
+    "settings"=>"Opciones",
+    "logout"=>"Logout",
 )
 ?>

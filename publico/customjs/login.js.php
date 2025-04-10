@@ -42,7 +42,10 @@ $languages = [
     new_pass.addEventListener("input", validar_pass);
 
     function change_language() {
-        const lang = languageSelect.value;
+        languageSelect.value = sessionStorage.getItem("lang") ? sessionStorage.getItem("lang") : "es"
+        const language_selected = languageSelect.value
+        sessionStorage.setItem("lang", language_selected)
+        const lang = sessionStorage.getItem("lang");
 
         userLabel.textContent = translations[lang]["user"];
         passLabel.textContent = translations[lang]["pass"];

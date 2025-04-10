@@ -29,7 +29,7 @@ header h1 {
 
 .stats {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 .buscador{
@@ -54,9 +54,6 @@ header h1 {
   background-color: #007bff;
   color: white;
   cursor: pointer;
-  font-size: 20px;
-  font-family: 'Akatab', sans-serif;
-  font: bold !important;
 }
 
 .explore {

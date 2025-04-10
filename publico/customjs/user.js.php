@@ -3,11 +3,10 @@ $languages = [
     "es" => include "aplicacion/vistas/partes/language/es.php",
     "en" => include "aplicacion/vistas/partes/language/en.php"
 ];
-$language_session = $_SESSION["language"];
 ?>
 <script>
     const translations = <?php echo json_encode($languages); ?>;
-    const lang = <?php echo json_encode($language_session) ?>.toString();
+    const lang = sessionStorage.getItem("lang");
 
     function change_language() {
 

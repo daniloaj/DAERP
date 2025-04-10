@@ -12,17 +12,9 @@
 
 <body>
     <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
-    <div class="data">
-        <div id="contentListinventario" class="container mt-2">
-            <section class="stats mb-4">
-                <div class="stat-item start-quiz" href="#modal_form" data-bs-toggle="modal" id="btnAgregarinventario"><i class="bi bi-plus-square-fill"></i> <br>Agregar inventario</div>
-                <div class="stat-item" id="filter_busqueda"><i class="bi bi-eye"></i><br>Search filters</div>
-                <div class="stat-item"><i class="bi bi-trash"></i> <br>Delete many</div>
-                <div class="stat-item"><i class="bi bi-download"></i> <br>PDF</div>
-                <div class="stat-item"><i class="bi bi-download"></i> <br>EXCEL</div>
-            </section>
+        <div id="contentListinventario">
 
-            <div class="row d-none" id="filtros_busqueda">
+            <div class="row" id="filtros_busqueda">
 
                 <div class="col-md-4">
                     <div class="input-group mb-3 buscador">
@@ -30,32 +22,6 @@
                         <i class="bi bi-search p-2"></i>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="input-group mb-3 buscador">
-                        <span class="p-1">Desde: </span>
-                        <input placeholder="Buscar fechas" type="date" class="form-control" aria-describedby="basic-addon2" id="date_desde">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="input-group mb-3 buscador">
-                        <span class="p-1">Hasta: </span>
-                        <input placeholder="Buscar fechas" type="date" class="form-control" aria-describedby="basic-addon2" id="date_hasta">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="input-group mb-3 buscador">
-                        <span class="p-1">Desde: </span>
-                        <input placeholder="$0.00" type="number" class="form-control" aria-describedby="basic-addon2" id="money_desde">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="input-group mb-3 buscador">
-                        <span class="p-1">Hasta: </span>
-                        <input placeholder="$0.00" type="number" class="form-control" aria-describedby="basic-addon2" id="money_hasta">
-                    </div>
-                </div>
-
-
             </div>
 
             <div id="contentTableinventario" class="tables_border">
@@ -162,7 +128,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <!--Scripts de inventario-->
     <script src="<?php echo URL ?>publico/customjs/inventario.js"></script>
     <script>
