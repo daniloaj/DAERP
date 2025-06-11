@@ -14,7 +14,7 @@
     <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
     <div class="data">
 
-                <div id="contentListinventario" class="container mt-2">
+                <div id="admintContent" class="container mt-2">
                     <section class="stats mb-4">
                         <a href="<?php echo URL ?>usuarios">
                             <div class="stat-item start-quiz"><i class="bi bi-plus-square-fill"></i> <br>Personal</div>
@@ -249,7 +249,7 @@
         </div>
     </div>
     <!--Scripts de inventario-->
-    <script src="<?php echo URL ?>publico/customjs/inventario.js"></script>
+    <script src="<?php echo URL ?>publico/customjs/inventarios.js"></script>
     <script>
         let tooltips = document.querySelectorAll('[data-toggle="tooltip"]');
         tooltips.forEach(function(tooltip) {

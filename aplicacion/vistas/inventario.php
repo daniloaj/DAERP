@@ -27,13 +27,10 @@
             <div id="contentTableinventario" class="tables_border">
                 <table class="table table-hover" style="text-transform: capitalize" id="myTableinventario">
                     <thead>
-                        <th>Id <img onclick="sortTableinventario(0, 'int')" src="publico/images/flecha.png"></th>
-                        <th>Fecha <img onclick="sortTableinventario(1, 'str')" src="publico/images/flecha.png"></th>
-                        <th>Producto <img onclick="sortTableinventario(2, 'str')" src="publico/images/flecha.png"></th>
-                        <th style="text-align:center">$ Costo <img onclick="sortTableinventario(3, 'int')" src="publico/images/flecha.png"></th>
-                        <th style="text-align:center">Cantidad <img onclick="sortTableinventario(4, 'int')" src="publico/images/flecha.png"></th>
-                        <th style="text-align:center">$ Total<img onclick="sortTableinventario(5, 'int')" src="publico/images/flecha.png"></th>
-                        <th style="text-align:center">Opciones</th>
+                        <th># <img onclick="sortTableinventario(0, 'int')" src="publico/images/flecha.png"></th>
+                        <th>Producto <img onclick="sortTableinventario(1, 'str')" src="publico/images/flecha.png"></th>
+                        <th style="text-align:center">Costo promedio <img onclick="sortTableinventario(2, 'int')" src="publico/images/flecha.png"></th>
+                        <th style="text-align:center">Stock <img onclick="sortTableinventario(3, 'int')" src="publico/images/flecha.png"></th>
                     </thead>
                     <tbody>
 
@@ -49,9 +46,6 @@
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
                         </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-lg-2 col-xl-2 mt-2">
-                        <b>Total: $<span id="total">0</span></b>
                     </div>
                 </div>
             </div>

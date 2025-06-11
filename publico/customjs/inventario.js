@@ -1,20 +1,6 @@
-const botoninventario = document.querySelector("#btnAgregarinventario");
-const panelDatosinventario = document.querySelector("#contentListinventario");
-const panelForminventario = document.querySelector("#contentForminventario");
-const btnCancelarinventario = document.querySelector("#btnCancelarinventario");
-const btnSaveInventario = document.querySelector("#btnSaveInventario");
-const contentTableinventario = document.querySelector("#contentTableinventario table tbody");
+let tabla_inventario = document.querySelector("#contentTableinventario table tbody");
 const txtSearchinventario = document.querySelector("#txtSearchinventario");
 const paginainventario = document.querySelector("#paginainven");
-const forminventario = document.querySelector("#forminventario");
-const insumo = document.querySelector("#insumo");
-const precio = document.querySelector("#precio");
-const unidades = document.querySelector("#unidades");
-const fecha = document.querySelector("#fecha");
-const n_factura = document.querySelector("#n_factura");
-const comprador = document.querySelector("#comprador");
-const filter_busqueda = document.querySelector("#filter_busqueda");
-let total = document.querySelector("#total");
 const objDatosinventario = {
     records: [],
     recordsFilter: [],
@@ -22,162 +8,17 @@ const objDatosinventario = {
     recordsShow: 6,
     filter: ""
 };
-
-
 eventListiners();
 
 function eventListiners() {
     document.addEventListener("DOMContentLoaded", cargarDatosinventario);
-    document.addEventListener("DOMContentLoaded", getProveedores);
-
-    botoninventario.addEventListener("click", agregarinventario);
-    btnCancelarinventario.addEventListener("click", cancelarinventario);
-    filter_busqueda.addEventListener("click", search_and_filters);
-
     txtSearchinventario.addEventListener("input", aplicarFiltroinventario);
-    insumo.addEventListener("input", validar_insumo)
-    precio.addEventListener("input", validar_precio)
-    unidades.addEventListener("input", validar_unidades)
-    fecha.addEventListener("input", validar_fecha)
-    n_factura.addEventListener("input", validar_n_factura)
-    comprador.addEventListener("input", validar_comprador)
-
-    forminventario.addEventListener("submit", guardarinventario);
 }
-function search_and_filters() {
-    let filtros=document.getElementById("filtros_busqueda")
-    if (filtros.classList.contains('d-none')) {
-        filtros.classList.remove("d-none")
-    } else {
-        filtros.classList.add("d-none")
-      }
-}
-function validar_insumo() {
-    if (insumo.value.length == 0) {
-        document.querySelector("#insumo").classList.add('color_rojo_inputs')
-    } else {
-        document.querySelector("#insumo").classList.remove('color_rojo_inputs')
-    }
-}
-function validar_precio() {
-    if (precio.value.length == 0) {
-        document.querySelector("#precio").classList.add('color_rojo_inputs')
-    } else {
-        document.querySelector("#precio").classList.remove('color_rojo_inputs')
-    }
-}
-function validar_unidades() {
-    if (unidades.value.length == 0) {
-        document.querySelector("#unidades").classList.add('color_rojo_inputs')
-    } else {
-        document.querySelector("#unidades").classList.remove('color_rojo_inputs')
-    }
-}
-function validar_fecha() {
-    if (fecha.value.length == 0) {
-        document.querySelector("#fecha").classList.add('color_rojo_inputs')
-    } else {
-        document.querySelector("#fecha").classList.remove('color_rojo_inputs')
-    }
-}
-function validar_n_factura() {
-    if (n_factura.value.length == 0) {
-        document.querySelector("#n_factura").classList.add('color_rojo_inputs')
-    } else {
-        document.querySelector("#n_factura").classList.remove('color_rojo_inputs')
-    }
-}
-function validar_comprador() {
-    if (comprador.value.length == 0) {
-        document.querySelector("#comprador").classList.add('color_rojo_inputs')
-    } else {
-        document.querySelector("#comprador").classList.remove('color_rojo_inputs')
-    }
-}
-function quitar_rojo_inputs() {
-
-    let inputs = document.querySelectorAll('input');
-
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].classList.remove('inputs_vacios');
-        inputs[i].classList.remove('color_rojo_inputs');
-    }
-}
-
-function guardarinventario(event) {
-    event.preventDefault();
-    const formDatainventario = new FormData(forminventario);
-    const API = new Api();
-
-    if ((insumo.value.length == 0)
-        || (comprador.value.length == 0)
-        || (n_factura.value.length == 0)
-        || (fecha.value.length == 0)
-        || (unidades.value.length == 0)
-        || (precio.value.length == 0)) {
-
-        let inputs = document.querySelectorAll('input');
-
-        for (let i = 0; i < inputs.length; i++) {
-            if (inputs[i].value === '') {
-                inputs[i].classList.add('inputs_vacios');
-                inputs[i].classList.add('color_rojo_inputs');
-                setTimeout(() => {
-                    inputs[i].classList.remove('inputs_vacios');
-                }, 400);
-            } else {
-                inputs[i].classList.remove('inputs_vacios');
-                inputs[i].classList.remove('color_rojo_inputs');
-            }
-        }
-    } else {
-        API.post(formDatainventario, "inventario/saveinventario").then(
-            data => {
-                if (data.success) {
-                    cancelarinventario();
-                    let modalElement = document.getElementById('modal_form');
-                    let modalInstance = bootstrap.Modal.getInstance(modalElement); 
-                    modalInstance.hide();
-                    Swal.fire({
-                        icon: "info",
-                        text: data.msg
-                    });
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: data.msg
-                    });
-                }
-            }
-        ).catch(
-            error => {
-                console.log("Error", error);
-            }
-        );
-    }
-}
-
 
 function aplicarFiltroinventario(element) {
     element.preventDefault();
     objDatosinventario.filter = this.value;
     crearTablainventario();
-}
-
-function getProveedores() {
-    const API = new Api()
-    API.get("proveedores/proveedoresList").then(response => {
-        const select = document.getElementById("provee")
-        response.data.forEach(data => {
-            const option = document.createElement('option')
-            option.value = data.id_proveedor
-            option.textContent = data.empresa
-            select.appendChild(option)
-        });
-    }).catch(error => {
-        console.log(error);
-    })
 }
 
 function cargarDatosinventario() {
@@ -187,12 +28,6 @@ function cargarDatosinventario() {
             if (data.success) {
                 objDatosinventario.records = data.records;
                 objDatosinventario.currentPage = 1;
-                let count = 0
-                total.innerHTML = 0
-                data.records.forEach(element => {
-                    count = count + Number(element.total)
-                });
-                total.innerHTML = count
                 crearTablainventario();
             } else {
                 console.log("Error al recuperar registros");
@@ -205,30 +40,12 @@ function cargarDatosinventario() {
     )
 }
 
-function agregarinventario() {
-    limpiarForminventario();
-}
-
-function limpiarForminventario() {
-    forminventario.reset();
-    document.querySelector("#id_inventario").value = "0";
-}
-
-
-function cancelarinventario() {
-    btnCancelarinventario.setAttribute("data-bs-dismiss", "modal");
-    btnCancelarinventario.classList.add('close-modal');
-    cargarDatosinventario();
-    quitar_rojo_inputs()
-}
-
-
 function crearTablainventario() {
     if (objDatosinventario.filter === "") {
         objDatosinventario.recordsFilter = objDatosinventario.records.map(item => item);
     } else {
         objDatosinventario.recordsFilter = objDatosinventario.records.filter(item => {
-            const { insumo, precio, unidades, fecha_format, total } = item;
+            const { insumo, precio, unidades  } = item;
             if (insumo.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
                 return item;
             }
@@ -238,20 +55,8 @@ function crearTablainventario() {
             if (unidades.toString().toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
                 return item;
             }
-            if (fecha_format.toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
-                return item;
-            }
-            if (total.toString().toUpperCase().search(objDatosinventario.filter.toUpperCase()) != -1) {
-                return item;
-            }
         });
     }
-    let count = 0
-    total.innerHTML = 0
-    objDatosinventario.recordsFilter.forEach(element => {
-        count = count + Number(element.total)
-    });
-    total.innerHTML = count
     const recordIni = (objDatosinventario.currentPage * objDatosinventario.recordsShow) - objDatosinventario.recordsShow;
     const recordFin = (recordIni + objDatosinventario.recordsShow) - 1;
     let html = "";
@@ -260,23 +65,16 @@ function crearTablainventario() {
             if ((index >= recordIni) && (index <= recordFin)) {
                 html += `
                         <tr>
-                        <td onclick="ver_detalle_producto(${item.id_inventario})">${index + 1}</td>
-                        <td onclick="ver_detalle_producto(${item.id_inventario})">${item.fecha_format}</td>
-                        <td data-toggle="tooltip" title="${item.insumo}" onclick="ver_detalle_producto(${item.id_inventario})">${truncate(item.insumo, 15)}</td>               
-                        <td style="text-align:center" onclick="ver_detalle_producto(${item.id_inventario})">${item.precio}</td>               
-                        <td style="text-align:center" onclick="ver_detalle_producto(${item.id_inventario})">${item.unidades}</td>
-                        <td style="text-align:center" onclick="ver_detalle_producto(${item.id_inventario})">${item.total}</td>
-                        <td style="text-align:center">
-                            <button href="#modal_form" data-bs-toggle="modal" class="btn btn-primary" onclick="editarinventario(${item.id_inventario}, false)"><img src="publico/images/edit.svg"></button>
-                            <button class="btn btn-danger" onclick="eliminarinventario(${item.id_inventario})"><img src="publico/images/delete.svg"></button>
-                            <button href="#modal_form" data-bs-toggle="modal" class="btn btn-info" onclick="editarinventario(${item.id_inventario}, true)"><img src="publico/images/copy.svg"></button>
-                        </td>
+                        <td>${index + 1}</td>
+                        <td data-toggle="tooltip" title="${item.insumo}" >${truncate(item.insumo, 15)}</td>               
+                        <td style="text-align:center">${item.precio}</td>               
+                        <td style="text-align:center">${item.unidades}</td>
                         </tr>
                     `;
             }
         }
     );
-    contentTableinventario.innerHTML = html;
+        tabla_inventario.innerHTML = html;
     crearPaginacioninventario();
 }
 function truncate(text, value) {
@@ -319,145 +117,4 @@ function crearPaginacioninventario() {
         crearTablainventario();
     };
     paginainventario.append(elSiguiente);
-}
-
-function ver_detalle_producto(id_inventario) {
-    const API = new Api();
-    API.get("inventario/getOneinventario?id_inventario=" + id_inventario).then(
-        data => {
-            if (data.success) {
-                Swal.fire({
-                    title: "Producto: " + data.records[0].insumo,
-                    showDenyButton: true,
-                    showCancelButton: true,
-                    confirmButtonText: "Editar",
-                    denyButtonText: `Eliminar`,
-                    width: 600,
-                    html: `
-                    <div class="mt-3" style="width: 97%; padding-left:13%">
-
-                    <div class='row mb-4' style="text-align: left">
-                        <div class='col-md-4 col-sm-4 col-lg-4 col-xl-4'>
-                            <b class='mt-2'>Cantidad: </b> <br>
-                            <label class='mt-2'>${data.records[0].unidades}</label>
-                        </div>
-                        <div class='col-md-4 col-sm-4 col-lg-4 col-xl-4'>
-                            <b class='mt-2'>Costo unitario: </b> <br>
-                            <label class='mt-2'>$${data.records[0].precio}</label>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
-                            <b class="mt-2">Total: </b> <br>
-                            <label class='mt-2'>${data.records[0].total}</label>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4" style="text-align: left">
-                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                            <b class="mt-2">Fecha compra: </b><br>
-                            <label class='mt-2'>${data.records[0].fecha_format}</label>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                            <b class="mt-2">Proveedor: </b><br>
-                            <label class='mt-2'>${data.records[0].empresa}</label>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3" style="text-align: left">
-                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                            <b class="mt-2">N° Factura: </b><br>
-                            <label class='mt-2'>${data.records[0].n_factura}</label>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                            <b class="mt-2">Responsable: </b><br>
-                            <label class='mt-2'>${data.records[0].comprador}</label>
-                        </div>
-                    </div>
-                    </div>
-                    `
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        botoninventario.click()
-                        agregarinventario();
-                        mostrarDatosForminventario(data.records[0], false);
-                    } else if (result.isDenied) {
-                        eliminarinventario(id_inventario)
-                    }
-                });
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: data.msg
-                });
-            }
-        }
-    ).catch(
-        error => {
-            console.log("Error:", error);
-        }
-    );
-}
-function editarinventario(id_inventario, copy) {
-    const API = new Api();
-    API.get("inventario/getOneinventario?id_inventario=" + id_inventario).then(
-        data => {
-            if (data.success) {
-                agregarinventario();
-                mostrarDatosForminventario(data.records[0], copy);
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: data.msg
-                });
-            }
-        }
-    ).catch(
-        error => {
-            console.log("Error:", error);
-        }
-    );
-}
-
-function mostrarDatosForminventario(record, copy) {
-    const { id_inventario, insumo, precio, unidades, fecha, provee, n_factura, comprador } = record;
-    document.querySelector("#id_inventario").value = copy == false ? id_inventario : 0;
-    document.querySelector("#insumo").value = insumo;
-    document.querySelector("#precio").value = precio;
-    document.querySelector("#unidades").value = unidades;
-    document.querySelector("#fecha").value = fecha;
-    document.querySelector("#provee").value = provee;
-    document.querySelector("#n_factura").value = n_factura;
-    document.querySelector("#comprador").value = comprador;
-}
-function eliminarinventario(id_inventario) {
-    Swal.fire({
-        title: "¿Esta seguro de eliminar el registro?",
-        showDenyButton: true,
-        confirmButtonText: "Si",
-        denyButtonText: "No"
-    }).then(
-        resultado => {
-            if (resultado.isConfirmed) {
-                const API = new Api();
-                API.get("inventario/deleteinventario?id_inventario=" + id_inventario).then(
-                    data => {
-                        if (data.success) {
-                            cancelarinventario();
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: data.msg
-                            });
-                        }
-                    }
-                ).catch(
-                    error => {
-                        console.err("Error", error);
-                    }
-                );
-            }
-        }
-    );
 }
