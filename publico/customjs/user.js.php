@@ -5,29 +5,29 @@ $languages = [
 ];
 ?>
 <script>
-    const translations = <?php echo json_encode($languages); ?>;
-    const lang = sessionStorage.getItem("lang");
+    const translations_user = <?php echo json_encode($languages); ?>;
+    const lang_user = sessionStorage.getItem("lang");
 
     function change_language() {
 
         const edit_tooltip = document.querySelectorAll(".edit_tooltip");
         edit_tooltip.forEach(function(element) {
-            element.textContent = translations[lang]["edit"];
+            element.textContent = translations_user[lang_user]["edit"];
         });
 
         const delete_tooltip = document.querySelectorAll(".delete_tooltip");
         delete_tooltip.forEach(function(element) {
-            element.textContent = translations[lang]["delete"];
+            element.textContent = translations_user[lang_user]["delete"];
         });
 
         const mail_tooltip = document.querySelectorAll(".mail_tooltip");
         mail_tooltip.forEach(function(element) {
-            element.textContent = translations[lang]["send_mail"];
+            element.textContent = translations_user[lang_user]["send_mail"];
         });
 
         const reset_tooltip = document.querySelectorAll(".reset_tooltip");
         reset_tooltip.forEach(function(element) {
-            element.textContent = translations[lang]["reset_pass"];
+            element.textContent = translations_user[lang_user]["reset_pass"];
         });
 
     }
@@ -650,10 +650,10 @@ $languages = [
     function reset_pass(id) {
         const usr = select_user(id);
         Swal.fire({
-            title: translations[lang]["reset_pass_title"],
+            title: translations_user[lang]["reset_pass_title"],
             showCancelButton: true,
-            confirmButtonText: translations[lang]["reset_pass"],
-            cancelButtonText: translations[lang]["cancel"],
+            confirmButtonText: translations_user[lang]["reset_pass"],
+            cancelButtonText: translations_user[lang]["cancel"],
             width: 400,
             preConfirm: () => {
                 return new Promise((resolve, reject) => {

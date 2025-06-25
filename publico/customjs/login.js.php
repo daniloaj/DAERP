@@ -41,12 +41,24 @@ $languages = [
     repeat_new_pass.addEventListener("input", validar_pass);
     new_pass.addEventListener("input", validar_pass);
 
-    function change_language() {
-        languageSelect.value = sessionStorage.getItem("lang") ? sessionStorage.getItem("lang") : "es"
-        const language_selected = languageSelect.value
-        sessionStorage.setItem("lang", language_selected)
-        const lang = sessionStorage.getItem("lang");
+    function init_language() {
+        languageSelect.value = sessionStorage.getItem("lang") || "es";
 
+        sessionStorage.setItem("lang", languageSelect.value);
+
+        const lang = sessionStorage.getItem("lang");
+        setLabels(lang);
+
+    }
+
+    function change_language() {
+        sessionStorage.setItem("lang", languageSelect.value);
+        const lang = sessionStorage.getItem("lang");
+        setLabels(lang);
+
+    }
+
+    function setLabels(lang) {
         userLabel.textContent = translations[lang]["user"];
         passLabel.textContent = translations[lang]["pass"];
         loginButton.textContent = translations[lang]["login"];
@@ -167,6 +179,8 @@ $languages = [
         let modalInstance = bootstrap.Modal.getInstance(modalElement);
         modalInstance.hide();
     }
-    languageSelect.addEventListener("change", change_language);
-    document.addEventListener("DOMContentLoaded", change_language);
+    document.addEventListener("DOMContentLoaded", () => {
+        init_language();
+        languageSelect.addEventListener("change", change_language);
+    });
 </script>

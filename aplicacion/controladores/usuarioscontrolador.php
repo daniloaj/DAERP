@@ -9,7 +9,7 @@ class usuariosControlador extends controlador
     public function __construct($parametro)
     {
         $this->usuarios = new usuarios();
-        parent::__construct("usuarios", $parametro, true);
+        parent::__construct("administracion/usuarios", $parametro, true);
     }
 
     public function deleteusuario()

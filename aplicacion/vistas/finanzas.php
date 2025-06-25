@@ -24,7 +24,7 @@
                 <div class="stat-item"><i class="bi bi-download"></i> <br>EXCEL</div>
             </section>  
         </div>
-        <?php require_once "aplicacion/vistas/inventario.php"; ?>
+        <?php require_once "aplicacion/vistas/partes/inventario/inventario.php"; ?>
     </div>
     <!--Additional Scripts -->
     <?php include_once "aplicacion/vistas/partes/javascript.php"; ?>

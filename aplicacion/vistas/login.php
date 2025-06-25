@@ -130,7 +130,7 @@
 
   <?php include "aplicacion/vistas/partes/javascript.php"; ?>
   <?php include "publico/customjs/login.js.php" ?>
-  <script src="<?php echo URL ?>publico/customjs/api.js"></script>
+  <!-- <script src="<?php echo URL ?>publico/customjs/api.js"></script> -->
   <script src="<?php echo URL ?>publico/customjs/login.js"></script>
 </body>
 
