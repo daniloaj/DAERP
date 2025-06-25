@@ -11,34 +11,32 @@
 </head>
 
 <body>
-<div class="container">
     <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
-  </div>
     <div class="data">
-        <h1 class="centrar">Sistema de Usuarios DAERP</h1>
-        <br>
-        <div id="contentListusuarios">
-            <button href="#modal_form" data-bs-toggle="modal" class="btn btn-success float-right" id="btnAgregarUsuarios">
-                <i class="bi bi-plus-square-fill"></i>
-                Agregar Usuarios
-            </button>
-            <button href="#modal_mails" data-bs-toggle="modal" class="btn btn-success float-right mr-3" id="enviar_varios_correos">
-                <i class="bi bi-plus-square-fill"></i>
-                Enviar correo a todos
-            </button>
 
-            <div class="col-md-4">
-                <div class="input-group mb-3">
+        <section class="stats mb-4">
+            <div id="btnAgregarUsuarios" href="#modal_form" data-bs-toggle="modal" class="stat-item start-quiz"><i class="bi bi-plus-square-fill"></i> <br>Agregar</div>
+            <div href="#modal_mails" data-bs-toggle="modal" id="enviar_varios_correos" class="stat-item" id="filter_busqueda"><i class="bi bi-eye"></i><br>Eviar mails</div>
+            <div class="stat-item"><i class="bi bi-trash"></i> <br>Eliminar</div>
+                  <a href="<?php echo URL ?>administracion&inventario">
+            <div  class="stat-item">Proveedores</div>
+            </a>
+            <div class="stat-item">Empleados</div>
+            <div class="stat-item"><i class="bi bi-download"></i> <br>PDF</div>
+            <div class="stat-item"><i class="bi bi-download"></i> <br>EXCEL</div>
+        </section>
+
+        <h1 class="mt-3 mb-3">Usuarios</h1>
+        <div id="contentListusuarios">
+
+            <div class="col-md-4 ">
+                <div class="input-group mb-3 buscador">
                     <input placeholder="Buscar registro" type="search" class="form-control" aria-describedby="basic-addon2" id="txtSearchUsuarios">
-                    <span class="input-group-text" id="basic-addon2">
-                        <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
-                        <lord-icon src="https://cdn.lordicon.com/xfftupfv.json" trigger="loop" style="width:25px;height:25px">
-                        </lord-icon></i>
-                    </span>
+                    <i class="bi bi-search p-2"></i>
                 </div>
             </div>
 
-            <div id="contentTableUsuarios">
+            <div id="contentTableUsuarios" class="tables_border">
                 <table class="table table-hover" id="myTableUsuarios">
                     <thead>
                         <th># <img onclick="sortTableUsuarios(0, 'int')" src="publico/images/flecha.png"></th>
