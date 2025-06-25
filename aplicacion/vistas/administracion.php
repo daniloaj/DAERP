@@ -14,103 +14,112 @@
     <?php require_once "aplicacion/vistas/partes/supertablero_partes/sidebar_supertablero.php"; ?>
     <div class="data">
 
-                <div id="admintContent" class="container mt-2">
-                    <section class="stats mb-4">
-                        <a href="<?php echo URL ?>administracion">
-                            <div class="stat-item start-quiz"><i class="bi bi-plus-square-fill"></i> <br>Personal</div>
-                        </a>
-                        <div class="stat-item" id="filter_busqueda"><i class="bi bi-eye"></i><br>proveedores</div>
-                        <div class="stat-item"><i class="bi bi-trash"></i> <br>contacto</div>
-                        <div  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" class="stat-item"><i class="bi bi-trash"></i> <br>historial</div>
-                        <div class="stat-item"><i class="bi bi-download"></i> <br>PDF</div>
-                        <div class="stat-item"><i class="bi bi-download"></i> <br>EXCEL</div>
-                    </section>
+        <div id="admintContent" class="container mt-2">
+            <section class="stats mb-4">
+                <a href="<?php echo URL ?>administracion&usuarios">
+                    <div class="stat-item start-quiz"><i class="bi bi-plus-square-fill"></i> <br>Personal</div>
+                </a>
+                <a href="<?php echo URL ?>administracion&empleados">
+                    <div class="stat-item" id="filter_busqueda"><i class="bi bi-eye"></i><br>Empleados</div>
+                </a>
+                <div class="stat-item"><i class="bi bi-trash"></i> <br>contacto</div>
+                <div data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" class="stat-item"><i class="bi bi-trash"></i> <br>historial</div>
+                <div class="stat-item"><i class="bi bi-download"></i> <br>PDF</div>
+                <div class="stat-item"><i class="bi bi-download"></i> <br>EXCEL</div>
+            </section>
+            <?php
+            $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $modulo = basename($current_url);
+            if ($modulo === "administracion&usuarios") {
+                require_once "aplicacion/vistas/partes/admin/usuarios.php";
+            } else {
+                require_once "aplicacion/vistas/partes/inventario/inventario.php";
+            }
+            ?>
+        </div>
 
-                   <?php require_once "aplicacion/vistas/partes/admin/usuarios.php"; ?>
+        <!-- historial -->
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">historial</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+
+                <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
+                    <h5 style="color: green">
+                        adding
+                    </h5>
+                    <p>
+                        se agregaron 5 productos "microhondas" a $5 cada uno.
+                    </p>
                 </div>
-
-                <!-- historial -->
-            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">historial</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
+                    <h5 style="color: blue">
+                        Edition
+                    </h5>
+                    <p>
+                        se editó el nombre del producto de "A" a "el microhondas"
+                    </p>
                 </div>
-                <div class="offcanvas-body">
-
-                    <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
-                        <h5 style="color: green">
-                            adding
-                        </h5>
-                        <p>
-                            se agregaron 5 productos "microhondas" a $5 cada uno.
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
-                        <h5 style="color: blue">
-                            Edition
-                        </h5>
-                        <p>
-                            se editó el nombre del producto de "A" a "el microhondas"
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
-                        <h5 style="color: red">
-                            delete
-                        </h5>
-                        <p>
-                            se eliminó el producto"A"
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
-                        <h5 style="color: green">
-                            adding
-                        </h5>
-                        <p>
-                            se agregaron 5 productos "microhondas" a $5 cada uno.
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
-                        <h5 style="color: blue">
-                            Edition
-                        </h5>
-                        <p>
-                            se editó el nombre del producto de "A" a "el microhondas"
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
-                        <h5 style="color: red">
-                            delete
-                        </h5>
-                        <p>
-                            se eliminó el producto"A"
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
-                        <h5 style="color: green">
-                            adding
-                        </h5>
-                        <p>
-                            se agregaron 5 productos "microhondas" a $5 cada uno.
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
-                        <h5 style="color: blue">
-                            Edition
-                        </h5>
-                        <p>
-                            se editó el nombre del producto de "A" a "el microhondas"
-                        </p>
-                    </div>
-                    <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
-                        <h5 style="color: red">
-                            delete
-                        </h5>
-                        <p>
-                            se eliminó el producto"A"
-                        </p>
-                    </div>
+                <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
+                    <h5 style="color: red">
+                        delete
+                    </h5>
+                    <p>
+                        se eliminó el producto"A"
+                    </p>
+                </div>
+                <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
+                    <h5 style="color: green">
+                        adding
+                    </h5>
+                    <p>
+                        se agregaron 5 productos "microhondas" a $5 cada uno.
+                    </p>
+                </div>
+                <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
+                    <h5 style="color: blue">
+                        Edition
+                    </h5>
+                    <p>
+                        se editó el nombre del producto de "A" a "el microhondas"
+                    </p>
+                </div>
+                <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
+                    <h5 style="color: red">
+                        delete
+                    </h5>
+                    <p>
+                        se eliminó el producto"A"
+                    </p>
+                </div>
+                <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
+                    <h5 style="color: green">
+                        adding
+                    </h5>
+                    <p>
+                        se agregaron 5 productos "microhondas" a $5 cada uno.
+                    </p>
+                </div>
+                <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
+                    <h5 style="color: blue">
+                        Edition
+                    </h5>
+                    <p>
+                        se editó el nombre del producto de "A" a "el microhondas"
+                    </p>
+                </div>
+                <div style="padding: 15px; background-color: white; border-radius: 15px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); margin-bottom: 25px">
+                    <h5 style="color: red">
+                        delete
+                    </h5>
+                    <p>
+                        se eliminó el producto"A"
+                    </p>
                 </div>
             </div>
+        </div>
     </div>
     <!--Scripts de inventario-->
     <script src="<?php echo URL ?>publico/customjs/inventarios.js"></script>
